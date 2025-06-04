@@ -16,16 +16,19 @@ export const Header = () => {
   });
 
   return (
-    <header id="home" className="h-screen pt-28 overflow-hidden max-h-[900px]">
+    <header
+      id="home"
+      className="h-screen pt-28 overflow-hidden min-h-[900px] max-h-[900px]"
+    >
       <div className="text-center h-full relative">
         <h1 className="text-sm text-muted-foreground">Hello, I am</h1>
         <Link href="/">
-          <h2 className="text-[2.5rem] font-medium leading-7 py-6">
+          <h2 className="text-3xl xs:text-4xl sm:text-[2.5rem] font-medium leading-7 py-4">
             Satyaprakash Yadav
           </h2>
         </Link>
         <div className="pl-[0.1rem] tracking-[0.4rem]">
-          <span className="text-gradient">{text}</span>
+          <span className="text-gradient xs:text-base sm:text-lg">{text}</span>
           <Cursor cursorColor="#444444" cursorStyle="|" />
         </div>
         <div className="inline-flex space-x-3 pt-9">
@@ -71,7 +74,7 @@ export const Header = () => {
             </Link>
           </div>
           <div className="grow flex justify-center">
-            <div className="me w-72 h-96 md:w-[22rem] md:h-[30rem]">
+            <div className="me w-60 h-96 xs:w-72 xs:h-96 md:w-[22rem] md:h-[30rem]">
               <Image
                 src="/web-developer.png"
                 alt="me"
