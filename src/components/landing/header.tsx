@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export const Header = () => {
   const [text] = useTypewriter({
-    words: ["DJango ResttAPI Developer", "Penetration Tester"],
+    words: ["Django RestAPI Developer", "Penetration Tester"],
     loop: true,
   });
 
@@ -47,7 +47,7 @@ export const Header = () => {
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary dark:bg-secondary p-1 rounded-md hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors duration-300 ease-in-out"
+              className="bg-primary p-1 rounded-md hover:bg-zinc-600 dark:hover:bg-zinc-400 transition-colors duration-300 ease-in-out"
             >
               <FaFacebookSquare className="text-white dark:text-zinc-950 w-4 h-4" />
             </Link>
@@ -56,7 +56,7 @@ export const Header = () => {
               aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary dark:bg-secondary p-1 rounded-md hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors duration-300 ease-in-out"
+              className="bg-primary p-1 rounded-md hover:bg-zinc-600 dark:hover:bg-zinc-400 transition-colors duration-300 ease-in-out"
             >
               <FaLinkedin className="text-white dark:text-zinc-950 w-4 h-4" />
             </Link>
@@ -65,7 +65,7 @@ export const Header = () => {
               aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-primary dark:bg-secondary p-1 rounded-md hover:bg-zinc-700 dark:hover:bg-zinc-200 transition-colors duration-300 ease-in-out"
+              className="bg-primary p-1 rounded-md hover:bg-zinc-600 dark:hover:bg-zinc-400 transition-colors duration-300 ease-in-out"
             >
               <FaGithub className="text-white dark:text-zinc-950 w-4 h-4" />
             </Link>
