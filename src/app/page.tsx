@@ -1,7 +1,9 @@
-import { Button } from "@/components/ui/button";
+import { Header } from "@/components/landing/header";
 
 export default function Home() {
   return (
-    <Button>Click me</Button>
+    <main>
+      <Header />
+    </main>
   );
 }
