@@ -1,11 +1,12 @@
+import { Tool } from "@/components/landing/tool";
 import { About } from "@/components/landing/about";
 import { Header } from "@/components/landing/header";
+import { Portfolio } from "@/components/landing/portfolio";
 import { Expertise } from "@/components/landing/expertise";
 import { Experience } from "@/components/landing/experience";
 import { Qualification } from "@/components/landing/qualification";
 
 import { ModeToggle } from "@/components/mode-toggle";
-import { Portfolio } from "@/components/landing/portfolio";
 
 export default function Home() {
   return (
@@ -19,6 +20,7 @@ export default function Home() {
       <Expertise />
       <Qualification />
       <Portfolio />
+      <Tool />
     </main>
   );
 }

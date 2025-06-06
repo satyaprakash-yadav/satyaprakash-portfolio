@@ -78,7 +78,7 @@ export const Portfolio = () => {
           >
             <div className="relative w-full h-[250px] lg:h-[300px] overflow-hidden">
               <Image
-                src={`/${portfolio.image}`}
+                src={`${portfolio.image}`}
                 alt="portfolio"
                 fill
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
