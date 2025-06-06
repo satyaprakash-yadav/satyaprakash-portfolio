@@ -81,7 +81,7 @@ const data_tools = [
 
 export const Tool = () => {
   return (
-    <section id="tool" className="my-32">
+    <section id="tool" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
         What I Use
       </h1>
