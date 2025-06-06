@@ -5,6 +5,7 @@ import { Experience } from "@/components/landing/experience";
 import { Qualification } from "@/components/landing/qualification";
 
 import { ModeToggle } from "@/components/mode-toggle";
+import { Portfolio } from "@/components/landing/portfolio";
 
 export default function Home() {
   return (
@@ -17,6 +18,7 @@ export default function Home() {
       <Experience />
       <Expertise />
       <Qualification />
+      <Portfolio />
     </main>
   );
 }
