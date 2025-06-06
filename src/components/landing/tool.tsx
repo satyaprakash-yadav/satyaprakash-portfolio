@@ -97,7 +97,7 @@ export const Tool = () => {
                   width={56}
                   height={56}
                   className={cn(
-                    "size-12 md:size-14",
+                    "size-12 md:size-14 grayscale-[20%]",
                     (tool.name === "notion" ||
                       tool.name === "github" ||
                       tool.name === "vercel" ||
@@ -120,7 +120,7 @@ export const Tool = () => {
                   width={56}
                   height={56}
                   className={cn(
-                    "size-12 md:size-14",
+                    "size-12 md:size-14 grayscale-[20%]",
                     (tool.name === "notion" ||
                       tool.name === "github" ||
                       tool.name === "vercel" ||
