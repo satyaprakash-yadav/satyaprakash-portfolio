@@ -1,6 +1,7 @@
 import { Tool } from "@/components/landing/tool";
 import { About } from "@/components/landing/about";
 import { Header } from "@/components/landing/header";
+import { Contact } from "@/components/landing/contact";
 import { Portfolio } from "@/components/landing/portfolio";
 import { Expertise } from "@/components/landing/expertise";
 import { Experience } from "@/components/landing/experience";
@@ -21,6 +22,7 @@ export default function Home() {
       <Qualification />
       <Portfolio />
       <Tool />
+      <Contact />
     </main>
   );
 }
