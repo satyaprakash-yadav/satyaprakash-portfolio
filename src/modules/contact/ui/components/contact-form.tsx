@@ -3,6 +3,7 @@
 
 import { z } from "zod";
 import axios from "axios";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { Loader2 } from "lucide-react";
 import { useState } from "react";
@@ -43,9 +44,11 @@ export const ContactForm = () => {
 
       if (response.data.success) {
         form.reset();
+        toast.success("Your message has been successfully sent.");
       }
     } catch (error: any) {
       console.error(error);
+      toast.error("Something went wrong!");
     } finally {
       setLoading(false);
     }
