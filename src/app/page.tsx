@@ -9,6 +9,7 @@ import { Experience } from "@/components/landing/experience";
 import { Qualification } from "@/components/landing/qualification";
 
 import { ModeToggle } from "@/components/mode-toggle";
+import { Navbar } from "@/components/landing/navbar";
 
 export default function Home() {
   return (
@@ -16,6 +17,7 @@ export default function Home() {
       <div className="absolute top-5 right-5">
         <ModeToggle />
       </div>
+      <Navbar />
       <main className="container px-4 md:px-8 mx-auto relative">
         <Header />
         <About />
