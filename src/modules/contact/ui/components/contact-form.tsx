@@ -1,7 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { z } from "zod";
+import axios from "axios";
 import { useForm } from "react-hook-form";
+import { Loader2 } from "lucide-react";
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -16,9 +20,11 @@ import {
   FormControl,
 } from "@/components/ui/form";
 
-import { formSchema } from "../../schemas";
+import { formSchema } from "../../../home/schemas";
 
 export const ContactForm = () => {
+  const [loading, setLoading] = useState(false);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,8 +35,20 @@ export const ContactForm = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setLoading(true);
+
+      const response = await axios.post("/api/send", values);
+
+      if (response.data.success) {
+        form.reset();
+      }
+    } catch (error: any) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -96,8 +114,19 @@ export const ContactForm = () => {
           )}
         />
         <div>
-          <Button type="submit" variant="default" className="mt-2">
-            Send Message
+          <Button
+            type="submit"
+            variant="default"
+            className="mt-2"
+            disabled={loading}
+          >
+            {loading && (
+              <>
+                <Loader2 className="animate-spin mr-2" size={18} />
+                Sending...
+              </>
+            )}
+            {!loading && <>Send Message</>}
           </Button>
         </div>
       </form>

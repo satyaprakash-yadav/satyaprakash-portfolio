@@ -2,7 +2,7 @@ import Link from "next/link";
 
 import { Button } from "../ui/button";
 import { Icons } from "@/modules/home/ui/components/icons";
-import { ContactForm } from "@/modules/home/ui/components/contact-form";
+import { ContactForm } from "@/modules/contact/ui/components/contact-form";
 
 export const Contact = () => {
   return (
