@@ -14,6 +14,7 @@ interface NavButtonProps {
   name: string;
   anchor: string;
   icon: LucideIcon;
+  active: boolean;
   hideMobile?: boolean;
 }
 
@@ -21,6 +22,7 @@ export const NavButton = ({
   name,
   anchor,
   icon: Icon,
+  active,
   hideMobile,
 }: NavButtonProps) => {
   return (
@@ -32,7 +34,8 @@ export const NavButton = ({
             size="sm"
             className={cn(
               "rounded-full text-white px-0 size-8 xs:w-11 xs:h-11",
-              hideMobile && "hidden md:flex"
+              hideMobile && "hidden md:flex",
+              active && "bg-primary-foreground text-primary"
             )}
           >
             <Link href={anchor}>
