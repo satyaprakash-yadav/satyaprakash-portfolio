@@ -2,46 +2,57 @@
 "use client";
 
 import * as z from "zod";
+import axios from "axios";
+import { toast } from "sonner";
+import { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
   Form,
+  FormControl,
+  FormField,
   FormItem,
   FormLabel,
-  FormField,
-  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import {
   Card,
-  CardTitle,
-  CardHeader,
   CardContent,
   CardDescription,
+  CardHeader,
+  CardTitle,
 } from "@/components/ui/card";
 
-import { formSchema } from "@/modules/auth/schemas";
+import { registerSchema } from "@/modules/auth/schemas";
 
-export const SignInView = () => {
+export const SignUpView = () => {
   const [loading, setLoading] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
+      name: "",
       email: "",
       password: "",
+      confirmPassword: "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof registerSchema>) => {
     try {
       setLoading(true);
-      console.log(values);
+
+      const response = await axios.post("/api/register", values);
+
+      if (response.data.success) {
+        form.reset();
+
+        toast.success("User successfully registered.");
+      }
     } catch (error: any) {
       console.error(error);
     } finally {
@@ -52,7 +63,7 @@ export const SignInView = () => {
   return (
     <Card className="w-full max-w-md">
       <CardHeader>
-        <CardTitle className="text-2xl">Sign In</CardTitle>
+        <CardTitle className="text-2xl">Sign Up</CardTitle>
         <CardDescription>to continue to Dashboard</CardDescription>
       </CardHeader>
       <CardContent>
@@ -63,12 +74,29 @@ export const SignInView = () => {
           >
             <FormField
               control={form.control}
+              name="name"
+              render={({ field }) => (
+                <FormItem className="space-y-1">
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input type="text" placeholder="John Doe" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem className="space-y-1">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="email@example.com" />
+                    <Input
+                      type="email"
+                      placeholder="email@example.com"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,7 +109,20 @@ export const SignInView = () => {
                 <FormItem className="space-y-1">
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input type="password" {...field} placeholder="********" />
+                    <Input type="password" placeholder="********" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="confirmPassword"
+              render={({ field }) => (
+                <FormItem className="space-y-1">
+                  <FormLabel>Confirm Password</FormLabel>
+                  <FormControl>
+                    <Input type="password" placeholder="********" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -96,10 +137,10 @@ export const SignInView = () => {
               {loading && (
                 <>
                   <Loader2 className="animate-spin mr-2" size={18} />
-                  Signing in...
+                  Signing Up...
                 </>
               )}
-              {!loading && <>Sign In</>}
+              {!loading && <>Sign Up</>}
             </Button>
           </form>
         </Form>
