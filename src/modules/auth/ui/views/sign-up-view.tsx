@@ -6,6 +6,7 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -52,9 +53,15 @@ export const SignUpView = () => {
         form.reset();
 
         toast.success("User successfully registered.");
+
+        await signIn("credentials", {
+          email: values.email,
+          password: values.password,
+          callbackUrl: "/admin",
+        });
       }
     } catch (error: any) {
-      console.error(error);
+      console.log(error);
     } finally {
       setLoading(false);
     }

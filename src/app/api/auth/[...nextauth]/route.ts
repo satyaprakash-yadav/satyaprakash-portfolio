@@ -9,21 +9,21 @@ import CredentialsProvider from "next-auth/providers/credentials";
 export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
-            id: "credentials",
-            name: "Credentials",
+            id: 'credentials',
+            name: 'Credentials',
             credentials: {
                 username: {
-                    label: "Email",
-                    type: "text"
+                    label: 'Email',
+                    type: 'text'
                 },
                 password: {
-                    label: "Password",
-                    type: "password"
+                    label: 'Password',
+                    type: 'password'
                 }
             },
             async authorize(credentials: any) {
                 if (!credentials?.email || !credentials?.password) {
-                    throw new Error("Email and password are required.")
+                    throw new Error('Email and password are required.');
                 }
 
                 const user = await prismadb.user.findUnique({
@@ -33,7 +33,7 @@ export const authOptions: AuthOptions = {
                 });
 
                 if (!user || !user.hashedPassword) {
-                    throw new Error("Incorrect email or password.");
+                    throw new Error('Incorrect email or password.');
                 }
 
                 const isCorrectPassword = await compare(
@@ -42,7 +42,7 @@ export const authOptions: AuthOptions = {
                 );
 
                 if (!isCorrectPassword) {
-                    throw new Error("Incorrect email or password.");
+                    throw new Error('Incorrect email or password.');
                 }
 
                 return user;
@@ -50,19 +50,19 @@ export const authOptions: AuthOptions = {
         })
     ],
     pages: {
-        signIn: "/auth/sign-in",
-        error: "/auth/sign-in"
+        signIn: '/sign-in',
+        error: '/sign-in'
     },
-    debug: process.env.NODE_ENV !== "production",
+    debug: process.env.NODE_ENV !== 'production',
     adapter: PrismaAdapter(prismadb),
     session: {
-        strategy: "jwt",
+        strategy: 'jwt'
     },
     jwt: {
         secret: process.env.NEXTAUTH_JWT_SECRET
     },
     secret: process.env.NEXTAUTH_SECRET
-}
+};
 
 export const handler = NextAuth(authOptions);
 

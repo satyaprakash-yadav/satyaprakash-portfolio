@@ -1,8 +1,7 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import * as z from "zod";
-import { Loader2 } from "lucide-react";
+import { AlertTriangle, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -26,9 +25,16 @@ import {
 } from "@/components/ui/card";
 
 import { formSchema } from "@/modules/auth/schemas";
+import { signIn } from "next-auth/react";
+import { AuthError } from "@auth/core/errors";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useSearchParams } from "next/navigation";
 
 export const SignInView = () => {
+  const searchParams = useSearchParams();
   const [loading, setLoading] = useState(false);
+
+  const error = searchParams.get("error");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -38,14 +44,25 @@ export const SignInView = () => {
     },
   });
 
-  const onSubmit = (values: z.infer<typeof formSchema>) => {
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       setLoading(true);
-      console.log(values);
-    } catch (error: any) {
-      console.error(error);
-    } finally {
-      setLoading(false);
+
+      await signIn("credentials", {
+        ...values,
+        callbackUrl: "/admin",
+      });
+    } catch (error) {
+      if (error instanceof AuthError) {
+        switch (error.type) {
+          case "CredentialsSignin":
+            return { message: "Invalid credentials" };
+          default:
+            return { message: "An error occurred" };
+        }
+      }
+
+      throw error;
     }
   };
 
@@ -56,6 +73,15 @@ export const SignInView = () => {
         <CardDescription>to continue to Dashboard</CardDescription>
       </CardHeader>
       <CardContent>
+        {error && (
+          <Alert variant="destructive" className="mb-6">
+            <AlertTitle className="flex items-center gap-2">
+              <AlertTriangle className="size-4" />
+              Error
+            </AlertTitle>
+            <AlertDescription>{error}</AlertDescription>
+          </Alert>
+        )}
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit(onSubmit)}
