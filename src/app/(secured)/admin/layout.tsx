@@ -13,7 +13,7 @@ const AdminLayout = async ({ children }: Props) => {
     };
     
     return ( 
-        <main>{children}</main>
+        <>{children}</>
     );
 }
  
