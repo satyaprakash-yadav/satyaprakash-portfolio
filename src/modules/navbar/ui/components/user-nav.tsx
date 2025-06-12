@@ -22,13 +22,13 @@ export const UserNav = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" className="relative size-8 rounded-full">
-          <Avatar className="size-9">
+        <Button variant="outline" className="relative size-8 rounded-full">
+          <Avatar className="size-8">
             <AvatarImage
               src={session?.user?.image as string}
               alt={session?.user?.name as string}
             />
-            <AvatarFallback>
+            <AvatarFallback className="bg-transparent">
               <User className="size-5" />
             </AvatarFallback>
           </Avatar>
