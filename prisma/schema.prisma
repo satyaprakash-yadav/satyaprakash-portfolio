@@ -19,6 +19,7 @@ model User {
   updatedAt      DateTime  @updatedAt
   accounts       Account[]
   sessions       Session[]
+  About          About?
 }
 
 model Account {
@@ -67,4 +68,12 @@ model About {
   project    String
   worldwide  String
   summary    String @db.Text
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
 }

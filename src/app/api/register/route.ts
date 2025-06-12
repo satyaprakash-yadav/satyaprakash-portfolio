@@ -29,14 +29,10 @@ export async function POST(req: Request) {
             return NextResponse.json({ success: false, error: "Passwords does not match." }, { status: 400 })
         }
 
-        const existingUser = await prismadb.user.findUnique({
-            where: {
-                email,
-            }
-        });
+        const userCount = await prismadb.user.count();
 
-        if (existingUser) {
-            return NextResponse.json({ success: false, error: "Email is already taken." }, { status: 400 })
+        if (userCount > 0) {
+            return NextResponse.json({ success: false, error: "Cannot register." }, { status: 400 })
         }
 
         const hashedPassword = await bcrypt.hash(password, 12);

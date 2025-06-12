@@ -61,7 +61,8 @@ export const SignUpView = () => {
         });
       }
     } catch (error: any) {
-      console.log(error);
+      const errorMessage = error.response.data.error;
+      toast.error(errorMessage);
     } finally {
       setLoading(false);
     }
