@@ -5,6 +5,9 @@ import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
 
+import { getServerSession } from "next-auth";
+import SessionProvider from "@/providers/session-provider";
+
 const poppins = Poppins({
   style: ["normal"],
   weight: ["400", "500", "600"],
@@ -22,18 +25,22 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await getServerSession();
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${poppins.className} antialiased`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <Toaster />
-          {children}
-        </ThemeProvider>
+        <SessionProvider session={session}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <Toaster />
+            {children}
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );
