@@ -7,6 +7,8 @@ import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 
 import { Footer } from "@/components/secured/footer";
 
+import { Sidebar } from "@/modules/dashboard/ui/components/sidebar";
+
 interface Props {
   children: React.ReactNode;
 }
@@ -16,6 +18,7 @@ const AdminRouteLayout = ({ children }: Props) => {
 
   return (
     <>
+    <Sidebar />
       <main
         className={cn(
           "min-h-[calc(100vh_-_56px)] bg-zinc-50 dark:bg-zinc-800 transition-[margin-left] ease-in-out duration-300",

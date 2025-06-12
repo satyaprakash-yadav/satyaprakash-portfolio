@@ -211,3 +211,15 @@ html {
 .animate-infinite-scroll {
   animation: infinite-scroll 25s linear infinite;
 }
+
+@layer utilities {
+  .duration-6000 {
+    transition-duration: 6000ms;
+  }
+  .duration-7000 {
+    transition-duration: 7000ms;
+  }
+  .duration-8000 {
+    transition-duration: 8000ms;
+  }
+}
