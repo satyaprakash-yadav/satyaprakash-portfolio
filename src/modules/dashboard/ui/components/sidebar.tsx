@@ -3,6 +3,8 @@ import Link from "next/link";
 import { LayoutTemplate } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+
+import { Menu } from "./menu";
 import { SidebarToggle } from "./sidebar-toggle";
 
 import { useStore } from "@/hooks/use-store";
@@ -44,6 +46,7 @@ export const Sidebar = () => {
             </h1>
           </Link>
         </Button>
+        <Menu isOpen={sidebar?.isOpen} />
       </div>
     </aside>
   );
