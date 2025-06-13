@@ -21,6 +21,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { expertiseFormSchema } from "../../schemas";
+import { toast } from "sonner";
 
 interface ExpertiseFormProps {
   expertiseType: string;
@@ -61,8 +62,28 @@ export const ExpertiseForm = ({
   });
 
   const onSubmit = async (values: z.infer<typeof expertiseFormSchema>) => {
-    console.log(values);
-    setLoading(false);
+    try {
+      setLoading(true);
+
+      const response = await axios.post("/api/expertise", values);
+
+      if (response.data.success) {
+        router.refresh();
+
+        const tData =
+          expertiseType === "SEOOPTIMIZATION"
+            ? "Seo"
+            : expertiseType === "WEBDEVELOPMENT"
+              ? "Web"
+              : "Content";
+        toast.success(`${tData} successfully saved`);
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
