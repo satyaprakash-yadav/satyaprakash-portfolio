@@ -27,7 +27,7 @@ const AdminRouteLayout = ({ children }: Props) => {
         )}
       >
         <Navbar />
-        <div className="container pt-8 pb-8">{children}</div>
+        <div className="container pt-8 pb-8 px-4 sm:px-8">{children}</div>
       </main>
       <footer
         className={cn(

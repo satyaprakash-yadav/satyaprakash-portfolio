@@ -6,6 +6,8 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+import { FrontendForm } from "@/modules/experience/ui/components/frontend-form";
+
 const ExperiencePage = async () => {
   return (
     <div className="grid lg:grid-cols-2 gap-4">
@@ -18,7 +20,9 @@ const ExperiencePage = async () => {
             Manage your frontend development section informations.
           </CardDescription>
         </CardHeader>
-        <CardContent>FrontendDevelopment</CardContent>
+        <CardContent>
+          <FrontendForm />
+        </CardContent>
       </Card>
       <Card className="rounded-lg border-none">
         <CardHeader className="mx-[1px] pb-9">
