@@ -1,7 +1,10 @@
 "use client";
 
 import { z } from "zod";
+import axios from "axios";
+import { toast } from "sonner";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash } from "lucide-react";
 import { useFieldArray, useForm } from "react-hook-form";
@@ -24,21 +27,35 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
+import type { Experience } from "@prisma/client";
 import { experienceFormSchema } from "../../schemas";
+interface FrontendFormProps {
+  frontendItems: Experience[];
+}
 
-export const FrontendForm = () => {
+export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
+
+  const initialValues =
+    frontendItems.length > 0
+      ? frontendItems.map((item) => ({
+          skill: item.skill,
+          level: item.level,
+          type: item.type,
+        }))
+      : [
+          {
+            skill: "",
+            level: "",
+            type: "frontend",
+          },
+        ];
 
   const form = useForm<z.infer<typeof experienceFormSchema>>({
     resolver: zodResolver(experienceFormSchema),
     defaultValues: {
-      items: [
-        {
-          skill: "",
-          level: "",
-          type: "frontend",
-        },
-      ],
+      items: initialValues,
     },
     mode: "onChange",
   });
@@ -48,9 +65,23 @@ export const FrontendForm = () => {
     control: form.control,
   });
 
-  const onSubmit = (values: z.infer<typeof experienceFormSchema>) => {
-    setLoading(false);
-    console.log(values);
+  const onSubmit = async (values: z.infer<typeof experienceFormSchema>) => {
+    try {
+      setLoading(true);
+
+      const response = await axios.post("/api/experience", values);
+
+      if (response.data.success) {
+        router.refresh();
+
+        toast.success("Experience successfully saved.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
