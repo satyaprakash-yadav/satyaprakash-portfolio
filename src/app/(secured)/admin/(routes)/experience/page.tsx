@@ -11,8 +11,9 @@ import {
 import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
 
-import { FrontendForm } from "@/modules/experience/ui/components/frontend-form";
-import { BackendForm } from "@/modules/experience/ui/components/backend-form";
+// import { FrontendForm } from "@/modules/experience/ui/components/frontend-form";
+// import { BackendForm } from "@/modules/experience/ui/components/backend-form";
+import { ExperienceForm } from "@/modules/experience/ui/components/experience-form";
 
 const ExperiencePage = async () => {
   const session = await auth();
@@ -47,7 +48,11 @@ const ExperiencePage = async () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <FrontendForm frontendItems={frontendItems} />
+          {/* <FrontendForm frontendItems={frontendItems} /> */}
+          <ExperienceForm
+            experienceType="frontend"
+            experienceItems={frontendItems}
+          />
         </CardContent>
       </Card>
       <Card className="rounded-lg border-none">
@@ -60,7 +65,11 @@ const ExperiencePage = async () => {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          <BackendForm backendItems={backendItems} />
+          {/* <BackendForm backendItems={backendItems} /> */}
+          <ExperienceForm
+            experienceType="backend"
+            experienceItems={backendItems}
+          />
         </CardContent>
       </Card>
     </div>
