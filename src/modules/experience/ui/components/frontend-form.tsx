@@ -34,9 +34,9 @@ export const FrontendForm = () => {
     defaultValues: {
       items: [
         {
-          type: "frontend",
           skill: "",
           level: "",
+          type: "frontend",
         },
       ],
     },
@@ -74,18 +74,6 @@ export const FrontendForm = () => {
             <div className="grow grid grid-cols-2 gap-2 sm:gap-3">
               <FormField
                 control={form.control}
-                name={`items.${index}.type`}
-                render={({ field }) => (
-                  <FormItem className="hidden">
-                    <FormControl>
-                      <Input type="hidden" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
                 name={`items.${index}.skill`}
                 render={({ field }) => (
                   <FormItem className="space-y-1">
@@ -118,6 +106,18 @@ export const FrontendForm = () => {
                         <SelectItem value="experienced">Experienced</SelectItem>
                       </SelectContent>
                     </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name={`items.${index}.type`}
+                render={({ field }) => (
+                  <FormItem className="hidden">
+                    <FormControl>
+                      <Input type="hidden" {...field} />
+                    </FormControl>
                     <FormMessage />
                   </FormItem>
                 )}
