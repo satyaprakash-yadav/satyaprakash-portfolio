@@ -43,7 +43,6 @@ export async function POST(req: Request) {
                 email,
                 hashedPassword,
                 image: "",
-                emailVerified: new Date()
             }
         });
 
