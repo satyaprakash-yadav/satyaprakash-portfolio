@@ -9,6 +9,8 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+import { prismadb } from "@/lib/prismadb";
+import { ExpertiseForm } from "@/modules/expertise/ui/components/expertise-form";
 
 const ExpertisePage = async () => {
   const session = await auth();
@@ -16,6 +18,27 @@ const ExpertisePage = async () => {
   if (!session || !session.user) {
     redirect("/sign-in");
   }
+
+  const seoOptimazationItems = await prismadb.expertise.findMany({
+    where: {
+      userId: session.user.id!,
+      type: "SEOOPTIMIZATION",
+    },
+  });
+
+  const webDevelopmentItems = await prismadb.expertise.findMany({
+    where: {
+      userId: session.user.id!,
+      type: "WEBDEVELOPMENT",
+    },
+  });
+
+  const contentCreationItems = await prismadb.expertise.findMany({
+    where: {
+      userId: session.user.id!,
+      type: "CONTENTCREATION",
+    },
+  });
 
   return (
     <div className="grid lg:grid-cols-2 gap-4">
@@ -26,7 +49,12 @@ const ExpertisePage = async () => {
             Manage your SEO optimization section informations.
           </CardDescription>
         </CardHeader>
-        <CardContent>SeoOptimazationForm</CardContent>
+        <CardContent>
+          <ExpertiseForm
+            expertiseType="SEOOPTIMIZATION"
+            expertiseItems={seoOptimazationItems}
+          />
+        </CardContent>
       </Card>
       <Card className="rounded-lg border-none">
         <CardHeader className="mx-[1px] pb-9">
@@ -35,7 +63,12 @@ const ExpertisePage = async () => {
             Manage your Web development section informations.
           </CardDescription>
         </CardHeader>
-        <CardContent>WebDevelopmentForm</CardContent>
+        <CardContent>
+          <ExpertiseForm
+            expertiseType="WEBDEVELOPMENT"
+            expertiseItems={webDevelopmentItems}
+          />
+        </CardContent>
       </Card>
       <Card className="rounded-lg border-none">
         <CardHeader className="mx-[1px] pb-9">
@@ -44,7 +77,12 @@ const ExpertisePage = async () => {
             Manage your Content creation section informations.
           </CardDescription>
         </CardHeader>
-        <CardContent>ContentCreationForm</CardContent>
+        <CardContent>
+          <ExpertiseForm
+            expertiseType="CONTENTCREATION"
+            expertiseItems={contentCreationItems}
+          />
+        </CardContent>
       </Card>
     </div>
   );
