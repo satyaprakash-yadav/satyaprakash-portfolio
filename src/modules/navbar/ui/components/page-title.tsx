@@ -11,7 +11,7 @@ export const PageTitle = () => {
     pageTitle = "Dashboard";
   } else if (pathname === "/admin/about") {
     pageTitle = "About";
-  } else if (pathname === "/admin/experience/") {
+  } else if (pathname === "/admin/experience") {
     pageTitle = "Experience";
   } else if (pathname === "/admin/expertise") {
     pageTitle = "Expertise";
