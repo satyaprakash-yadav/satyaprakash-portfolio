@@ -12,12 +12,12 @@ const getData = async (): Promise<DataProps> => {
         prismadb.about.findFirst(),
         prismadb.experience.findMany({
             where: {
-                type: "frontend",
+                type: "FRONTEND",
             }
         }),
         prismadb.experience.findMany({
             where: {
-                type: "backend",
+                type: "BACKEND",
             }
         })
     ]);

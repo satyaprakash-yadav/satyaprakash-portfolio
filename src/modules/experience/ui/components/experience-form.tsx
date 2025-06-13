@@ -78,8 +78,8 @@ export const ExperienceForm = ({
 
       if (response.data.success) {
         router.refresh();
-        
-        const tData = experienceType === "frontend" ? "Frontend" : "Backend";
+
+        const tData = experienceType === "FRONTEND" ? "Frontend" : "Backend";
         toast.success(`${tData} successfully saved.`);
       }
     } catch (error) {

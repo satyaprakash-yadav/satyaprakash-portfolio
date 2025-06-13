@@ -25,14 +25,14 @@ const ExperiencePage = async () => {
   const frontendItems = await prismadb.experience.findMany({
     where: {
       userId: session.user.id!,
-      type: "frontend",
+      type: "FRONTEND",
     },
   });
 
   const backendItems = await prismadb.experience.findMany({
     where: {
       userId: session.user.id!,
-      type: "backend",
+      type: "BACKEND",
     },
   });
 
@@ -50,7 +50,7 @@ const ExperiencePage = async () => {
         <CardContent>
           {/* <FrontendForm frontendItems={frontendItems} /> */}
           <ExperienceForm
-            experienceType="frontend"
+            experienceType="FRONTEND"
             experienceItems={frontendItems}
           />
         </CardContent>
@@ -67,7 +67,7 @@ const ExperiencePage = async () => {
         <CardContent>
           {/* <BackendForm backendItems={backendItems} /> */}
           <ExperienceForm
-            experienceType="backend"
+            experienceType="BACKEND"
             experienceItems={backendItems}
           />
         </CardContent>
