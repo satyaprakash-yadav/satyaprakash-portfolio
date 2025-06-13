@@ -1,45 +1,46 @@
 "use client";
 
-import { z } from "zod";
+import * as z from "zod";
 import axios from "axios";
-import { toast } from "sonner";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Loader2, Trash } from "lucide-react";
-import { useFieldArray, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm, useFieldArray } from "react-hook-form";
 
-import { Button } from "@/components/ui/button";
+import type { Experience } from "@prisma/client";
+
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import {
   Form,
-  FormControl,
-  FormField,
   FormItem,
   FormLabel,
+  FormField,
+  FormControl,
   FormMessage,
 } from "@/components/ui/form";
 import {
   Select,
-  SelectContent,
   SelectItem,
-  SelectTrigger,
   SelectValue,
+  SelectTrigger,
+  SelectContent,
 } from "@/components/ui/select";
-
-import type { Experience } from "@prisma/client";
 import { experienceFormSchema } from "../../schemas";
-interface FrontendFormProps {
-  frontendItems: Experience[];
+import { toast } from "sonner";
+
+interface BackendFormProps {
+  backendItems: Experience[];
 }
 
-export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
+export const BackendForm = ({ backendItems }: BackendFormProps) => {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const initialValues =
-    frontendItems.length > 0
-      ? frontendItems.map((item) => ({
+    backendItems.length > 0
+      ? backendItems.map((item) => ({
           skill: item.skill,
           level: item.level,
           type: item.type,
@@ -48,7 +49,7 @@ export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
           {
             skill: "",
             level: "",
-            type: "frontend",
+            type: "backend",
           },
         ];
 
@@ -74,7 +75,7 @@ export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
       if (response.data.success) {
         router.refresh();
 
-        toast.success("Frontend successfully saved.");
+        toast.success("Backend successfully saved.");
       }
     } catch (error) {
       console.log(error);
@@ -100,7 +101,7 @@ export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="flex items-center gap-2 sm:gap-3 justify-between"
+            className="flex items-start gap-2 sm:gap-3 justify-between"
           >
             <div className="grow grid grid-cols-2 gap-2 sm:gap-3">
               <FormField
@@ -171,7 +172,7 @@ export const FrontendForm = ({ frontendItems }: FrontendFormProps) => {
             variant="outline"
             size="sm"
             className="mt-2"
-            onClick={() => append({ type: "frontend", skill: "", level: "" })}
+            onClick={() => append({ type: "backend", skill: "", level: "" })}
           >
             Add skill
           </Button>

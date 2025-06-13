@@ -12,6 +12,7 @@ import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
 
 import { FrontendForm } from "@/modules/experience/ui/components/frontend-form";
+import { BackendForm } from "@/modules/experience/ui/components/backend-form";
 
 const ExperiencePage = async () => {
   const session = await auth();
@@ -24,6 +25,13 @@ const ExperiencePage = async () => {
     where: {
       userId: session.user.id!,
       type: "frontend",
+    },
+  });
+
+  const backendItems = await prismadb.experience.findMany({
+    where: {
+      userId: session.user.id!,
+      type: "backend",
     },
   });
 
@@ -51,7 +59,9 @@ const ExperiencePage = async () => {
             Manage your backend development section informations.
           </CardDescription>
         </CardHeader>
-        <CardContent>BackendDevelopment</CardContent>
+        <CardContent>
+          <BackendForm backendItems={backendItems} />
+        </CardContent>
       </Card>
     </div>
   );
