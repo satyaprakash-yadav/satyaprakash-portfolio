@@ -1,11 +1,15 @@
 "use client";
 
 import { z } from "zod";
+import axios from "axios";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 
+import type { About } from "@prisma/client";
 import { aboutFormSchema } from "../../schemas";
 
 import { Input } from "@/components/ui/input";
@@ -20,22 +24,41 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-export const AboutForm = () => {
+interface AboutFormProps {
+  about: About | null;
+}
+
+export const AboutForm = ({ about }: AboutFormProps) => {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
 
   const form = useForm<z.infer<typeof aboutFormSchema>>({
     resolver: zodResolver(aboutFormSchema),
     defaultValues: {
-      experience: "",
-      project: "",
-      worldwide: "",
-      summary: "",
+      experience: about !== null ? about.experience : "",
+      project: about !== null ? about.project : "",
+      worldwide: about !== null ? about.worldwide : "",
+      summary: about !== null ? about.summary : "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof aboutFormSchema>) => {
-    console.log(values);
-    setLoading(false);
+  const onSubmit = async (values: z.infer<typeof aboutFormSchema>) => {
+    try {
+      setLoading(true);
+
+      const response = await axios.post("/api/about", values);
+
+      if (response.data.success) {
+        router.refresh();
+
+        toast.success("About successfully saved.");
+      }
+    } catch (error) {
+      console.log(error);
+      toast.error("Something went wrong!");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (

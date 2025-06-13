@@ -8,7 +8,23 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-const AboutPage = () => {
+import { auth } from "@/lib/auth";
+import { prismadb } from "@/lib/prismadb";
+import { redirect } from "next/navigation";
+
+const AboutPage = async () => {
+  const session = await auth();
+
+  if (!session || !session.user) {
+    redirect("/sign-in");
+  }
+
+  const about = await prismadb.about.findFirst({
+    where: {
+      userId: session.user.id!,
+    },
+  });
+
   return (
     <Card className="rounded-lg border-none">
       <CardHeader className="mx-[1px] pb-9">
@@ -18,7 +34,7 @@ const AboutPage = () => {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <AboutForm />
+        <AboutForm about={about} />
       </CardContent>
     </Card>
   );
