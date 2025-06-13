@@ -2,93 +2,12 @@
 
 import { BadgeCheck } from "lucide-react";
 
-const data_frontend = [
-  {
-    skill: "HTML",
-    level: "Experienced",
-  },
-  {
-    skill: "CSS",
-    level: "Experienced",
-  },
-  {
-    skill: "JavaScript",
-    level: "Experienced",
-  },
-  {
-    skill: "TypeScript",
-    level: "Intermediate",
-  },
-  {
-    skill: "Bootstrap",
-    level: "Experienced",
-  },
-  {
-    skill: "Tailwind",
-    level: "Experienced",
-  },
-  {
-    skill: "React",
-    level: "Experienced",
-  },
-  {
-    skill: "Vue",
-    level: "Intermediate",
-  },
-  {
-    skill: "Vite",
-    level: "Experienced",
-  },
-  {
-    skill: "NextJS",
-    level: "Experienced",
-  },
-];
+import type getData from "@/actions/get-data";
 
-const data_backend = [
-  {
-    skill: "Laravel",
-    level: "Intermediate",
-  },
-  {
-    skill: "Codeigniter",
-    level: "Experienced",
-  },
-  {
-    skill: "Node JS",
-    level: "Basic",
-  },
-  {
-    skill: "MongoDB",
-    level: "Intermediate",
-  },
-  {
-    skill: "PHP",
-    level: "Experienced",
-  },
-  {
-    skill: "MySQL",
-    level: "Experienced",
-  },
-  {
-    skill: "Firebase",
-    level: "Intermediate",
-  },
-  {
-    skill: "Inertia",
-    level: "Experienced",
-  },
-  {
-    skill: "Express JS",
-    level: "Basic",
-  },
-  {
-    skill: "Prisma",
-    level: "Intermediate",
-  },
-];
-
-export const Experience = () => {
+export const Experience = ({
+  frontend,
+  backend,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   return (
     <section id="experience" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
@@ -101,7 +20,7 @@ export const Experience = () => {
             Frontend Development
           </h3>
           <div className="w-full grid grid-cols-2 gap-y-4">
-            {data_frontend.map(({ skill, level }, index) => (
+            {frontend?.map(({ skill, level }, index) => (
               <article
                 key={index}
                 className="flex gap-4 text-primary-foreground group-hover:text-primary"
@@ -109,7 +28,7 @@ export const Experience = () => {
                 <BadgeCheck className="size-5 mt-[2px]" />
                 <div className="flex flex-col">
                   <h4 className="text-sm md:text-base">{skill}</h4>
-                  <small className="text-xs md:text-sm text-muted-foreground">
+                  <small className="text-xs md:text-sm text-muted-foreground capitalize">
                     {level}
                   </small>
                 </div>
@@ -122,7 +41,7 @@ export const Experience = () => {
             Backend Development
           </h3>
           <div className="w-full grid grid-cols-2 gap-y-4">
-            {data_backend.map(({ skill, level }, index) => (
+            {backend?.map(({ skill, level }, index) => (
               <article
                 key={index}
                 className="flex gap-4 text-primary-foreground group-hover:text-primary"
@@ -130,7 +49,7 @@ export const Experience = () => {
                 <BadgeCheck className="size-5 mt-[2px]" />
                 <div className="flex flex-col">
                   <h4 className="text-sm md:text-base">{skill}</h4>
-                  <small className="text-xs md:text-sm text-muted-foreground">
+                  <small className="text-xs md:text-sm text-muted-foreground capitalize">
                     {level}
                   </small>
                 </div>

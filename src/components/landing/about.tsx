@@ -7,7 +7,9 @@ import { Briefcase, FolderGit2, Laptop } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import getData from "@/actions/get-data";
 
-export const About = ({ about }: Awaited<ReturnType<typeof getData>>) => {
+export const About = ({
+  about,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   return (
     <section id="about" className="md:mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
