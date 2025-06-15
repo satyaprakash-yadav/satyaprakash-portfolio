@@ -2,33 +2,39 @@
 
 import { Check } from "lucide-react";
 
-const data_seo_optimization = [
-  "Gather relevant keywords.",
-  "Optimize images for search.",
-  "Optimize meta descriptions.",
-  "Speed up web page load.",
-  "Optimize page across devices.",
-  "Manage broken links.",
-];
+import type getData from "@/actions/get-data";
 
-const data_web_development = [
-  "Designing user interfaces and navigation menus.",
-  "Writing and reviewing code for web pages.",
-  "Integrating multimedia content onto a site.",
-  "Testing web applications.",
-  "Troubleshooting problems with performance or user experience.",
-  "Collaborating with teams of designers, developers, and clients.",
-];
+// const data_seo_optimization = [
+//   "Gather relevant keywords.",
+//   "Optimize images for search.",
+//   "Optimize meta descriptions.",
+//   "Speed up web page load.",
+//   "Optimize page across devices.",
+//   "Manage broken links.",
+// ];
 
-const data_content_creation = [
-  "Research industry-related topics.",
-  "Prepare well-structured drafts using digital publishing platforms.",
-  "Create and distribute marketing copy to advertise company and products.",
-  "Identify customers' needs and recommend new topics.",
-  "Measure web traffic to content.",
-];
+// const data_web_development = [
+//   "Designing user interfaces and navigation menus.",
+//   "Writing and reviewing code for web pages.",
+//   "Integrating multimedia content onto a site.",
+//   "Testing web applications.",
+//   "Troubleshooting problems with performance or user experience.",
+//   "Collaborating with teams of designers, developers, and clients.",
+// ];
 
-export const Expertise = () => {
+// const data_content_creation = [
+//   "Research industry-related topics.",
+//   "Prepare well-structured drafts using digital publishing platforms.",
+//   "Create and distribute marketing copy to advertise company and products.",
+//   "Identify customers' needs and recommend new topics.",
+//   "Measure web traffic to content.",
+// ];
+
+export const Expertise = ({
+  seooptimization,
+  webdevelopment,
+  contentcreation,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   return (
     <section id="expertise" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
@@ -43,12 +49,12 @@ export const Expertise = () => {
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {data_seo_optimization.map((expertise, index) => (
+            {seooptimization?.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />
                 </div>
-                <p>{expertise}</p>
+                <p>{item.service}</p>
               </li>
             ))}
           </ul>
@@ -61,12 +67,12 @@ export const Expertise = () => {
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {data_web_development.map((expertise, index) => (
+            {webdevelopment?.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />
                 </div>
-                <p>{expertise}</p>
+                <p>{item.service}</p>
               </li>
             ))}
           </ul>
@@ -79,12 +85,12 @@ export const Expertise = () => {
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {data_content_creation.map((expertise, index) => (
+            {contentcreation?.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />
                 </div>
-                <p>{expertise}</p>
+                <p>{item.service}</p>
               </li>
             ))}
           </ul>
