@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 
-import QualificationModal from "@/modals/qualification-modal";
+import QualificationModal from "@/components/modals/qualification-modal";
 
 const ModalProvider = () => {
     const [isMounted, setIsMounted] = useState(false);
