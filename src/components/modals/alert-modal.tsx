@@ -55,7 +55,7 @@ export const AlertModal = ({
                             Deleting...
                         </>
                     )}
-                    {!loading && <>Continue</>}
+                    {!loading && <>Delete</>}
                 </Button>
             </div>
         </Modal>
