@@ -29,8 +29,10 @@ import {
 } from "@/components/ui/select";
 import { qualificationFormSchema } from "@/modules/qualifications/schemas";
 import { Input } from "../ui/input";
+import { toast } from "sonner";
 
 const QualificationModal = () => {
+    const router = useRouter();
     const qualificationModal = useQualificationModal();
 
     const [loading, setLoading] = useState(false);
@@ -50,9 +52,23 @@ const QualificationModal = () => {
 
     const qualificationType = form.watch("type");
 
-    const onSubmit = (values: z.infer<typeof qualificationFormSchema>) => {
-        console.log(values);
-        setLoading(false);
+    const onSubmit = async (values: z.infer<typeof qualificationFormSchema>) => {
+        try {
+            setLoading(true);
+            
+            const response = await axios.post("/api/qualification", values);
+
+            if (response.data.success) {
+                form.reset();
+                qualificationModal.onClose();
+                router.refresh();
+                toast.success("Qualification successfully saved.")
+            }
+        } catch (error) {
+            toast.error("Something went wrong!")
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
