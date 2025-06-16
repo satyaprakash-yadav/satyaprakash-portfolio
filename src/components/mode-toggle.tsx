@@ -28,7 +28,7 @@ export function ModeToggle() {
           <TooltipTrigger asChild>
             <DropdownMenuTrigger asChild>
               <Button
-                className="rounded-full size-8"
+                className="rounded-full size-8 bg-background"
                 variant="outline"
                 size="icon"
               >
