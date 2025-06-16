@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
@@ -8,11 +8,7 @@ import { ThemeProvider } from "@/providers/theme-provider";
 import { getServerSession } from "next-auth";
 import SessionProvider from "@/providers/session-provider";
 
-const poppins = Poppins({
-  style: ["normal"],
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-});
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Satyaprakash — My Personal Website",
@@ -29,7 +25,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`${poppins.className} antialiased`}>
+      <body className={`${inter.className} antialiased`}>
         <SessionProvider session={session}>
           <ThemeProvider
             attribute="class"

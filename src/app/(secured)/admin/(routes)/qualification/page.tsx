@@ -44,7 +44,7 @@ const QualificationPage = async () => {
     return (
         <Card className="rounded-lg border-none">
             <CardHeader className="mx-[1px] pb-9">
-                <CardTitle className="text-xl font-bold">Qualification</CardTitle>
+                <CardTitle className="text-xl font-semibold">Qualification</CardTitle>
                 <CardDescription>
                     Manage your qualification section information.
                 </CardDescription>

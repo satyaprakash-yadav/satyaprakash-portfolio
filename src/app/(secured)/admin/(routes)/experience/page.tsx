@@ -40,7 +40,7 @@ const ExperiencePage = async () => {
     <div className="grid lg:grid-cols-2 gap-4">
       <Card className="rounded-lg border-none">
         <CardHeader className="mx-[1px] pb-9">
-          <CardTitle className="text-xl font-bold">
+          <CardTitle className="text-xl font-semibold">
             Frontend Development
           </CardTitle>
           <CardDescription>
@@ -57,7 +57,7 @@ const ExperiencePage = async () => {
       </Card>
       <Card className="rounded-lg border-none">
         <CardHeader className="mx-[1px] pb-9">
-          <CardTitle className="text-xl font-bold">
+          <CardTitle className="text-xl font-semibold">
             Backend Development
           </CardTitle>
           <CardDescription>

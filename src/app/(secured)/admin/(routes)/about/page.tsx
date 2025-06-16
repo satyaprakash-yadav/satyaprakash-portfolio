@@ -28,7 +28,7 @@ const AboutPage = async () => {
   return (
     <Card className="rounded-lg border-none">
       <CardHeader className="mx-[1px] pb-9">
-        <CardTitle className="text-xl font-bold">About</CardTitle>
+        <CardTitle className="text-xl font-semibold">About</CardTitle>
         <CardDescription>
           Manage your about section informations.
         </CardDescription>
