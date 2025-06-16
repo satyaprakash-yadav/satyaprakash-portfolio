@@ -1,5 +1,7 @@
-import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
+
+import { auth } from "@/lib/auth";
+import ModalProvider from "@/providers/modal-provider";
 
 interface Props {
     children: React.ReactNode;
@@ -13,7 +15,10 @@ const AdminLayout = async ({ children }: Props) => {
     };
     
     return ( 
-        <>{children}</>
+        <>  
+            <ModalProvider />
+            {children}
+        </>
     );
 }
  

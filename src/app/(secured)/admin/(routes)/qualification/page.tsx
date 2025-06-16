@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/card";
 
 import { columns } from "@/modules/qualifications/ui/components/columns";
+import { AddButton } from "@/modules/qualifications/ui/components/buttons";
 import { DataTable } from "@/components/data-table/data-table";
 
 export const options = [
@@ -50,7 +51,12 @@ const QualificationPage = async () => {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                <DataTable data={qualifications} columns={columns} options={options} />
+                <DataTable
+                    data={qualifications}
+                    columns={columns}
+                    options={options}
+                    AddButton={<AddButton />}
+                />
             </CardContent>
         </Card>
     );

@@ -1,5 +1,6 @@
 "use client";
 
+import { ReactNode } from "react";
 import { Table } from "@tanstack/react-table";
 import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
@@ -15,11 +16,13 @@ interface DataTableToolbarProps<TData> {
         value: string;
         icon?: React.ComponentType<{ className?: string }>;
     }[];
+    AddButton?: ReactNode;
 };
 
 export function DataTableToolbar<TData>({
     table,
     options,
+    AddButton,
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -28,7 +31,7 @@ export function DataTableToolbar<TData>({
             <div className="flex flex-1 items-center space-x-2">
                 <div className="flex justify-between items-center h-[32px] rounded-md border border-input shadow-sm focus-within:outline-none focus-within:ring-1 focus-within:ring-ring">
                     <MagnifyingGlassIcon className="size-4 mx-2 text-muted-foreground" />
-                    <Input 
+                    <Input
                         placeholder="Search..."
                         value={(table.getState().globalFilter as string) ?? ""}
                         onChange={(event) => table.setGlobalFilter(event.target.value)}
@@ -49,7 +52,10 @@ export function DataTableToolbar<TData>({
                     </Button>
                 )}
             </div>
-            <DataTableViewOptions table={table} />
+            <div className="flex items-center space-x-2">
+                <DataTableViewOptions table={table} />
+                {AddButton}
+            </div>
         </div>
     )
 }
