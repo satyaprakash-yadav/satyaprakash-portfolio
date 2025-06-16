@@ -2,13 +2,14 @@
 
 import * as z from "zod";
 import axios from "axios";
+import { toast } from "sonner";
 import React, { useState } from "react";
 import { Row } from "@tanstack/react-table";
 import { Edit, Trash2, Ellipsis } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { DotsHorizontalIcon } from "@radix-ui/react-icons";
 
 import { AlertModal } from "@/components/modals/alert-modal";
+import { useQualificationModal } from "@/hooks/use-qualification-modal";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -18,8 +19,8 @@ import {
     DropdownMenuContent,
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+
 import { qualificationSchema } from "../../schemas";
-import { toast } from "sonner";
 
 interface CellActionsProps<TData> {
     row: Row<TData>;
@@ -31,6 +32,7 @@ export function CellActions<TData>({ row }: CellActionsProps<TData>) {
     const [loading, setLoading] = useState(false);
 
     const qualification = qualificationSchema.parse(row.original);
+    const qualificationModal = useQualificationModal();
 
     const onDelete = async () => {
         try {
@@ -67,7 +69,26 @@ export function CellActions<TData>({ row }: CellActionsProps<TData>) {
                     </Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    <DropdownMenuItem className="hover:cursor-pointer">
+                    <DropdownMenuItem
+                        className="hover:cursor-pointer"
+                        onClick={() => {
+                            qualificationModal.setTitle("Edit Qualification");
+                            qualificationModal.setDescription(
+                                "Update information on your qualification section."
+                            );
+                            qualificationModal.setQualification({
+                                id: qualification.id,
+                                type: qualification.type,
+                                degree: qualification.degree,
+                                school: qualification.school,
+                                position: qualification.position,
+                                company: qualification.company,
+                                startYear: qualification.startYear,
+                                endYear: qualification.endYear,
+                            });
+                            qualificationModal.onOpen();
+                        }}
+                    >
                         <Edit className="mr-2" size={14} />
                         Edit
                     </DropdownMenuItem>

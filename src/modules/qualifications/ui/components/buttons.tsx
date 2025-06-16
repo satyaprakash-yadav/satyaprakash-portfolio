@@ -17,6 +17,7 @@ export const AddButton = () => {
                 qualificationModal.setDescription(
                     "Add more information on your qualification section."
                 )
+                qualificationModal.setQualification(undefined);
                 qualificationModal.onOpen();
             }}
         >

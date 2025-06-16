@@ -48,6 +48,15 @@ const QualificationModal = () => {
             startYear: "",
             endYear: "",
         },
+        values: {
+            type: qualificationModal.qualification?.type ?? "",
+            degree: qualificationModal.qualification?.degree ?? "",
+            school: qualificationModal.qualification?.school ?? "",
+            position: qualificationModal.qualification?.position ?? "",
+            company: qualificationModal.qualification?.company ?? "",
+            startYear: qualificationModal.qualification?.startYear ?? "",
+            endYear: qualificationModal.qualification?.endYear ?? "",
+        }
     });
 
     const qualificationType = form.watch("type");
@@ -55,8 +64,17 @@ const QualificationModal = () => {
     const onSubmit = async (values: z.infer<typeof qualificationFormSchema>) => {
         try {
             setLoading(true);
-            
-            const response = await axios.post("/api/qualification", values);
+
+            let response;
+
+            if (qualificationModal.qualification?.id !== undefined) {
+                response = await axios.patch(
+                    `/api/qualification/${qualificationModal.qualification.id}`,
+                    values,
+                );
+            } else {
+                response = await axios.post("/api/qualification", values);
+            }
 
             if (response.data.success) {
                 form.reset();
