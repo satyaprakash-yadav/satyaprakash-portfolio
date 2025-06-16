@@ -6,6 +6,9 @@ import { Cross2Icon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
 
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+
+import DeleteButton from "@/components/data-table/data-table-delete";
+
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { DataTableViewOptions } from "./data-table-view-options";
 
@@ -17,12 +20,14 @@ interface DataTableToolbarProps<TData> {
         icon?: React.ComponentType<{ className?: string }>;
     }[];
     AddButton?: ReactNode;
+    page: string;
 };
 
 export function DataTableToolbar<TData>({
     table,
     options,
     AddButton,
+    page,
 }: DataTableToolbarProps<TData>) {
     const isFiltered = table.getState().columnFilters.length > 0;
 
@@ -53,6 +58,9 @@ export function DataTableToolbar<TData>({
                 )}
             </div>
             <div className="flex items-center space-x-2">
+                {table.getFilteredSelectedRowModel().rows.length > 0 && (
+                    <DeleteButton table={table} page={page} />
+                )}
                 <DataTableViewOptions table={table} />
                 {AddButton}
             </div>
