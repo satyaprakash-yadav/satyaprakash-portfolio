@@ -8,6 +8,8 @@ import { Badge } from "@/components/ui/badge";
 import { Checkbox } from "@/components/ui/checkbox";
 import { DataTableColumnHeader } from "@/components/data-table/data-table-colum-header";
 
+import { CellActions } from "./cell-actions";
+
 export const columns: ColumnDef<Qualification>[] = [
     {
         id: "select",
@@ -114,4 +116,8 @@ export const columns: ColumnDef<Qualification>[] = [
         ),
         cell: ({ row }) => format(row.getValue("createdAt"), "dd MM yyyy")
     },
+    {
+        id: "actions",
+        cell: ({ row }) => <CellActions row={row} />
+    }
 ];

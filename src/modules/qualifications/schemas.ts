@@ -43,3 +43,9 @@ export const qualificationFormSchema = z
       });
     }
   });
+
+
+export const qualificationSchema = z.object({
+  id: z.string(),
+  type: z.string(),
+});
