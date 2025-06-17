@@ -89,6 +89,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                 const isSelected = selectedValues.has(option.value)
                                 return (
                                     <CommandItem
+                                        className="hover:cursor-pointer"
                                         key={option.value}
                                         onSelect={() => {
                                             if (isSelected) {
@@ -130,7 +131,7 @@ export function DataTableFacetedFilter<TData, TValue>({
                                 <CommandGroup>
                                     <CommandItem
                                         onSelect={() => column?.setFilterValue(undefined)}
-                                        className="justify-center text-center"
+                                        className="justify-center text-center hover:cursor-pointer"
                                     >
                                         Clear filters
                                     </CommandItem>

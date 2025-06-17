@@ -42,15 +42,15 @@ export function ModeToggle() {
         </Tooltip>
       </TooltipProvider>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
+        <DropdownMenuItem onClick={() => setTheme("light")} className="hover:cursor-pointer">
           <SunIcon className="size-4 mr-2 dark:text-foreground" />
           Light
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
+        <DropdownMenuItem onClick={() => setTheme("dark")} className="hover:cursor-pointer">
           <MoonIcon className="size-4 mr-2 dark:text-foreground" />
           Dark
         </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
+        <DropdownMenuItem onClick={() => setTheme("system")} className="hover:cursor-pointer">
           <MixerVerticalIcon className="size-4 mr-2 dark:text-foreground" />
           System
         </DropdownMenuItem>
