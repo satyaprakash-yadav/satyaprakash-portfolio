@@ -6,55 +6,60 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
 import { QualificationCard } from "@/modules/home/ui/components/qualification-card";
 
-const data_education = [
-  {
-    start_year: "2004",
-    end_year: "2016",
-    school: "Abhinav Bal Vidyalaya Mandir English Medium High School",
-    degree: "(10th) Higher Secondary Certificate of Education",
-  },
-  {
-    start_year: "2016",
-    end_year: "2018",
-    school: "B.N.N. College in Science (MH)",
-    degree: "(12th) Higher Secondary Certificate of Education",
-  },
-  {
-    start_year: "2018",
-    end_year: "2021",
-    school: "B.N.N. College in Science (MH)",
-    degree: "Digree in Information Technology",
-  },
-];
+import type getData from "@/actions/get-data";
 
-const data_experience = [
-  {
-    start_year: "2022",
-    end_year: "2023",
-    company: "KnowledgeWorks Global Ltd",
-    position: "Software Development",
-  },
-  {
-    start_year: "2023",
-    end_year: "2023",
-    company: "Sahayata24x7 - K3Y Technology Services Private Limited",
-    position: "Full Stack Developer",
-  },
-  {
-    start_year: "2023",
-    end_year: "2024",
-    company: "Aryabhata2.O institiue",
-    position: "Web Developer Teaching",
-  },
-  {
-    start_year: "2025",
-    end_year: "present",
-    company: "Dr. Kana pvt ltd",
-    position: "Web Developer - Freelancer",
-  },
-];
+// const data_education = [
+//   {
+//     start_year: "2004",
+//     end_year: "2016",
+//     school: "Abhinav Bal Vidyalaya Mandir English Medium High School",
+//     degree: "(10th) Higher Secondary Certificate of Education",
+//   },
+//   {
+//     start_year: "2016",
+//     end_year: "2018",
+//     school: "B.N.N. College in Science (MH)",
+//     degree: "(12th) Higher Secondary Certificate of Education",
+//   },
+//   {
+//     start_year: "2018",
+//     end_year: "2021",
+//     school: "B.N.N. College in Science (MH)",
+//     degree: "Digree in Information Technology",
+//   },
+// ];
 
-export const Qualification = () => {
+// const data_experience = [
+//   {
+//     start_year: "2022",
+//     end_year: "2023",
+//     company: "KnowledgeWorks Global Ltd",
+//     position: "Software Development",
+//   },
+//   {
+//     start_year: "2023",
+//     end_year: "2023",
+//     company: "Sahayata24x7 - K3Y Technology Services Private Limited",
+//     position: "Full Stack Developer",
+//   },
+//   {
+//     start_year: "2023",
+//     end_year: "2024",
+//     company: "Aryabhata2.O institiue",
+//     position: "Web Developer Teaching",
+//   },
+//   {
+//     start_year: "2025",
+//     end_year: "present",
+//     company: "Dr. Kana pvt ltd",
+//     position: "Web Developer - Freelancer",
+//   },
+// ];
+
+export const Qualification = ({
+  education,
+  experience,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {  
   return (
     <section id="qualification" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
@@ -71,14 +76,14 @@ export const Qualification = () => {
             <QualificationCard
               icon={GraduationCap}
               qualificationType="education"
-              data={data_education}
+              data={education}
             />
           </TabsContent>
           <TabsContent value="experience">
             <QualificationCard
               icon={Briefcase}
               qualificationType="experience"
-              data={data_experience}
+              data={experience}
             />
           </TabsContent>
         </Tabs>
