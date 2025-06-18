@@ -3,6 +3,10 @@ import { redirect } from "next/navigation";
 
 import { prismadb } from "@/lib/prismadb";
 
+import { DataTable } from "@/components/data-table/data-table";
+import { columns } from "@/modules/portfolio/ui/components/columns";
+import { AddButton } from "@/modules/portfolio/ui/components/add-button";
+
 import {
     Card,
     CardTitle,
@@ -11,9 +15,6 @@ import {
     CardDescription,
 } from "@/components/ui/card";
 
-import { DataTable } from "@/components/data-table/data-table";
-import { columns } from "@/modules/portfolio/ui/components/columns";
-import { AddButton } from "@/modules/portfolio/ui/components/add-button";
 
 export const options = [];
 
@@ -29,7 +30,7 @@ const PortfolioPage = async () => {
             userId: session.user.id!,
         },
         orderBy: {
-            createdAt: "asc",
+            createdAt: "desc",
         },
         include: {
             tags: true
