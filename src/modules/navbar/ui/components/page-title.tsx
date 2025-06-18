@@ -19,6 +19,8 @@ export const PageTitle = () => {
     pageTitle = "Qualification";
   } else if (pathname === "/admin/portfolio") {
     pageTitle = "Portfolio";
+  } else if (pathname.includes("/admin/portfolio/")) {
+    pageTitle = "Portfolio";
   } else if (pathname === "/admin/link") {
     pageTitle = "Link";
   }

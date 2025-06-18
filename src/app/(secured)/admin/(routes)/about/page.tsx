@@ -1,3 +1,7 @@
+import { auth } from "@/lib/auth";
+import { prismadb } from "@/lib/prismadb";
+import { redirect } from "next/navigation";
+
 import { AboutForm } from "@/modules/about/ui/components/about-form";
 
 import {
@@ -7,10 +11,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
-import { auth } from "@/lib/auth";
-import { prismadb } from "@/lib/prismadb";
-import { redirect } from "next/navigation";
 
 const AboutPage = async () => {
   const session = await auth();
