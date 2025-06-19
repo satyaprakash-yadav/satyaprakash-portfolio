@@ -2,9 +2,15 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { CopyPlus, Loader2 } from "lucide-react";
+
+import type getData from "@/actions/get-data";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import axios from "axios";
+import { toast } from "sonner";
 
 const data_portfolio = [
   {
@@ -63,7 +69,47 @@ const data_portfolio = [
   },
 ];
 
-export const Portfolio = () => {
+export const Portfolio = ({
+  portfolio,
+  portfolioCount,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+  const [hide, setHide] = useState(false);
+  const [offset, setOffset] = useState(6);
+  const [loading, setLoading] = useState(false);
+  const [portfolios, setPortfolios] = useState(portfolio);
+
+  const onLoadMore = async () => {
+    try {
+      setLoading(true);
+
+      const response = await axios.get("/api/portfolio", {
+        params: {
+          offset: offset,
+        }
+      });
+
+      if (response.status === 200) {
+        if (response.data.length > 2) {
+          setOffset((prev) => prev + 3);
+        } else {
+          setHide(true);
+        }
+
+        setPortfolios([...portfolios!, ...response.data]);
+      }
+    } catch (error) {
+      toast.error("Something went wrong!")
+    } finally {
+      setLoading(false);
+    }
+  }
+
+  useEffect(() => {
+    if (offset == portfolioCount!) {
+      setHide(true);
+    }
+  }, [offset, portfolioCount]);
+
   return (
     <section id="portfolio" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
@@ -71,19 +117,21 @@ export const Portfolio = () => {
       </h1>
       <h2 className="text-center text-2xl font-semibold pt-1">Portfolio</h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
-        {data_portfolio.toReversed().map((portfolio) => (
+        {portfolios?.map((portfolio) => (
           <article
             key={portfolio.id}
             className="relative w-full h-min rounded-2xl flex flex-col group"
           >
             <div className="relative w-full h-[250px] lg:h-[300px] overflow-hidden">
-              <Image
-                src={`${portfolio.image}`}
-                alt="portfolio"
-                fill
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                className="object-cover object-top group-hover:object-bottom transition-all duration-6000 ease-in-out rounded-t-2xl border-t border-x"
-              />
+              {portfolio.image && (
+                <Image
+                  src={`${portfolio.image}`}
+                  alt="portfolio"
+                  fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover object-top group-hover:object-bottom transition-all duration-6000 ease-in-out rounded-t-2xl border-t border-x"
+                />
+              )}
             </div>
             <div className="flex flex-col gap-4 rounded-b-2xl py-9 px-6 md:px-6 border border-t-primary dark:border-t-zinc-100 group-hover:border-t-zinc-200 dark:group-hover:border-t-zinc-800 bg-primary group-hover:bg-primary-foreground transition-colors duration-300 ease-in-out">
               <h3 className="text-base lg:text-[1.2rem] font-medium text-primary-foreground group-hover:text-primary">
@@ -96,12 +144,12 @@ export const Portfolio = () => {
                     variant="outline"
                     className="rounded-full border-primary-foreground group-hover:border-primary text-primary-foreground group-hover:text-primary font-medium"
                   >
-                    {tag}
+                    {tag.name}
                   </Badge>
                 ))}
               </div>
               <p className="text-xs lg:text-sm text-primary-foreground group-hover:text-primary">
-                {portfolio.desc}
+                {portfolio.description}
               </p>
               <div className="pt-2 flex gap-4 items-center">
                 <Button
@@ -110,7 +158,7 @@ export const Portfolio = () => {
                   asChild
                 >
                   <Link
-                    href={portfolio.github}
+                    href={portfolio.githubUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -123,7 +171,7 @@ export const Portfolio = () => {
                   asChild
                 >
                   <Link
-                    href={portfolio.demo}
+                    href={portfolio.demoUrl}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -135,6 +183,24 @@ export const Portfolio = () => {
           </article>
         ))}
       </div>
+      {!hide && (
+        <div className="flex justify-center mt-8">
+          <Button onClick={onLoadMore} variant="default" disabled={loading}>
+            {loading && (
+              <>
+                <Loader2 className="animate-spin size-4 mr-2" size={18} />
+                Loading...
+              </>
+            )}
+            {!loading && (
+              <>
+                <CopyPlus className="size-4 mr-2" />
+                Show More
+              </>
+            )}
+          </Button>
+        </div>
+      )}
     </section>
   );
 };

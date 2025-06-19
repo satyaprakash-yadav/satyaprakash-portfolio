@@ -15,7 +15,18 @@ import { Qualification } from "@/components/landing/qualification";
 import { ModeToggle } from "@/components/mode-toggle";
 
 export default async function Home() {
-  const { about, frontend, backend, seooptimization, webdevelopment, contentcreation, education, experience } = await getData();
+  const { 
+    about, 
+    frontend, 
+    backend, 
+    seooptimization, 
+    webdevelopment, 
+    contentcreation, 
+    education, 
+    experience, 
+    portfolio, 
+    portfolioCount 
+  } = await getData();
 
   return (
     <>
@@ -33,7 +44,7 @@ export default async function Home() {
           contentcreation={contentcreation}
         />
         <Qualification education={education} experience={experience} />
-        <Portfolio />
+        <Portfolio portfolio={portfolio} portfolioCount={portfolioCount} />
         <Tool />
         <Contact />
       </main>

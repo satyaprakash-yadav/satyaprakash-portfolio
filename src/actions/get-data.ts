@@ -3,8 +3,13 @@ import type {
   About,
   Experience,
   Expertise,
+  Prisma,
   Qualification,
 } from "@prisma/client";
+
+type PortfolioWithTags = Prisma.PortfolioGetPayload<{
+  include: { tags: true };
+}>;
 
 interface DataProps {
   about: About | null;
@@ -15,6 +20,8 @@ interface DataProps {
   contentcreation: Expertise[];
   education: Qualification[];
   experience: Qualification[];
+  portfolio: PortfolioWithTags[];
+  portfolioCount: number;
 }
 
 const getData = async (): Promise<DataProps> => {
@@ -27,6 +34,8 @@ const getData = async (): Promise<DataProps> => {
     contentcreation,
     education,
     experience,
+    portfolio,
+    portfolioCount,
   ] = await prismadb.$transaction([
     prismadb.about.findFirst(),
     prismadb.experience.findMany({
@@ -70,6 +79,16 @@ const getData = async (): Promise<DataProps> => {
         id: "desc",
       },
     }),
+    prismadb.portfolio.findMany({
+      take: 6,
+      include: {
+        tags: true,
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    }),
+    prismadb.portfolio.count()
   ]);
 
   return {
@@ -81,6 +100,8 @@ const getData = async (): Promise<DataProps> => {
     contentcreation,
     education,
     experience,
+    portfolio,
+    portfolioCount,
   };
 };
 
