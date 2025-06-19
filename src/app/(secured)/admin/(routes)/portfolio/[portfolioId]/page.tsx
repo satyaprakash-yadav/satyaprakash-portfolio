@@ -4,6 +4,7 @@ import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
 import { PortfolioForm } from "@/modules/portfolio/ui/components/portfolio-form";
 
+import { BackButton } from "@/components/back-button";
 import {
     Card,
     CardTitle,
@@ -34,17 +35,20 @@ const PortfolioIdPage = async ({
 
 
     return (
-        <Card className="rounded-lg border-none">
-            <CardHeader className="mx-[1px] pb-9">
-                <CardTitle className="text-xl font-semibold">Edit Portfolio</CardTitle>
-                <CardDescription>
-                    Edit project information on your portfolio section.
-                </CardDescription>
-            </CardHeader>
-            <CardContent>
-                <PortfolioForm portfolio={portfolio} />
-            </CardContent>
-        </Card>
+        <>
+            <BackButton slug="/admin/portfolio" />
+            <Card className="rounded-lg border-none">
+                <CardHeader className="mx-[1px] pb-9">
+                    <CardTitle className="text-xl font-semibold">Edit Portfolio</CardTitle>
+                    <CardDescription>
+                        Edit project information on your portfolio section.
+                    </CardDescription>
+                </CardHeader>
+                <CardContent>
+                    <PortfolioForm portfolio={portfolio} />
+                </CardContent>
+            </Card>
+        </>
     );
 }
 
