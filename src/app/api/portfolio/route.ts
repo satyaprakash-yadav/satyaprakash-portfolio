@@ -3,6 +3,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
 
+import addBlurredDataUrls from "@/lib/get-blur-data";
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
@@ -112,7 +114,9 @@ export async function GET(req: NextRequest) {
       },
     });
 
-    return NextResponse.json({ success: true, portfolios });
+    const photosWithBlur = await addBlurredDataUrls(portfolios);
+
+    return NextResponse.json({ success: true, photosWithBlur });
   } catch (error: any) {
     console.log("[PORTFOLIO_GET]", error);
     return NextResponse.json(

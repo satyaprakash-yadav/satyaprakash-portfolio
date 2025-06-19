@@ -1,4 +1,5 @@
 import { prismadb } from "@/lib/prismadb";
+import addBlurredDataUrls from "@/lib/get-blur-data";
 import type {
   About,
   Experience,
@@ -11,6 +12,10 @@ type PortfolioWithTags = Prisma.PortfolioGetPayload<{
   include: { tags: true };
 }>;
 
+type PortfolioWithBlur = PortfolioWithTags & {
+  blurredDataUrl?: string;
+};
+
 interface DataProps {
   about: About | null;
   frontend: Experience[];
@@ -20,7 +25,7 @@ interface DataProps {
   contentcreation: Expertise[];
   education: Qualification[];
   experience: Qualification[];
-  portfolio: PortfolioWithTags[];
+  portfolioWithBlur: PortfolioWithBlur[];
   portfolioCount: number;
 }
 
@@ -91,6 +96,8 @@ const getData = async (): Promise<DataProps> => {
     prismadb.portfolio.count()
   ]);
 
+  const portfolioWithBlur = await addBlurredDataUrls(portfolio);
+
   return {
     about,
     frontend,
@@ -100,7 +107,7 @@ const getData = async (): Promise<DataProps> => {
     contentcreation,
     education,
     experience,
-    portfolio,
+    portfolioWithBlur,
     portfolioCount,
   };
 };
