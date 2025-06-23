@@ -170,10 +170,10 @@ export const ExpertiseForm = ({
             {loading && (
               <>
                 <Loader2 className="animate-spin mr-2" size={18} />
-                Updating...
+                Saving...
               </>
             )}
-            {!loading && <p>Update service</p>}
+            {!loading && <p className="px-4">Save</p>}
           </Button>
         </div>
       </form>
