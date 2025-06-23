@@ -1,8 +1,12 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-export const Footer = () => {
+import type getData from "@/actions/get-data";
+
+export const Footer = ({
+  miscellaneous,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   return (
     <footer id="footer" className="mt-32 bg-primary">
       <div className="container px-4 md:px-8 mx-auto w-full flex flex-col py-12">
@@ -59,18 +63,43 @@ export const Footer = () => {
         </ul>
         <div className="flex justify-center gap-4 mt-8">
           <Button variant="secondary" size="icon" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
+            <Link
+              href={`${miscellaneous ? miscellaneous.facebookUrl : "#"}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label='Facebook'
+            >
               <FaFacebook className="size-5" />
             </Link>
           </Button>
           <Button variant="secondary" size="icon" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
+            <Link
+              href={`${miscellaneous ? miscellaneous.instagramUrl : "#"}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label='Instagram'
+            >
               <FaInstagram className="size-5" />
             </Link>
           </Button>
           <Button variant="secondary" size="icon" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
+            <Link
+              href={`${miscellaneous ? miscellaneous.twitterUrl : "#"}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label='Twitter'
+            >
               <FaTwitter className="size-5" />
+            </Link>
+          </Button>
+          <Button variant='secondary' size='icon' asChild>
+            <Link
+              href={`${miscellaneous ? miscellaneous.linkedinUrl : '#'}`}
+              aria-label='LinkedIn'
+              target='_blank'
+              rel='noopener noreferrer'
+            >
+              <FaLinkedin className='size-5' />
             </Link>
           </Button>
         </div>

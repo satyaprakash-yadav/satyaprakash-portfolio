@@ -9,9 +9,15 @@ import { useTypewriter, Cursor } from "react-simple-typewriter";
 
 import { Button } from "@/components/ui/button";
 
-export const Header = () => {
+import type getData from "@/actions/get-data";
+
+export const Header = ({
+  miscellaneous,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   const [text] = useTypewriter({
-    words: ["Django RestAPI Developer", "Penetration Tester"],
+    words: miscellaneous
+      ? miscellaneous?.titles.map((title) => title.name)
+      : [],
     loop: true,
   });
 
@@ -35,7 +41,7 @@ export const Header = () => {
         </div>
         <div className="inline-flex space-x-3 pt-9">
           <Button variant="outline" asChild>
-            <Link href="#" target="_blank" rel="noopener noreferrer">
+            <Link href={miscellaneous ? miscellaneous.cvUrl : "#"} target="_blank" rel="noopener noreferrer">
               Download CV
             </Link>
           </Button>
@@ -48,7 +54,7 @@ export const Header = () => {
         <div className="flex justify-between items-end">
           <div className='flex flex-col items-center gap-4 after:content-[""] after:w-[1px] after:h-[2rem] after:bg-primary'>
             <Link
-              href="#"
+              href={miscellaneous ? miscellaneous.facebookUrl : "#"}
               aria-label="Facebook"
               target="_blank"
               rel="noopener noreferrer"
@@ -57,7 +63,7 @@ export const Header = () => {
               <FaFacebookSquare className="text-white dark:text-zinc-950 w-4 h-4" />
             </Link>
             <Link
-              href="#"
+              href={miscellaneous ? miscellaneous.linkedinUrl : "#"}
               aria-label="LinkedIn"
               target="_blank"
               rel="noopener noreferrer"
@@ -66,7 +72,7 @@ export const Header = () => {
               <FaLinkedin className="text-white dark:text-zinc-950 w-4 h-4" />
             </Link>
             <Link
-              href="#"
+              href={miscellaneous ? miscellaneous.githubUrl : "#"}
               aria-label="GitHub"
               target="_blank"
               rel="noopener noreferrer"

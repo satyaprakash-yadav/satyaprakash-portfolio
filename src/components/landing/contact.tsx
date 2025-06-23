@@ -4,7 +4,11 @@ import { Button } from "../ui/button";
 import { Icons } from "@/modules/home/ui/components/icons";
 import { ContactForm } from "@/modules/contact/ui/components/contact-form";
 
-export const Contact = () => {
+import type getData from "@/actions/get-data";
+
+export const Contact = ({
+  miscellaneous,
+}: Partial<Awaited<ReturnType<typeof getData>>>) => {
   return (
     <section id="contact" className="mt-32">
       <h1 className="text-center text-sm text-muted-foreground font-medium">
@@ -18,7 +22,7 @@ export const Contact = () => {
               <Icons.email className="size-7 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Email</h3>
               <h4 className="text-sm text-muted-foreground pb-1">
-                satyay3556@gmail.com
+                {miscellaneous?.email}
               </h4>
               <Button
                 variant="link"
@@ -26,9 +30,8 @@ export const Contact = () => {
                 asChild
               >
                 <Link
-                  href="mailto:satyay3556@gmail.com"
-                  target="_blank"
-                  rel="noopener noreferer"
+                  href={`${miscellaneous ? 'mailto:' + miscellaneous.email : '#'
+                    }`}
                 >
                   Email me
                 </Link>
@@ -41,14 +44,14 @@ export const Contact = () => {
               <Icons.messenger className="size-7 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Messenger</h3>
               <h4 className="text-sm text-muted-foreground pb-1">
-                Satyaprakash Yadav
+                {miscellaneous?.messengerName}
               </h4>
               <Button
                 variant="link"
                 className="text-primary-foreground group-hover:text-primary"
                 asChild
               >
-                <Link href="#" target="_blank" rel="noopener noreferer">
+                <Link href={`${miscellaneous ? miscellaneous.messengerUrl : "#"}`} target="_blank" rel="noopener noreferer">
                   Say hello
                 </Link>
               </Button>
@@ -60,14 +63,14 @@ export const Contact = () => {
               <Icons.discord className="size-8 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Discord</h3>
               <h4 className="text-sm text-muted-foreground pb-1">
-                Satyaprakash.Yadav
+                {miscellaneous?.discordUsername}
               </h4>
               <Button
                 variant="link"
                 className="text-primary-foreground group-hover:text-primary"
                 asChild
               >
-                <Link href="#" target="_blank" rel="noopener noreferer">
+                <Link href={`${miscellaneous ? miscellaneous.discordUrl : "#"}`} target="_blank" rel="noopener noreferer">
                   Let&apos;s chat
                 </Link>
               </Button>

@@ -16,6 +16,10 @@ type PortfolioWithBlur = PortfolioWithTags & {
   blurredDataUrl?: string;
 };
 
+type MiscellaneousWithTitles = Prisma.MiscellaneousGetPayload<{
+  include: { titles: true },
+}>;
+
 interface DataProps {
   about: About | null;
   frontend: Experience[];
@@ -27,6 +31,7 @@ interface DataProps {
   experience: Qualification[];
   portfolioWithBlur: PortfolioWithBlur[];
   portfolioCount: number;
+  miscellaneous: MiscellaneousWithTitles | null;
 }
 
 const getData = async (): Promise<DataProps> => {
@@ -41,6 +46,7 @@ const getData = async (): Promise<DataProps> => {
     experience,
     portfolio,
     portfolioCount,
+    miscellaneous,
   ] = await prismadb.$transaction([
     prismadb.about.findFirst(),
     prismadb.experience.findMany({
@@ -93,7 +99,12 @@ const getData = async (): Promise<DataProps> => {
         createdAt: "desc",
       },
     }),
-    prismadb.portfolio.count()
+    prismadb.portfolio.count(),
+    prismadb.miscellaneous.findFirst({
+      include: {
+        titles: true,
+      }
+    })
   ]);
 
   const portfolioWithBlur = await addBlurredDataUrls(portfolio);
@@ -109,6 +120,7 @@ const getData = async (): Promise<DataProps> => {
     experience,
     portfolioWithBlur,
     portfolioCount,
+    miscellaneous,
   };
 };
 
