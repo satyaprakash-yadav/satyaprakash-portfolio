@@ -56,7 +56,7 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
             twitterUrl: miscellaneous?.twitterUrl ?? "",
             linkedinUrl: miscellaneous?.linkedinUrl ?? "",
             githubUrl: miscellaneous?.githubUrl ?? "",
-            csvUrl: miscellaneous?.csvUrl ?? "",
+            cvUrl: miscellaneous?.cvUrl ?? "",
             titles: initialValues,
         },
         mode: "onChange",
@@ -71,11 +71,17 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
         formState: { errors },
     } = form;
 
-    const onSubmit = async (values: z.infer<typeof MiscellaneousFormSchema>) => { 
+    const onSubmit = async (values: z.infer<typeof MiscellaneousFormSchema>) => {
         try {
             setLoading(true)
-            console.log(values);
-            
+
+            const response = await axios.post("/api/miscellaneous", values);
+
+            if (response.data.success) {
+                router.refresh();
+                toast.success("Miscellaneous successfully saved.")
+            }
+
         } catch (error) {
             console.log(error);
             toast.error("Something went wrong!")
@@ -86,12 +92,12 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
 
     return (
         <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+            <form onSubmit={form.handleSubmit(onSubmit)} className="grid lg:grid-cols-2 gap-4">
                 <FormField
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem className="space-y-1">
+                        <FormItem className="space-y-1 lg:col-span-2">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input {...field} placeholder="Enter email" />
@@ -219,18 +225,18 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
                 />
                 <FormField
                     control={form.control}
-                    name="csvUrl"
+                    name="cvUrl"
                     render={({ field }) => (
                         <FormItem className="space-y-1">
-                            <FormLabel>CSV URL</FormLabel>
+                            <FormLabel>C    V URL</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder="Enter CSV URL" />
+                                <Input {...field} placeholder="Enter CV URL" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
                     )}
                 />
-                <div>
+                <div className="lg:col-span-2 mt-6">
                     {fields.map((field, index) => (
                         <div key={field.id} className="flex items-end gap-2 sm:gap-3 justify-between">
                             <div className="grow">
