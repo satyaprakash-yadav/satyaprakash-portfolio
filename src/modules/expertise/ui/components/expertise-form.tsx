@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Trash } from "lucide-react";
@@ -19,6 +20,7 @@ import {
   FormLabel,
   FormControl,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { expertiseFormSchema } from "../../schemas";
 import { toast } from "sonner";
@@ -61,6 +63,10 @@ export const ExpertiseForm = ({
     control: form.control,
   });
 
+  const {
+    formState: { errors },
+  } = form;
+
   const onSubmit = async (values: z.infer<typeof expertiseFormSchema>) => {
     try {
       setLoading(true);
@@ -90,20 +96,25 @@ export const ExpertiseForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 sm:gap-3"
+        className="flex flex-col"
       >
-        <FormLabel>Service</FormLabel>
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="flex items-start gap-2 sm:gap-3 justify-between"
+            className="flex items-end gap-2 sm:gap-3 justify-between"
           >
             <div className="grow">
               <FormField
                 control={form.control}
                 name={`items.${index}.service`}
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
+                    <FormLabel className={cn(index !== 0 && "sr-only")}>
+                      Service
+                    </FormLabel>
+                    <FormDescription className={cn(index !== 0 && "sr-only")}>
+                      Add list services and expertises you offer.
+                    </FormDescription>
                     <FormControl>
                       <Input {...field} placeholder="Enter service" />
                     </FormControl>
@@ -124,7 +135,10 @@ export const ExpertiseForm = ({
                 )}
               />
             </div>
-            <div className="grow-0">
+            <div className={cn(
+              "grow-0",
+              !!errors.items?.at?.(index) && "self-end mb-[1.7rem]",
+            )}>
               <Button
                 onClick={() => remove(index)}
                 variant="outline"
@@ -135,7 +149,7 @@ export const ExpertiseForm = ({
             </div>
           </div>
         ))}
-        <div className="mb-1 sm:mb-2 -mt-2">
+        <div>
           <Button
             type="button"
             variant="outline"
@@ -151,7 +165,7 @@ export const ExpertiseForm = ({
             disabled={loading}
             type="submit"
             variant="default"
-            className="mt-2"
+            className="mt-6"
           >
             {loading && (
               <>

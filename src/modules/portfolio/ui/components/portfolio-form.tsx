@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { Prisma } from "@prisma/client";
 import { useRouter } from "next/navigation";
@@ -21,6 +22,7 @@ import {
     FormField,
     FormControl,
     FormMessage,
+    FormDescription,
 } from "@/components/ui/form";
 import { portfolioFormSchema } from "../../schemas";
 import { toast } from "sonner";
@@ -69,6 +71,10 @@ export const PortfolioForm = ({
         name: "tags",
         control: form.control,
     });
+
+    const {
+        formState: { errors },
+    } = form;
 
     const onSubmit = async (values: z.infer<typeof portfolioFormSchema>) => {
         try {
@@ -139,7 +145,7 @@ export const PortfolioForm = ({
                         control={form.control}
                         name="title"
                         render={({ field }) => (
-                            <FormItem className="space-y-1">
+                            <FormItem>
                                 <FormLabel>Title</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Enter title" />
@@ -152,7 +158,7 @@ export const PortfolioForm = ({
                         control={form.control}
                         name="description"
                         render={({ field }) => (
-                            <FormItem className="space-y-1">
+                            <FormItem>
                                 <FormLabel>Description</FormLabel>
                                 <FormControl>
                                     <Textarea
@@ -169,7 +175,7 @@ export const PortfolioForm = ({
                         control={form.control}
                         name="githubUrl"
                         render={({ field }) => (
-                            <FormItem className="space-y-1">
+                            <FormItem>
                                 <FormLabel>GitHub URL</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Enter GitHub URL" />
@@ -182,7 +188,7 @@ export const PortfolioForm = ({
                         control={form.control}
                         name="demoUrl"
                         render={({ field }) => (
-                            <FormItem className="space-y-1">
+                            <FormItem>
                                 <FormLabel>Demo URL</FormLabel>
                                 <FormControl>
                                     <Input {...field} placeholder="Enter demo URL" />
@@ -191,51 +197,64 @@ export const PortfolioForm = ({
                             </FormItem>
                         )}
                     />
-                    <FormLabel className="pt-2">Tags</FormLabel>
-                    {fields.map((field, index) => (
-                        <div key={field.id} className="flex items-start gap-2 sm:gap-3 justify-between">
-                            <div className="grow">
-                                <FormField
-                                    control={form.control}
-                                    name={`tags.${index}.name`}
-                                    render={({ field }) => (
-                                        <FormItem className="space-y-1">
-                                            <FormControl>
-                                                <Input {...field} placeholder="Enter tag" />
-                                            </FormControl>
-                                            <FormMessage />
-                                        </FormItem>
-                                    )}
-                                />
+                    <div>
+                        {fields.map((field, index) => (
+                            <div
+                                key={field.id}
+                                className="flex items-end gap-2 sm:gap-3 justify-between"
+                            >
+                                <div className="grow">
+                                    <FormField
+                                        control={form.control}
+                                        name={`tags.${index}.name`}
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel className={cn(index !== 0 && "sr-only")}>
+                                                    Tags
+                                                </FormLabel>
+                                                <FormDescription className={cn(index !== 0 && "sr-only")}>
+                                                    Add list of techs used in this this project.
+                                                </FormDescription>
+                                                <FormControl>
+                                                    <Input {...field} placeholder="Enter tag" />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                    />
+                                </div>
+                                <div className={cn(
+                                    "grow-0",
+                                    !!errors.tags?.at?.(index) && "self-end mb-[1.7rem]",
+                                )}>
+                                    <Button
+                                        onClick={() => remove(index)}
+                                        variant="outline"
+                                        size="icon"
+                                    >
+                                        <Trash className="size-4" />
+                                    </Button>
+                                </div>
                             </div>
-                            <div className="grow-0">
-                                <Button
-                                    onClick={() => remove(index)}
-                                    variant="outline"
-                                    size="icon"
-                                >
-                                    <Trash className="size-4" />
-                                </Button>
-                            </div>
+                        ))}
+                        <div>
+                            <Button
+                                type="button"
+                                variant="outline"
+                                size="sm"
+                                className="mt-2"
+                                onClick={() => append({ name: "" })}
+                            >
+                                Add tag
+                            </Button>
                         </div>
-                    ))}
-                    <div className="mb-1 sm:mb-2 -mt-2">
-                        <Button
-                            type="button"
-                            variant="outline"
-                            size="sm"
-                            className="mt-2"
-                            onClick={() => append({ name: "" })}
-                        >
-                            Add tag
-                        </Button>
                     </div>
                     <div>
                         <Button
                             disabled={loading}
                             type="submit"
                             variant="default"
-                            className="mt-2"
+                            className="mt-4"
                         >
                             {loading && (
                                 <>

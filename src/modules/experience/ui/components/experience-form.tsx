@@ -2,6 +2,7 @@
 
 import * as z from "zod";
 import axios from "axios";
+import { cn } from "@/lib/utils";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2, Trash } from "lucide-react";
@@ -70,6 +71,10 @@ export const ExperienceForm = ({
     control: form.control,
   });
 
+  const {
+    formState: { errors },
+  } = form;
+
   const onSubmit = async (values: z.infer<typeof experienceFormSchema>) => {
     try {
       setLoading(true);
@@ -94,26 +99,22 @@ export const ExperienceForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className="flex flex-col gap-2 sm:gap-3"
+        className="flex flex-col"
       >
-        <div className="flex items-center gap-2 sm:gap-3 justify-between">
-          <div className="grow grid grid-cols-2 gap-2 sm:gap-3">
-            <FormLabel>Skill</FormLabel>
-            <FormLabel>Level</FormLabel>
-          </div>
-          <div className="grow-0 w-8" />
-        </div>
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="flex items-start gap-2 sm:gap-3 justify-between"
+            className="flex items-end gap-2 sm:gap-3 justify-between"
           >
             <div className="grow grid grid-cols-2 gap-2 sm:gap-3">
               <FormField
                 control={form.control}
                 name={`items.${index}.skill`}
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
+                    <FormLabel className={cn(index !== 0 && "sr-only")}>
+                      Skill
+                    </FormLabel>
                     <FormControl>
                       <Input placeholder="Enter skill" {...field} />
                     </FormControl>
@@ -125,7 +126,10 @@ export const ExperienceForm = ({
                 control={form.control}
                 name={`items.${index}.level`}
                 render={({ field }) => (
-                  <FormItem className="space-y-1">
+                  <FormItem>
+                    <FormLabel className={cn(index !== 0 && "sr-only")}>
+                      Level
+                    </FormLabel>
                     <Select
                       onValueChange={field.onChange}
                       defaultValue={field.value}
@@ -160,7 +164,11 @@ export const ExperienceForm = ({
                 )}
               />
             </div>
-            <div className="grow-0">
+            <div className={cn(
+              "grow-0",
+              !!errors.items?.at?.(index) && "self-end mb-[1.7rem]"
+            )}
+            >
               <Button
                 onClick={() => remove(index)}
                 variant="outline"
@@ -171,12 +179,12 @@ export const ExperienceForm = ({
             </div>
           </div>
         ))}
-        <div className="mb-1 sm:mb-2 -mt-2">
+        <div>
           <Button
             type="button"
             variant="outline"
             size="sm"
-            className="mt-2"
+            className="mt-5"
             onClick={() =>
               append({ skill: "", level: "", type: experienceType })
             }
