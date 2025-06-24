@@ -21,7 +21,7 @@ export const SheetMenu = () => {
                 </Button>
             </SheetTrigger>
             <SheetTitle className="hidden"></SheetTitle>
-            <SheetContent className="sm:w-72 px-3" side="left" aria-describedby="">
+            <SheetContent className="sm:w-72 px-3 h-full flex flex-col" side="left" aria-describedby="">
                 <SheetHeader>
                     <Button
                         className="flex justify-center items-center pb-2 pt-1"

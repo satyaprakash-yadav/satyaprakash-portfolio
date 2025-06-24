@@ -82,8 +82,8 @@ export const Menu = ({ isOpen }: MenuProps) => {
   ];
 
   return (
-    <nav className="mt-8">
-      <ul className="flex flex-col items-start space-y-1 px-2">
+    <nav className="mt-8 h-full">
+      <ul className="flex flex-col h-full items-start space-y-1 px-2">
         {routes.map((route) => (
           <li className="w-full" key={route.href}>
             <TooltipProvider disableHoverableContent>
@@ -118,14 +118,14 @@ export const Menu = ({ isOpen }: MenuProps) => {
             </TooltipProvider>
           </li>
         ))}
-        <li className="w-full">
+        <li className="w-full grow flex items-end">
           <TooltipProvider disableHoverableContent>
             <Tooltip delayDuration={100}>
               <TooltipTrigger asChild>
                 <Button
                   onClick={() => signOut()}
-                  variant="ghost"
-                  className="w-full justify-start h-10"
+                  variant="outline"
+                  className="w-full justify-center h-10 mt-4"
                 >
                   <span className={cn(isOpen === false ? "" : "mr-4")}>
                     <LogOut size={18} />
@@ -138,12 +138,12 @@ export const Menu = ({ isOpen }: MenuProps) => {
                         : "translate-x-0 opacity-100"
                     )}
                   >
-                    Sign Out
+                    Sign out
                   </p>
                 </Button>
               </TooltipTrigger>
               {isOpen === false && (
-                <TooltipContent side="right">Sign Out</TooltipContent>
+                <TooltipContent side="right">Sign out</TooltipContent>
               )}
             </Tooltip>
           </TooltipProvider>
