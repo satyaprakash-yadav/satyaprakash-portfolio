@@ -135,6 +135,9 @@ export const PortfolioForm = ({
                     <SingleImageDropzone
                         className="w-full h-full"
                         value={file}
+                        dropzoneOptions={{
+                            maxSize: 1024 * 1024 * 2    // 2MB
+                        }}
                         onChange={(file) => {
                             setFile(file);
                         }}
