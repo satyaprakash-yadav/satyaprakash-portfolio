@@ -20,6 +20,8 @@ import {
     FormControl
 } from "@/components/ui/form";
 import { AccountFormSchema } from "../../schemas";
+import { useSession } from "next-auth/react";
+import { toast } from "sonner";
 
 type User = Prisma.UserGetPayload<{
     select: {
@@ -36,6 +38,8 @@ export const AccountForm = ({ user }: AccountFormProps) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
+    const { update } = useSession();
+
     const form = useForm<z.infer<typeof AccountFormSchema>>({
         resolver: zodResolver(AccountFormSchema),
         defaultValues: {
@@ -50,9 +54,25 @@ export const AccountForm = ({ user }: AccountFormProps) => {
     const onSubmit = async (values: z.infer<typeof AccountFormSchema>) => {
         try {
             setLoading(true);
-            console.log(values);
+            
+            const response = await axios.post("/api/account", values);
+
+            if (response.data.success) {
+                update({
+                    name: response.data.user.name,
+                    email: response.data.user.email,
+                });
+
+                form.resetField("current");
+                form.resetField("password");
+                form.resetField("confirm");
+                router.refresh();
+
+                toast.success("Admin updated successfully.")
+            }
         } catch (error) {
             console.log(error);
+            toast.error("Something went wrong!");
         } finally {
             setLoading(false);
         }
