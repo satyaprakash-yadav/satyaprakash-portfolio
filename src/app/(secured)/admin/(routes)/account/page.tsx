@@ -9,6 +9,7 @@ import {
     CardContent,
     CardDescription,
 } from "@/components/ui/card";
+import { AccountForm } from "@/modules/account/ui/components/account-form";
 
 const AccountPage = async () => {
     const session = await auth();
@@ -20,6 +21,10 @@ const AccountPage = async () => {
     const user = await prismadb.user.findUnique({
         where: {
             id: session.user.id!,
+        },
+        select: {
+            name: true,
+            email: true,
         }
     });
 
@@ -34,7 +39,7 @@ const AccountPage = async () => {
                 </CardDescription>
             </CardHeader>
             <CardContent>
-                Profile Form!
+                <AccountForm user={user} />
             </CardContent>
         </Card>
     );
