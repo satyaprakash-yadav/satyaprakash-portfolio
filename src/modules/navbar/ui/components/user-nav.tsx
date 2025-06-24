@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { signOut, useSession } from "next-auth/react";
-import { FolderGit2, LayoutGrid, LogOut, User } from "lucide-react";
+import { LayoutGrid, LogOut, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -54,9 +54,9 @@ export const UserNav = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="hover:cursor-pointer" asChild>
-            <Link href="/admin/portfolio" className="flex items-center">
-              <FolderGit2 className="size-4 mr-3 text-muted-foreground" />
-              Portfolio
+            <Link href="/admin/profile" className="flex items-center">
+              <User className="size-4 mr-3 text-muted-foreground" />
+              Account
             </Link>
           </DropdownMenuItem>
         </DropdownMenuGroup>

@@ -13,6 +13,7 @@ import {
   List,
   LogOut,
   Text,
+  User,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -35,6 +36,12 @@ export const Menu = ({ isOpen }: MenuProps) => {
       label: "Dashboard",
       active: pathname === "/admin",
       icon: <LayoutGrid size={18} />,
+    },
+    {
+      href: "/admin/profile",
+      label: "Account",
+      active: pathname === "/admin/profile",
+      icon: <User size={18} />,
     },
     {
       href: "/admin/about",
