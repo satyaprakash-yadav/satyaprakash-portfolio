@@ -54,7 +54,7 @@ export const UserNav = () => {
             </Link>
           </DropdownMenuItem>
           <DropdownMenuItem className="hover:cursor-pointer" asChild>
-            <Link href="/admin/profile" className="flex items-center">
+            <Link href="/admin/account" className="flex items-center">
               <User className="size-4 mr-3 text-muted-foreground" />
               Account
             </Link>

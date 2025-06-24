@@ -38,9 +38,9 @@ export const Menu = ({ isOpen }: MenuProps) => {
       icon: <LayoutGrid size={18} />,
     },
     {
-      href: "/admin/profile",
+      href: "/admin/account",
       label: "Account",
-      active: pathname === "/admin/profile",
+      active: pathname.includes("/admin/account"),
       icon: <User size={18} />,
     },
     {
