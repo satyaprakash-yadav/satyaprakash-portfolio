@@ -23,7 +23,7 @@ export const QualificationCard = ({
         </h3>
       </div>
       <div className="relative wrap overflow-hidden h-full">
-        <div className="absolute border border-opacity-20 border-primary-foreground/80 group-hover:border-primary h-full left-[50%]"></div>
+        <div className="absolute border border-opacity-20 border-primary-foreground/80 group-hover:border-primary h-full right-[calc(50%_-_1px)]"></div>
         {data?.map((value, index) => (
           <div
             key={index}
