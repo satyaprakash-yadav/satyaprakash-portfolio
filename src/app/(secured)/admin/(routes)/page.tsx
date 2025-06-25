@@ -14,23 +14,36 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 
+import { MiniCard } from "@/modules/dashboard/ui/components/mini-card";
 import { QualificationTab } from "@/modules/dashboard/ui/components/qualification-tab";
 
 const DashboardPage = async () => {
   const session = await auth();
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect("/sign-in");
   };
 
-  const [portfolioCount, workingStart, currentJob, education, experience] =
+  const [
+    portfolioCount,
+    workingStart,
+    currentJob,
+    education,
+    experience,
+    projects,
+  ] =
     await prismadb.$transaction([
-      prismadb.portfolio.count(),
+      prismadb.portfolio.count({
+        where: {
+          userId: session.user.id!,
+        }
+      }),
       prismadb.qualification.findFirst({
         select: {
           startYear: true
         },
         where: {
+          userId: session.user.id!,
           type: "EXPERIENCE"
         },
         orderBy: {
@@ -39,12 +52,14 @@ const DashboardPage = async () => {
       }),
       prismadb.qualification.findFirst({
         where: {
+          userId: session.user.id!,
           type: "EXPERIENCE",
           endYear: "present"  // TODO: present - P capital 
         }
       }),
       prismadb.qualification.findMany({
         where: {
+          userId: session.user.id!,
           type: "EDUCATION"
         },
         orderBy: {
@@ -53,10 +68,20 @@ const DashboardPage = async () => {
       }),
       prismadb.qualification.findMany({
         where: {
+          userId: session.user.id!,
           type: "EXPERIENCE"
         },
         orderBy: {
           id: "desc"
+        }
+      }),
+      prismadb.portfolio.findMany({
+        take: 5,
+        where: {
+          userId: session.user.id!,
+        },
+        orderBy: {
+          createdAt: "desc"
         }
       })
     ]);
@@ -79,52 +104,30 @@ const DashboardPage = async () => {
         </div>
       </div>
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-        <Card className="rounded-lg border-none">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Portfolio</CardTitle>
-            <FolderGit2 className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{portfolioCount}</div>
-            <p className="text-xs text-muted-foreground">completed projects</p>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg border-none">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Experience</CardTitle>
-            <Book className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{workingYears}</div>
-            <p className="text-xs text-muted-foreground">years of working</p>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg border-none">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Current Job</CardTitle>
-            <Briefcase className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl leading-8 font-bold max-w-[206px] truncate">
-              {currentJob?.position}
-            </div>
-            <p className="text-xs text-muted-foreground">
-              {currentJob?.company}
-            </p>
-          </CardContent>
-        </Card>
-        <Card className="rounded-lg border-none">
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Location</CardTitle>
-            <Laptop className="size-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-xl leading-8 font-bold max-w-[206px] truncate">
-              Worldwide
-            </div>
-            <p className="text-xs text-muted-foreground">remotely available</p>
-          </CardContent>
-        </Card>
+        <MiniCard
+          icon={FolderGit2}
+          title="Portfolio"
+          content={portfolioCount}
+          desc="completed projects"
+        />
+        <MiniCard
+          icon={Book}
+          title='Experience'
+          content={workingYears}
+          desc='years of working'
+        />
+        <MiniCard
+          icon={Briefcase}
+          title='Current Job'
+          content={!!currentJob ? currentJob.position : ''}
+          desc={!!currentJob ? currentJob.company : ''}
+        />
+        <MiniCard
+          icon={Laptop}
+          title='Location'
+          content='Worldwide'
+          desc='remotely available'
+        />
       </div>
       <div className="grid xl:grid-cols-5 gap-4 mt-4">
         <Card className="rounded-lg border-none col-span-3">
