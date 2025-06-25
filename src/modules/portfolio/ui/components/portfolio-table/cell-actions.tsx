@@ -22,7 +22,7 @@ import {
 
 import { AlertModal } from "@/components/modals/alert-modal";
 
-import { portfolioSchema } from "../../schemas";
+import { portfolioSchema } from "@/modules/portfolio/schemas";
 import { toast } from "sonner";
 
 interface CellActionsProps<TData> {
