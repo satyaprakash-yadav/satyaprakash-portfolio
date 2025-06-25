@@ -3,6 +3,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { UserNav } from "./user-nav";
 import { PageTitle } from "./page-title";
 import { SheetMenu } from "./sheet-menu";
+import { ViewWebsite } from "./view-website";
 
 export const Navbar = () => {
   return (
@@ -13,6 +14,7 @@ export const Navbar = () => {
           <PageTitle />
         </div>
         <div className="flex flex-1 items-center space-x-2 justify-end">
+          <ViewWebsite />
           <ModeToggle />
           <UserNav />
         </div>
