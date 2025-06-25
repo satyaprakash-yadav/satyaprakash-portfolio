@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/card";
 
 import { columns } from "@/modules/qualifications/ui/components/qualification-table/columns";
-import { AddButton } from "@/modules/qualifications/ui/components/qualification-table/buttons";
+import { AddButton } from "@/modules/qualifications/ui/components/qualification-table/add-button";
 import { DataTable } from "@/components/data-table/data-table";
 
 export const options = [
