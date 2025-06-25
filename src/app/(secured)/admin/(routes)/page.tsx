@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 
 import { MiniCard } from "@/modules/dashboard/ui/components/mini-card";
+import { RecentProject } from "@/modules/dashboard/ui/components/recent-project";
 import { QualificationTab } from "@/modules/dashboard/ui/components/qualification-tab";
 
 const DashboardPage = async () => {
@@ -130,7 +131,7 @@ const DashboardPage = async () => {
         />
       </div>
       <div className="grid xl:grid-cols-5 gap-4 mt-4">
-        <Card className="rounded-lg border-none col-span-3">
+        <Card className="rounded-lg border-none xl:col-span-3">
           <CardHeader className="relative mx-[1px]">
             <CardTitle className="text-xl font-bold">Qualification</CardTitle>
             <CardDescription>
@@ -139,6 +140,17 @@ const DashboardPage = async () => {
           </CardHeader>
           <CardContent className="pb-9">
             <QualificationTab education={education} experience={experience} />
+          </CardContent>
+        </Card>
+        <Card className="rounded-lg border-none xl:col-span-2">
+          <CardHeader className="relative mx-[1px]">
+            <CardTitle className="text-xl font-bold">Recent Projects</CardTitle>
+            <CardDescription>
+              My latest 5 completed projects list
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="pb-9">
+            <RecentProject projects={projects} />
           </CardContent>
         </Card>
       </div>
