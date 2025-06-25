@@ -11,8 +11,8 @@ import {
     CardTitle
 } from "@/components/ui/card";
 
-import { columns } from "@/modules/qualifications/ui/components/columns";
-import { AddButton } from "@/modules/qualifications/ui/components/buttons";
+import { columns } from "@/modules/qualifications/ui/components/qualification-table/columns";
+import { AddButton } from "@/modules/qualifications/ui/components/qualification-table/buttons";
 import { DataTable } from "@/components/data-table/data-table";
 
 export const options = [

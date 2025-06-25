@@ -4,8 +4,8 @@ import { redirect } from "next/navigation";
 import { prismadb } from "@/lib/prismadb";
 
 import { DataTable } from "@/components/data-table/data-table";
-import { columns } from "@/modules/portfolio/ui/components/columns";
-import { AddButton } from "@/modules/portfolio/ui/components/add-button";
+import { columns } from "@/modules/portfolio/ui/components/portfolio-table/columns";
+import { AddButton } from "@/modules/portfolio/ui/components/portfolio-table/add-button";
 
 import {
     Card,

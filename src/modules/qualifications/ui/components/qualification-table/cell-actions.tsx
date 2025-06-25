@@ -20,7 +20,7 @@ import {
     DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 
-import { qualificationSchema } from "../../schemas";
+import { qualificationSchema } from "@/modules/qualifications/schemas";
 
 interface CellActionsProps<TData> {
     row: Row<TData>;
@@ -43,6 +43,7 @@ export function CellActions<TData>({ row }: CellActionsProps<TData>) {
             router.refresh();
             toast.success("Data successfully deleted.")
         } catch (error) {
+            console.log(error);
             toast.error("Something went wrong!");
         } finally {
             setLoading(false);
