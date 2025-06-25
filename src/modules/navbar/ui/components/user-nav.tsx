@@ -15,25 +15,39 @@ import {
   DropdownMenuContent,
   DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from "@/components/ui/tooltip";
 
 export const UserNav = () => {
   const { data: session } = useSession();
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <Button variant="outline" className="relative size-8 rounded-full">
-          <Avatar className="size-8">
-            <AvatarImage
-              src={session?.user?.image as string}
-              alt={session?.user?.name as string}
-            />
-            <AvatarFallback className="bg-transparent">
-              <User className="size-5" />
-            </AvatarFallback>
-          </Avatar>
-        </Button>
-      </DropdownMenuTrigger>
+      <TooltipProvider disableHoverableContent>
+        <Tooltip delayDuration={100}>
+          <TooltipTrigger asChild>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="relative size-8 rounded-full">
+                <Avatar className="size-8">
+                  <AvatarImage
+                    src={session?.user?.image as string}
+                    alt={session?.user?.name as string}
+                  />
+                  <AvatarFallback className="bg-transparent">
+                    <User className="size-5" />
+                  </AvatarFallback>
+                </Avatar>
+              </Button>
+            </DropdownMenuTrigger>
+          </TooltipTrigger>
+          <TooltipContent side="bottom">Profile</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+
       <DropdownMenuContent className="w-56" align="end" forceMount>
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
