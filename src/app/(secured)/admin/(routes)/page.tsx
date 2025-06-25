@@ -23,25 +23,42 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   };
 
-  const [portfolioCount, education, experience] = await prismadb.$transaction([
-    prismadb.portfolio.count(),
-    prismadb.qualification.findMany({
-      where: {
-        type: "EDUCATION",
-      },
-      orderBy: {
-        id: "desc",
-      }
-    }),
-    prismadb.qualification.findMany({
-      where: {
-        type: "EXPERIENCE",
-      },
-      orderBy: {
-        id: "desc",
-      }
-    })
-  ]);
+  const [portfolioCount, workingStart, education, experience] =
+    await prismadb.$transaction([
+      prismadb.portfolio.count(),
+      prismadb.qualification.findFirst({
+        select: {
+          startYear: true
+        },
+        where: {
+          type: "EXPERIENCE"
+        },
+        orderBy: {
+          id: "asc"
+        }
+      }),
+      prismadb.qualification.findMany({
+        where: {
+          type: "EDUCATION"
+        },
+        orderBy: {
+          id: "desc",
+        }
+      }),
+      prismadb.qualification.findMany({
+        where: {
+          type: "EXPERIENCE"
+        },
+        orderBy: {
+          id: "desc"
+        }
+      })
+    ]);
+
+  const workingYears =
+    typeof workingStart?.startYear === "string"
+      ? new Date().getFullYear() - parseInt(workingStart?.startYear)
+      : 0;
 
   return (
     <>
@@ -72,7 +89,7 @@ const DashboardPage = async () => {
             <Book className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1.5+</div>
+            <div className="text-2xl font-bold">{workingYears}</div>
             <p className="text-xs text-muted-foreground">years of working</p>
           </CardContent>
         </Card>
