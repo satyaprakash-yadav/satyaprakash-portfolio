@@ -23,7 +23,7 @@ const DashboardPage = async () => {
     redirect("/sign-in");
   };
 
-  const [portfolioCount, workingStart, education, experience] =
+  const [portfolioCount, workingStart, currentJob, education, experience] =
     await prismadb.$transaction([
       prismadb.portfolio.count(),
       prismadb.qualification.findFirst({
@@ -35,6 +35,12 @@ const DashboardPage = async () => {
         },
         orderBy: {
           id: "asc"
+        }
+      }),
+      prismadb.qualification.findFirst({
+        where: {
+          type: "EXPERIENCE",
+          endYear: "present"  // TODO: present - P capital 
         }
       }),
       prismadb.qualification.findMany({
@@ -99,10 +105,12 @@ const DashboardPage = async () => {
             <Briefcase className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold max-w-[206px] truncate">
-              Web Developer
+            <div className="text-xl leading-8 font-bold max-w-[206px] truncate">
+              {currentJob?.position}
             </div>
-            <p className="text-xs text-muted-foreground">Freelancer - Kanalogistics pvt ltd</p>
+            <p className="text-xs text-muted-foreground">
+              {currentJob?.company}
+            </p>
           </CardContent>
         </Card>
         <Card className="rounded-lg border-none">
@@ -111,7 +119,7 @@ const DashboardPage = async () => {
             <Laptop className="size-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold max-w-[206px] truncate">
+            <div className="text-xl leading-8 font-bold max-w-[206px] truncate">
               Worldwide
             </div>
             <p className="text-xs text-muted-foreground">remotely available</p>
