@@ -15,13 +15,13 @@ import { MiscellaneousForm } from "@/modules/miscellaneous/ui/components/miscell
 const MiscellaneousPage = async () => {
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.id) {
         redirect("/sign-in");
     };
 
     const miscellaneous = await prismadb.miscellaneous.findFirst({
         where: {
-            userId: session.user.id!,
+            userId: session?.user?.id,
         },
         include: {
             titles: true,

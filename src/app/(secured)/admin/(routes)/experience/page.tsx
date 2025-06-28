@@ -18,20 +18,20 @@ import { ExperienceForm } from "@/modules/experience/ui/components/experience-fo
 const ExperiencePage = async () => {
   const session = await auth();
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect("/sign-in");
   }
 
   const frontendItems = await prismadb.experience.findMany({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
       type: "FRONTEND",
     },
   });
 
   const backendItems = await prismadb.experience.findMany({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
       type: "BACKEND",
     },
   });

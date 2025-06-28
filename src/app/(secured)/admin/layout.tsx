@@ -10,7 +10,7 @@ interface Props {
 const AdminLayout = async ({ children }: Props) => {
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.id) {
         redirect("/sign-in");
     };
     

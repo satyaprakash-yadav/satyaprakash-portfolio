@@ -1,7 +1,3 @@
-import { redirect } from "next/navigation";
-
-import { auth } from "@/lib/auth";
-
 import { BackButton } from "@/components/back-button";
 import {
     Card,
@@ -13,13 +9,7 @@ import {
 
 import { PortfolioForm } from "@/modules/portfolio/ui/components/portfolio-form";
 
-const CreatePage = async () => {
-    const session = await auth();
-
-    if (!session || !session.user) {
-        redirect("/sign-in");
-    };
-
+const CreatePage = () => {
     return (
         <>
             <BackButton slug="/admin/portfolio" />

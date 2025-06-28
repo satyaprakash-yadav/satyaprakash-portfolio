@@ -14,13 +14,13 @@ import { AccountForm } from "@/modules/account/ui/components/account-form";
 const AccountPage = async () => {
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.id) {
         redirect("/sign-in");
     };
 
     const user = await prismadb.user.findUnique({
         where: {
-            id: session.user.id!,
+            id: session?.user?.id,
         },
         select: {
             name: true,

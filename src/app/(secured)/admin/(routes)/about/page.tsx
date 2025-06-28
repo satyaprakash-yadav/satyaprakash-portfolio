@@ -15,13 +15,13 @@ import {
 const AboutPage = async () => {
   const session = await auth();
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect("/sign-in");
   }
 
   const about = await prismadb.about.findFirst({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
     },
   });
 

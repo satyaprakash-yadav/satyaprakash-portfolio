@@ -15,27 +15,27 @@ import { ExpertiseForm } from "@/modules/expertise/ui/components/expertise-form"
 const ExpertisePage = async () => {
   const session = await auth();
 
-  if (!session || !session.user) {
+  if (!session || !session.user || !session.user.id) {
     redirect("/sign-in");
   }
 
   const seoOptimazationItems = await prismadb.expertise.findMany({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
       type: "SEOOPTIMIZATION",
     },
   });
 
   const webDevelopmentItems = await prismadb.expertise.findMany({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
       type: "WEBDEVELOPMENT",
     },
   });
 
   const contentCreationItems = await prismadb.expertise.findMany({
     where: {
-      userId: session.user.id!,
+      userId: session?.user?.id,
       type: "CONTENTCREATION",
     },
   });

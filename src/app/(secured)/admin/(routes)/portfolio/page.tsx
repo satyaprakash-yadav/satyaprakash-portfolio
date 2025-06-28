@@ -21,13 +21,13 @@ export const options = [];
 const PortfolioPage = async () => {
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.id) {
         redirect("/sign-in");
     };
 
     const portfolios = await prismadb.portfolio.findMany({
         where: {
-            userId: session.user.id!,
+            userId: session?.user?.id,
         },
         orderBy: {
             createdAt: "desc",

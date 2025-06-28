@@ -20,13 +20,14 @@ const PortfolioIdPage = async ({
 }) => {
     const session = await auth();
 
-    if (!session || !session.user) {
+    if (!session || !session.user || !session.user.id) {
         redirect("/sign-in");
     };
 
     const portfolio = await prismadb.portfolio.findUnique({
         where: {
             id: params.portfolioId,
+            userId: session?.user?.id
         },
         include: {
             tags: true,
