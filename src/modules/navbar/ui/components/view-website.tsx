@@ -20,7 +20,7 @@ export const ViewWebsite = () => {
                         className="size-8 rounded-full bg-background"
                         asChild
                     >
-                        <Link href="/">
+                        <Link href="/" target="_blank" rel="noopener noreferer">
                             <PanelTop className="size-5" />
                         </Link>
                     </Button>
