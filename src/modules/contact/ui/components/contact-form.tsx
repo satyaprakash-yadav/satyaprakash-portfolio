@@ -67,7 +67,11 @@ export const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-base">Name</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Enter your name" />
+                <Input
+                  {...field}
+                  placeholder="Enter your name"
+                  autoComplete="name"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -80,7 +84,11 @@ export const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-base">Email</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Enter your email" />
+                <Input
+                  {...field}
+                  placeholder="Enter your email"
+                  autoComplete="email"
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
