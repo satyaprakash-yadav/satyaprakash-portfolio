@@ -131,7 +131,7 @@ export const PortfolioForm = ({
                 className="grid lg:grid-cols-2 gap-8"
             >
                 <div className="flex flex-col gap-4">
-                    <FormLabel>Image</FormLabel>
+                    <FormLabel htmlFor="image-file">Image</FormLabel>
                     <SingleImageDropzone
                         className="w-full h-full"
                         value={file}
