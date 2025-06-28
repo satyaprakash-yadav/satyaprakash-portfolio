@@ -83,6 +83,7 @@ const QualificationModal = () => {
                 toast.success("Qualification successfully saved.")
             }
         } catch (error) {
+            console.log(error);
             toast.error("Something went wrong!")
         } finally {
             setLoading(false);
@@ -111,6 +112,7 @@ const QualificationModal = () => {
                                     <Select
                                         onValueChange={field.onChange}
                                         defaultValue={field.value}
+                                        name={field.name}
                                     >
                                         <FormControl>
                                             <SelectTrigger>
