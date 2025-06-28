@@ -100,7 +100,11 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
                         <FormItem className="space-y-1 lg:col-span-2">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder="Enter email" />
+                                <Input
+                                    {...field}
+                                    placeholder="Enter email"
+                                    autoComplete="email"
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

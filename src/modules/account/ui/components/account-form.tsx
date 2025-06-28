@@ -54,7 +54,7 @@ export const AccountForm = ({ user }: AccountFormProps) => {
     const onSubmit = async (values: z.infer<typeof AccountFormSchema>) => {
         try {
             setLoading(true);
-            
+
             const response = await axios.post("/api/account", values);
 
             if (response.data.success) {
@@ -88,7 +88,11 @@ export const AccountForm = ({ user }: AccountFormProps) => {
                         <FormItem className="space-y-1">
                             <FormLabel>Name</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder="Enter your name" />
+                                <Input
+                                    {...field}
+                                    placeholder="Enter your name"
+                                    autoComplete="name"
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
@@ -101,7 +105,11 @@ export const AccountForm = ({ user }: AccountFormProps) => {
                         <FormItem className="space-y-1">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input {...field} placeholder="example@gmail.com" />
+                                <Input 
+                                    {...field} 
+                                    placeholder="example@gmail.com" 
+                                    autoComplete="email"
+                                />
                             </FormControl>
                             <FormMessage />
                         </FormItem>
