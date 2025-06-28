@@ -4,7 +4,6 @@ import {
     CardTitle,
     CardHeader,
     CardContent,
-    CardDescription,
 } from "@/components/ui/card";
 
 const AccountLoading = () => {
@@ -14,9 +13,7 @@ const AccountLoading = () => {
                 <CardTitle className="text-xl font-semibold">
                     <Skeleton className="h-7 w-[100px]" />
                 </CardTitle>
-                <CardDescription>
                     <Skeleton className="h-5 w-[300px]" />
-                </CardDescription>
             </CardHeader>
             <CardContent>
                 <div className="flex flex-col gap-4">

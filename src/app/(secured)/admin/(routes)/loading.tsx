@@ -4,7 +4,6 @@ import {
     CardTitle,
     CardHeader,
     CardContent,
-    CardDescription,
 } from "@/components/ui/card";
 
 const DashboardLoading = () => {
@@ -39,9 +38,7 @@ const DashboardLoading = () => {
                             <Skeleton className="h-5 w-[119px]" />
                             <Skeleton className="h-5 w-12" />
                         </CardTitle>
-                        <CardDescription>
-                            <Skeleton className="h-5 w-[200px]" />
-                        </CardDescription>
+                        <Skeleton className="h-5 w-[200px]" />
                     </CardHeader>
                     <CardContent className="pb-9">
                         <Skeleton className="h-7 w-full" />
@@ -55,9 +52,7 @@ const DashboardLoading = () => {
                             <Skeleton className="h-5 w-[119px]" />
                             <Skeleton className="h-5 w-12" />
                         </CardTitle>
-                        <CardDescription>
-                            <Skeleton className="h-5 w-[200px]" />
-                        </CardDescription>
+                        <Skeleton className="h-5 w-[200px]" />
                     </CardHeader>
                     <CardContent className="pb-9">
                         <div className="flex flex-col space-y-4">

@@ -6,7 +6,6 @@ import {
     CardTitle,
     CardHeader,
     CardContent,
-    CardDescription,
 } from "@/components/ui/card";
 
 const QualificationLoading = () => {
@@ -16,9 +15,7 @@ const QualificationLoading = () => {
                 <CardTitle className="text-xl font-semibold">
                     <Skeleton className="h-7 w-[100px]" />
                 </CardTitle>
-                <CardDescription>
-                    <Skeleton className="h-5 w-[300px]" />
-                </CardDescription>
+                <Skeleton className="h-5 w-[300px]" />
             </CardHeader>
             <CardContent>
                 <DataTableLoading columnCount={9} rowCount={7} />

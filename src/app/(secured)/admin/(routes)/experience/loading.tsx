@@ -5,7 +5,6 @@ import {
     CardTitle,
     CardHeader,
     CardContent,
-    CardDescription
 } from "@/components/ui/card";
 
 const ExperienceLoading = () => {
@@ -16,9 +15,7 @@ const ExperienceLoading = () => {
                     <CardTitle className="text-xl font-semibold">
                         <Skeleton className="h-7 w-[150px]" />
                     </CardTitle>
-                    <CardDescription>
-                        <Skeleton className="h-5 w-[300px]" />
-                    </CardDescription>
+                    <Skeleton className="h-5 w-[300px]" />
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col">
@@ -49,9 +46,7 @@ const ExperienceLoading = () => {
                     <CardTitle className="text-xl font-semibold">
                         <Skeleton className="h-7 w-[150px]" />
                     </CardTitle>
-                    <CardDescription>
-                        <Skeleton className="h-5 w-[300px]" />
-                    </CardDescription>
+                    <Skeleton className="h-5 w-[300px]" />
                 </CardHeader>
                 <CardContent>
                     <div className="flex flex-col">
