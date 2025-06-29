@@ -1,6 +1,5 @@
 import { cn } from "@/lib/utils";
 
-import { BackButton } from "@/components/back-button";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
     Card,
@@ -12,7 +11,7 @@ import {
 const PortfolioIdLoading = () => {
     return (
         <>
-            <BackButton slug="/admin/portfolio" />
+            <Skeleton className="h-9 w-[85px] mb-4" />
             <Card className="rounded-lg border-none">
                 <CardHeader className="mx-[1px] pb-9">
                     <CardTitle className="text-xl font-semibold">
