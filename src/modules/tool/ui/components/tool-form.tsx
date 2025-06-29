@@ -30,6 +30,7 @@ import {
     SelectTrigger,
 } from "@/components/ui/select";
 import { toolFormSchema } from "../../schemas";
+import { toast } from "sonner";
 
 interface ToolFormProps {
     tool?: Tool | null;
@@ -54,7 +55,50 @@ export const ToolForm = ({ tool }: ToolFormProps) => {
         }
     });
 
-    const onSubmit = () => { }
+    const onSubmit = async (values: z.infer<typeof toolFormSchema>) => {
+        try {
+            setLoading(true);
+
+            let imageURL = tool?.image ?? "";
+            let thumbnailURL = tool?.thumbnail ?? "";
+            if (file && file instanceof File) {
+                const res = await edgestore.publicImages.upload({
+                    file,
+                    options: {
+                        replaceTargetUrl: tool?.image ?? undefined
+                    }
+                });
+
+                if (res.url && res.thumbnailUrl) {
+                    imageURL = res.url;
+                    thumbnailURL = res.thumbnailUrl;
+                }
+            };
+
+            const newValues = { ...values, image: imageURL, thumbnail: thumbnailURL };
+
+            if (tool) {
+                const response = await axios.patch(`/api/tool/${tool.id}`, newValues);
+
+                if (response.data.success) {
+                    toast.success("Tool successfully saved");
+                    router.push(response.data.tool.id);
+                }
+            } else {
+                const response = await axios.post("/api/tool", newValues);
+
+                if (response.data.success) {
+                    toast.success("Tool successfully saved");
+                    router.push(response.data.tool.id);
+                }
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error("Something went wrong!");
+        } finally {
+            setLoading(false);
+        }
+    };
 
     return (
         <Form {...form}>
