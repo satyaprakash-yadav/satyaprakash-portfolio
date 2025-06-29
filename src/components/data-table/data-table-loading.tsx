@@ -48,6 +48,7 @@ export const DataTableLoading = ({
                                         className={cn(
                                             i === 0 && "w-6",
                                             i === 1 && tableType === "portfolio" && "w-20",
+                                            i === 1 && tableType === "tool" && "w-12",
                                         )}
                                     >
                                         <Skeleton
@@ -72,7 +73,8 @@ export const DataTableLoading = ({
                                     <TableCell key={i}>
                                         <Skeleton className={cn(
                                             "h-6 w-full",
-                                            i === 1 && tableType === "portfolio" && "size-20"
+                                            i === 1 && tableType === "portfolio" && "size-20",
+                                            i === 1 && tableType === "tool" && "size-12",
                                         )}
                                         />
                                     </TableCell>
