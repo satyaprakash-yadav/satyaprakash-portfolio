@@ -12,9 +12,9 @@ export const AddButton = () => {
             className="h-8"
             asChild
         >
-            <Link href="/admin/tool/create">
+            <Link href="/admin/tool/add">
                 <PlusCircle size={16} className="mr-2" />
-                Create
+                Add
             </Link>
         </Button>
     )

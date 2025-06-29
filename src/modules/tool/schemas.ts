@@ -7,3 +7,10 @@ export const toolSchema = z.object({
     name: z.string(),
     color: z.string(),
 });
+
+export const toolFormSchema = z.object({
+    image: z.string(),
+    thumbnail: z.string(),
+    name: z.string().min(1, { message: "Please enter name." }),
+    color: z.string().min(1, { message: "Please select color." }),
+});
