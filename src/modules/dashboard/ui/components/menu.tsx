@@ -82,7 +82,7 @@ export const Menu = ({ isOpen }: MenuProps) => {
     },
     {
       href: "/admin/tool",
-      label: "Tool",
+      label: "Tool & Apps",
       active: pathname.includes("/admin/tool"),
       icon: <TerminalSquare size={18} />,
     },

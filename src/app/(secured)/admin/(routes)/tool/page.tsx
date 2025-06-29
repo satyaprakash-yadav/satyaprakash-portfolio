@@ -45,9 +45,9 @@ const ToolPage = async () => {
     return (
         <Card className="rounded-lg border-none">
             <CardHeader className="mx-[1px] pb-9">
-                <CardTitle className="text-xl font-semibold">Tool</CardTitle>
+                <CardTitle className="text-xl font-semibold">Tool & Apps</CardTitle>
                 <CardDescription>
-                    Manage your tool list section informations.
+                    Manage your tool and apps list section informations.
                 </CardDescription>
             </CardHeader>
             <CardContent>
