@@ -1,4 +1,6 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
@@ -104,6 +106,8 @@ export async function PATCH(
       },
     });
 
+    revalidatePath("/");
+
     return NextResponse.json({ success: true, qualification });
   } catch (error: any) {
     console.log("[QUALIFICATION_PATCH]", error);
@@ -153,6 +157,8 @@ export async function DELETE(
         id: params.qualificationId,
       },
     });
+
+    revalidatePath("/");
 
     return NextResponse.json({ success: true, qualification });
   } catch (error: any) {

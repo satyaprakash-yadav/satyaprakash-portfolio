@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import bcrypt from "bcrypt";
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 
 import { prismadb } from "@/lib/prismadb";
 
@@ -46,6 +47,8 @@ export async function POST(req: Request) {
             }
         });
 
+        revalidatePath("/");
+        
         return NextResponse.json({ success: true, user });
     } catch (error: any) {
         console.error('[REGISTER_POST]', error);
