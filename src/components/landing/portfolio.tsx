@@ -12,62 +12,62 @@ import { Button } from "@/components/ui/button";
 import axios from "axios";
 import { toast } from "sonner";
 
-const data_portfolio = [
-  {
-    id: 1,
-    image: "/ai-summarizer.png",
-    title: "Netfuix - A Netflix Clone App",
-    github: "#",
-    demo: "#",
-    tags: ["MERN Stack", "Tailwind", "Open AI"],
-    desc: "This is an AI app that can create realistic images and art from a description in natural language.",
-  },
-  {
-    id: 2,
-    image: "/ai-summarizer.png",
-    title: "AI Summarizer - An Article Simplifier",
-    github: "#",
-    demo: "#",
-    tags: ["ReactJS", "Tailwind", "Rapid API"],
-    desc: "This is an AI app to simplify lengthy articles into concise summaries by inputting article URL.",
-  },
-  {
-    id: 3,
-    image: "/ai-summarizer.png",
-    title: "Hangman - Guess The Word",
-    github: "#",
-    demo: "#",
-    tags: ["ReactJS", "Tailwind"],
-    desc: "This is a classic word puzzle game Hangman user play by guessing letters one at a time to solve it.",
-  },
-  {
-    id: 4,
-    image: "/ai-summarizer.png",
-    title: "URL Shortener - Short Link & Analytics",
-    github: "#",
-    demo: "#",
-    tags: ["NextJS", "shadcn/ui", "Clerk"],
-    desc: "This is URL shortener app. Users can create custom short link & view analytics of the links.",
-  },
-  {
-    id: 5,
-    image: "/ai-summarizer.png",
-    title: "Book Store - A Book E-Commerce",
-    github: "#",
-    demo: "#",
-    tags: ["Laravel", "ReactJS", "toyyibPay"],
-    desc: "This is a book store e-commerce app with server side carts & toyyibPay payment gateway.",
-  },
-  {
-    id: 6,
-    image: "/ai-summarizer.png",
-    title: "Scribe - Chat with PDF",
-    github: "#",
-    demo: "#",
-    tags: ["NextJS", "OpenAI", "Kinde"],
-    desc: "Scribe enable you to converse with any PDF instantly. Just upload your file and start chatting.",
-  },
-];
+// const data_portfolio = [
+//   {
+//     id: 1,
+//     image: "/ai-summarizer.png",
+//     title: "Netfuix - A Netflix Clone App",
+//     github: "#",
+//     demo: "#",
+//     tags: ["MERN Stack", "Tailwind", "Open AI"],
+//     desc: "This is an AI app that can create realistic images and art from a description in natural language.",
+//   },
+//   {
+//     id: 2,
+//     image: "/ai-summarizer.png",
+//     title: "AI Summarizer - An Article Simplifier",
+//     github: "#",
+//     demo: "#",
+//     tags: ["ReactJS", "Tailwind", "Rapid API"],
+//     desc: "This is an AI app to simplify lengthy articles into concise summaries by inputting article URL.",
+//   },
+//   {
+//     id: 3,
+//     image: "/ai-summarizer.png",
+//     title: "Hangman - Guess The Word",
+//     github: "#",
+//     demo: "#",
+//     tags: ["ReactJS", "Tailwind"],
+//     desc: "This is a classic word puzzle game Hangman user play by guessing letters one at a time to solve it.",
+//   },
+//   {
+//     id: 4,
+//     image: "/ai-summarizer.png",
+//     title: "URL Shortener - Short Link & Analytics",
+//     github: "#",
+//     demo: "#",
+//     tags: ["NextJS", "shadcn/ui", "Clerk"],
+//     desc: "This is URL shortener app. Users can create custom short link & view analytics of the links.",
+//   },
+//   {
+//     id: 5,
+//     image: "/ai-summarizer.png",
+//     title: "Book Store - A Book E-Commerce",
+//     github: "#",
+//     demo: "#",
+//     tags: ["Laravel", "ReactJS", "toyyibPay"],
+//     desc: "This is a book store e-commerce app with server side carts & toyyibPay payment gateway.",
+//   },
+//   {
+//     id: 6,
+//     image: "/ai-summarizer.png",
+//     title: "Scribe - Chat with PDF",
+//     github: "#",
+//     demo: "#",
+//     tags: ["NextJS", "OpenAI", "Kinde"],
+//     desc: "Scribe enable you to converse with any PDF instantly. Just upload your file and start chatting.",
+//   },
+// ];
 
 export const Portfolio = ({
   portfolioWithBlur,
@@ -89,8 +89,8 @@ export const Portfolio = ({
       });
 
       if (response.status === 200) {
-        if (response.data.length > 2) {
-          setOffset((prev) => prev + 3);
+        if (response.data.length > 5) {
+          setOffset((prev) => prev + 6);
         } else {
           setHide(true);
         }
@@ -98,6 +98,7 @@ export const Portfolio = ({
         setPortfolios([...portfolios!, ...response.data]);
       }
     } catch (error) {
+      console.log(error);
       toast.error("Something went wrong!")
     } finally {
       setLoading(false);
