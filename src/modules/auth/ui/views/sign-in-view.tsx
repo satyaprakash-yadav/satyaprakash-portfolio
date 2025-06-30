@@ -1,6 +1,7 @@
 "use client";
 
 import * as z from "zod";
+import Link from "next/link";
 import { AlertTriangle, Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
@@ -94,7 +95,7 @@ export const SignInView = () => {
                 <FormItem className="space-y-1">
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input {...field} placeholder="email@example.com" />
+                    <Input {...field} placeholder="email@example.com" autoComplete="email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +118,8 @@ export const SignInView = () => {
               disabled={loading}
               type="submit"
               variant="default"
-              className="mt-2"
+              className="mt-4"
+              size="lg"
             >
               {loading && (
                 <>
@@ -127,6 +129,12 @@ export const SignInView = () => {
               )}
               {!loading && <>Sign In</>}
             </Button>
+            <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-1">
+              Don&apos;t have an account yet?
+              <Button variant="link" className="mt-1 px-1" asChild>
+                <Link href="/sign-up">Sign up</Link>
+              </Button>
+            </p>
           </form>
         </Form>
       </CardContent>

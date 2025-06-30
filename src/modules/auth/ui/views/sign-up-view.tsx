@@ -2,6 +2,7 @@
 "use client";
 
 import * as z from "zod";
+import Link from "next/link";
 import axios from "axios";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -87,7 +88,7 @@ export const SignUpView = () => {
                 <FormItem className="space-y-1">
                   <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="John Doe" {...field} />
+                    <Input type="text" placeholder="John Doe" {...field} autoComplete="name" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -104,6 +105,7 @@ export const SignUpView = () => {
                       type="email"
                       placeholder="email@example.com"
                       {...field}
+                      autoComplete="email"
                     />
                   </FormControl>
                   <FormMessage />
@@ -140,7 +142,8 @@ export const SignUpView = () => {
               disabled={loading}
               type="submit"
               variant="default"
-              className="mt-2"
+              className="mt-4"
+              size="lg"
             >
               {loading && (
                 <>
@@ -150,6 +153,12 @@ export const SignUpView = () => {
               )}
               {!loading && <>Sign Up</>}
             </Button>
+            <p className='text-sm font-light text-gray-500 dark:text-gray-400 mt-1'>
+              Already have an account?
+              <Button variant='link' className='ml-1 px-1' asChild>
+                <Link href='/sign-in'>Sign in</Link>
+              </Button>
+            </p>
           </form>
         </Form>
       </CardContent>
