@@ -15,8 +15,13 @@ import {
     CardDescription,
 } from "@/components/ui/card";
 
+import { ComponentType } from "react";
 
-export const options = [];
+const filterOptions: {
+    label: string;
+    value: string;
+    icon?: ComponentType<{ className?: string | undefined }> | undefined;
+}[] = [];
 
 const PortfolioPage = async () => {
     const session = await auth();
@@ -52,7 +57,7 @@ const PortfolioPage = async () => {
                 <DataTable
                     data={portfolios}
                     columns={columns}
-                    options={options}
+                    options={filterOptions}
                     AddButton={<AddButton />}
                     page="portfolio"
                 />

@@ -15,7 +15,7 @@ import { columns } from "@/modules/tool/ui/components/columns";
 import { DataTable } from "@/components/data-table/data-table";
 import { AddButton } from "@/modules/tool/ui/components/add-button";
 
-export const options = [
+const filterOptions = [
     {
         label: "Light",
         value: "LIGHT"
@@ -54,7 +54,7 @@ const ToolPage = async () => {
                 <DataTable
                     data={tools}
                     columns={columns}
-                    options={options}
+                    options={filterOptions}
                     AddButton={<AddButton />}
                     page="tool"
                 />

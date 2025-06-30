@@ -15,7 +15,7 @@ import { columns } from "@/modules/qualifications/ui/components/qualification-ta
 import { AddButton } from "@/modules/qualifications/ui/components/qualification-table/add-button";
 import { DataTable } from "@/components/data-table/data-table";
 
-export const options = [
+const filterOptions = [
     {
         label: "Education",
         value: "EDUCATION",
@@ -54,7 +54,7 @@ const QualificationPage = async () => {
                 <DataTable
                     data={qualifications}
                     columns={columns}
-                    options={options}
+                    options={filterOptions}
                     AddButton={<AddButton />}
                     page="qualification"
                 />
