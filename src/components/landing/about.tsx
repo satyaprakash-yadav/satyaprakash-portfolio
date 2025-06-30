@@ -35,7 +35,7 @@ export const About = ({
               <h3 className="text-base text-primary-foreground group-hover:text-primary pb-2">
                 Experience
               </h3>
-              <small className="text-xs font-normal text-muted-foreground">
+              <small className="text-xs font-normal text-muted/60 group-hover:text-primary/80">
                 {/* 1.5+ Years Working */}
                 {about?.experience}
               </small>
@@ -45,7 +45,7 @@ export const About = ({
               <h3 className="text-base text-primary-foreground group-hover:text-primary pb-2">
                 Projects
               </h3>
-              <small className="text-xs font-normal text-muted-foreground">
+              <small className="text-xs font-normal text-muted/60 group-hover:text-primary/80">
                 {/* 15+ Completed */}
                 {about?.project}
               </small>
@@ -55,7 +55,7 @@ export const About = ({
               <h3 className="text-base text-primary-foreground group-hover:text-primary pb-2">
                 Worlwide
               </h3>
-              <small className="text-xs font-normal text-muted-foreground">
+              <small className="text-xs font-normal text-muted/60 group-hover:text-primary/80">
                 {/* Remotely Available */}
                 {about?.worldwide}
               </small>

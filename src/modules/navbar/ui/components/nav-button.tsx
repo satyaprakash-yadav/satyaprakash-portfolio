@@ -38,7 +38,7 @@ export const NavButton = ({
               active && "bg-primary-foreground text-primary"
             )}
           >
-            <Link href={anchor}>
+            <Link href={anchor} aria-label={name}>
               <Icon
                 className={cn(name === "Qualification" ? "size-6" : "size-5")}
               />
