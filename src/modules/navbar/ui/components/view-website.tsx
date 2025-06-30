@@ -9,7 +9,11 @@ import {
     TooltipProvider,
 } from "@/components/ui/tooltip";
 
-export const ViewWebsite = () => {
+interface ViewWebsiteProps {
+    newTab?: boolean;
+};
+
+export const ViewWebsite = ({ newTab }: ViewWebsiteProps) => {
     return (
         <TooltipProvider disableHoverableContent>
             <Tooltip delayDuration={100}>
@@ -20,7 +24,11 @@ export const ViewWebsite = () => {
                         className="size-8 rounded-full bg-background"
                         asChild
                     >
-                        <Link href="/" target="_blank" rel="noopener noreferer">
+                        <Link
+                            href="/"
+                            target={`${!newTab ? "_blank" : "_self"}`}
+                            rel="noopener noreferer"
+                        >
                             <PanelTop className="size-5" />
                         </Link>
                     </Button>
