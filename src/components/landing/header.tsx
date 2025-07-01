@@ -148,7 +148,7 @@ export const Header = ({
             <div>
               <Link
                 href="#contact"
-                className="text-primary hover:opacity-60 transition-opacity duration-300 ease-in-out"
+                className="text-primary hover:opacity-60"
               >
                 <p className="text-sm [writing-mode:vertical-lr]">Scroll Down</p>
               </Link>
