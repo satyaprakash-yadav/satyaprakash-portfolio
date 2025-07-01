@@ -1,23 +1,53 @@
+"use client";
+
 import Link from "next/link";
+import { useRef } from "react";
+import { motion, useInView } from "framer-motion";
 
 import { Button } from "../ui/button";
 import { Icons } from "@/modules/home/ui/components/icons";
 import { ContactForm } from "@/modules/contact/ui/components/contact-form";
+
+import {
+  slideInFromLeft,
+  slideInFromRight,
+  slideInFromTop,
+} from "@/lib/motion";
 
 import type getData from "@/actions/get-data";
 
 export const Contact = ({
   miscellaneous,
 }: Partial<Awaited<ReturnType<typeof getData>>>) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
   return (
-    <section id="contact" className="mt-32">
-      <h1 className="text-center text-sm text-muted-foreground font-medium">
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      id="contact"
+      className="mt-32"
+    >
+      <motion.h1
+        variants={slideInFromTop(0.3)}
+        className="text-center text-sm text-muted-foreground font-medium"
+      >
         Get in Touch
-      </h1>
-      <h2 className="text-center text-2xl font-semibold pt-1">Contact Me</h2>
+      </motion.h1>
+      <motion.h2
+        variants={slideInFromTop(0.4)}
+        className="text-center text-2xl font-semibold pt-1"
+      >
+        Contact Me
+      </motion.h2>
       <div className="w-full max-w-xl lg:max-w-6xl mx-auto grid lg:grid-cols-5 gap-16 pt-8">
         <div className="lg:col-span-2 flex flex-col gap-6">
-          <article className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10">
+          <motion.article
+            variants={slideInFromLeft(0.3)}
+            className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10"
+          >
             <div className="flex flex-col items-center text-primary-foreground group-hover:text-primary">
               <Icons.email className="size-7 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Email</h3>
@@ -37,9 +67,12 @@ export const Contact = ({
                 </Link>
               </Button>
             </div>
-          </article>
+          </motion.article>
 
-          <article className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10">
+          <motion.article
+            variants={slideInFromLeft(0.4)}
+            className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10"
+          >
             <div className="flex flex-col items-center text-primary-foreground group-hover:text-primary">
               <Icons.messenger className="size-7 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Messenger</h3>
@@ -56,9 +89,12 @@ export const Contact = ({
                 </Link>
               </Button>
             </div>
-          </article>
+          </motion.article>
 
-          <article className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10">
+          <motion.article
+            variants={slideInFromLeft(0.5)}
+            className="rounded-2xl bg-primary group hover:bg-primary-foreground transition-colors duration-300 ease-in-out border border-primary py-4 px-4 md:px-10"
+          >
             <div className="flex flex-col items-center text-primary-foreground group-hover:text-primary">
               <Icons.discord className="size-8 invert group-hover:invert-0 dark:invert-0 dark:group-hover:invert" />
               <h3 className="text-lg font-medium pt-4">Discord</h3>
@@ -75,12 +111,12 @@ export const Contact = ({
                 </Link>
               </Button>
             </div>
-          </article>
+          </motion.article>
         </div>
-        <div className="lg:col-span-3">
+        <motion.div variants={slideInFromRight(0.5)} className="lg:col-span-3">
           <ContactForm />
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };

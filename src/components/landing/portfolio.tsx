@@ -1,16 +1,21 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
+import axios from "axios";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { toast } from "sonner";
+import { useRef, useState } from "react";
 import { CopyPlus, Loader2 } from "lucide-react";
+import { motion, useInView } from "framer-motion";
 
 import type getData from "@/actions/get-data";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import axios from "axios";
-import { toast } from "sonner";
+
+import { fadeIn, slideInFromTop } from "@/lib/motion";
+
 
 // const data_portfolio = [
 //   {
@@ -69,11 +74,18 @@ import { toast } from "sonner";
 //   },
 // ];
 
+type PortfolioProps = Pick<
+  Awaited<ReturnType<typeof getData>>,
+  'portfolioWithBlur'
+>;
+
 export const Portfolio = ({
   portfolioWithBlur,
-  portfolioCount,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
-  const [hide, setHide] = useState(false);
+}: PortfolioProps) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+
+  const [_hide, setHide] = useState(false);
   const [offset, setOffset] = useState(6);
   const [loading, setLoading] = useState(false);
   const [portfolios, setPortfolios] = useState(portfolioWithBlur);
@@ -105,21 +117,34 @@ export const Portfolio = ({
     }
   }
 
-  useEffect(() => {
-    if (offset == portfolioCount!) {
-      setHide(true);
-    }
-  }, [offset, portfolioCount]);
-
   return (
-    <section id="portfolio" className="mt-32">
-      <h1 className="text-center text-sm text-muted-foreground font-medium">
+    <motion.section
+      ref={ref}
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      id="portfolio"
+      className="mt-32"
+    >
+      <motion.h1
+        variants={slideInFromTop(0.3)}
+        className="text-center text-sm text-muted-foreground font-medium"
+      >
         My Recent Work
-      </h1>
-      <h2 className="text-center text-2xl font-semibold pt-1">Portfolio</h2>
+      </motion.h1>
+      <motion.h2
+        variants={slideInFromTop(0.4)}
+        className="text-center text-2xl font-semibold pt-1"
+      >
+        Portfolio
+      </motion.h2>
       <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 pt-8">
-        {portfolios?.map((portfolio) => (
-          <article
+        {portfolios?.map((portfolio, index) => (
+          <motion.article
+            ref={ref}
+            initial="hidden"
+            animate={isInView ? "visible" : "hidden"}
+            custom={index}
+            variants={fadeIn((((index - 1) % 3) + 3) / 10)}
             key={portfolio.id}
             className="relative w-full h-min rounded-2xl flex flex-col group"
           >
@@ -193,10 +218,10 @@ export const Portfolio = ({
                 </Button>
               </div>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
-      {!hide && (
+      {offset % 6 === 0 && (
         <div className="flex justify-center mt-8">
           <Button onClick={onLoadMore} variant="default" disabled={loading}>
             {loading && (
@@ -214,6 +239,6 @@ export const Portfolio = ({
           </Button>
         </div>
       )}
-    </section>
+    </motion.section>
   );
 };
