@@ -10,9 +10,11 @@ import type getData from "@/actions/get-data";
 
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 
+type FooterProps = Pick<Awaited<ReturnType<typeof getData>>, "miscellaneous">;
+
 export const Footer = ({
   miscellaneous,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: FooterProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 

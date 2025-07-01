@@ -19,12 +19,14 @@ import {
   slideInFromRight,
 } from "@/lib/motion";
 
+type HeaderProps = Pick<Awaited<ReturnType<typeof getData>>, 'miscellaneous'>;
+
 export const Header = ({
   miscellaneous,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: HeaderProps) => {
   const [text] = useTypewriter({
     words: miscellaneous
-      ? miscellaneous?.titles.map((title) => title.name)
+      ? miscellaneous.titles.map((title) => title.name)
       : [],
     loop: true,
   });
@@ -38,13 +40,13 @@ export const Header = ({
     >
       <div className="text-center h-full relative">
         <motion.h1
-          variants={slideInFromTop(0.3)}
+          variants={slideInFromTop(0)}
           className="text-sm text-muted-foreground font-medium"
         >
           Hello, I am
         </motion.h1>
         <motion.div
-          variants={slideInFromTop(0.4)}
+          variants={slideInFromTop(0.1)}
           className="flex flex-col justify-start items-center"
         >
           <Link href="/">
@@ -123,7 +125,7 @@ export const Header = ({
             />
           </div>
           <motion.div
-            variants={slideInFromTop(0.5)}
+            variants={slideInFromTop(0)}
             className="grow flex justify-center"
           >
             <div className="me w-60 h-96 xs:w-72 xs:h-96 md:w-[22rem] md:h-[30rem]">

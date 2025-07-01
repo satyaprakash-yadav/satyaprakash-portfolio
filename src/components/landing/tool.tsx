@@ -87,9 +87,11 @@ import type getData from "@/actions/get-data";
 //   },
 // ];
 
+type ToolProps = Pick<Awaited<ReturnType<typeof getData>>, "tool">;
+
 export const Tool = ({
   tool,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: ToolProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -119,7 +121,7 @@ export const Tool = ({
       >
         <div className="w-full inline-flex flex-nowrap overflow-hidden [mask-image:_linear-gradient(to_right,transparent_0,_black_128px,_black_calc(100%-200px),transparent_100%)]">
           <ul className="flex items-center justify-center md:justify-start [&_li]:mx-5 md:[&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll">
-            {tool?.map((item) => (
+            {tool.map((item) => (
               <li key={item.id}>
                 {item.image && (
                   <Image
@@ -140,7 +142,7 @@ export const Tool = ({
             className="flex items-center justify-center md:justify-start [&_li]:mx-5 md:[&_li]:mx-8 [&_img]:max-w-none animate-infinite-scroll"
             aria-hidden="true"
           >
-            {tool?.map((item) => (
+            {tool.map((item) => (
               <li key={item.id}>
                 {item.image && (
                   <Image

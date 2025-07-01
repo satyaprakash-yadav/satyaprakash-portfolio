@@ -60,10 +60,15 @@ import type getData from "@/actions/get-data";
 //   },
 // ];
 
+type QualificationProps = Pick<
+  Awaited<ReturnType<typeof getData>>,
+  "education" | "experience"
+>;
+
 export const Qualification = ({
   education,
   experience,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: QualificationProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 

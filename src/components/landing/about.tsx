@@ -16,9 +16,11 @@ import {
   slideInFromTop,
 } from "@/lib/motion";
 
+type AboutProps = Pick<Awaited<ReturnType<typeof getData>>, "about">;
+
 export const About = ({
   about,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: AboutProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 

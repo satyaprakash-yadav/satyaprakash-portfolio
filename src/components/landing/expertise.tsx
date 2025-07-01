@@ -34,11 +34,16 @@ import { slideInFromLeft, slideInFromTop } from "@/lib/motion";
 //   "Measure web traffic to content.",
 // ];
 
+type ExpertiseProps = Pick<
+  Awaited<ReturnType<typeof getData>>,
+  "seooptimization" | "webdevelopment" | "contentcreation"
+>;
+
 export const Expertise = ({
   seooptimization,
   webdevelopment,
   contentcreation,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: ExpertiseProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -73,7 +78,7 @@ export const Expertise = ({
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {seooptimization?.map((item, index) => (
+            {seooptimization.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />
@@ -94,7 +99,7 @@ export const Expertise = ({
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {webdevelopment?.map((item, index) => (
+            {webdevelopment.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />
@@ -115,7 +120,7 @@ export const Expertise = ({
             </h3>
           </div>
           <ul className="pt-6 flex flex-col gap-5 text-sm font-normal text-primary-foreground group-hover:text-primary">
-            {contentcreation?.map((item, index) => (
+            {contentcreation.map((item, index) => (
               <li key={index} className="flex items-start space-x-4">
                 <div>
                   <Check className="size-4 mt-[2px]" />

@@ -16,9 +16,11 @@ import {
 
 import type getData from "@/actions/get-data";
 
+type ContactProps = Pick<Awaited<ReturnType<typeof getData>>, "miscellaneous">;
+
 export const Contact = ({
   miscellaneous,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: ContactProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 

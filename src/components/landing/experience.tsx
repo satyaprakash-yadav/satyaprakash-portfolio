@@ -11,10 +11,15 @@ import {
   slideInFromTop,
 } from "@/lib/motion";
 
+type ExperienceProps = Pick<
+  Awaited<ReturnType<typeof getData>>,
+  "frontend" | "backend"
+>;
+
 export const Experience = ({
   frontend,
   backend,
-}: Partial<Awaited<ReturnType<typeof getData>>>) => {
+}: ExperienceProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
 
@@ -47,7 +52,7 @@ export const Experience = ({
             Frontend Development
           </h3>
           <div className="w-full grid grid-cols-2 gap-y-4">
-            {frontend?.map(({ skill, level }, index) => (
+            {frontend.map(({ skill, level }, index) => (
               <article
                 key={index}
                 className="flex gap-4 text-primary-foreground group-hover:text-primary"
@@ -71,7 +76,7 @@ export const Experience = ({
             Backend Development
           </h3>
           <div className="w-full grid grid-cols-2 gap-y-4">
-            {backend?.map(({ skill, level }, index) => (
+            {backend.map(({ skill, level }, index) => (
               <article
                 key={index}
                 className="flex gap-4 text-primary-foreground group-hover:text-primary"
