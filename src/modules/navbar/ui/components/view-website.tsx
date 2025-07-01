@@ -26,6 +26,7 @@ export const ViewWebsite = ({ newTab }: ViewWebsiteProps) => {
                     >
                         <Link
                             href="/"
+                            scroll={false}
                             target={`${!newTab ? "_blank" : "_self"}`}
                             rel="noopener noreferer"
                         >
