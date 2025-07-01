@@ -138,22 +138,19 @@ export const Header = ({
               />
             </div>
           </motion.div>
-          <motion.div
-            variants={slideInFromRight(0.5)}
-            className="flex flex-col items-center justify-end gap-4"
-          >
-            <div className="relative">
+          <div className="flex flex-col items-center justify-end gap-4 transform">
+            <motion.div variants={slideInFromRight(0.4)} className="relative">
               <div className="mouse" />
-            </div>
-            <div>
+            </motion.div>
+            {/* <motion.div variants={slideInFromRight(0.5)}> */}
               <Link
                 href="#contact"
-                className="text-primary hover:opacity-60"
+                className="text-primary hover:opacity-60 transition-opacity duration-300 ease-in-out"
               >
                 <p className="text-sm [writing-mode:vertical-lr]">Scroll Down</p>
               </Link>
-            </div>
-          </motion.div>
+            {/* </motion.div> */}
+          </div>
         </div>
       </div>
     </motion.header>
