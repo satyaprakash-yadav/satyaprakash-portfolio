@@ -107,7 +107,7 @@ export const Menu = ({ isOpen }: MenuProps) => {
                       </span>
                       <p
                         className={cn(
-                          "whitespace-nowrap transition-all ease-in-out duration-300",
+                          "whitespace-nowrap transition-[transform,opacity] ease-in-out duration-300",
                           isOpen === false
                             ? "-translate-x-96 opacity-0"
                             : "translate-x-0 opacity-100"
@@ -139,9 +139,9 @@ export const Menu = ({ isOpen }: MenuProps) => {
                   </span>
                   <p
                     className={cn(
-                      "whitespace-nowrap transition-all ease-in-out duration-300",
+                      "whitespace-nowrap transition-[transform,opacity] ease-in-out duration-300",
                       isOpen === false
-                        ? "-translate-x-96 opacity-0"
+                        ? "-translate-x-96 opacity-0 hidden"
                         : "translate-x-0 opacity-100"
                     )}
                   >
