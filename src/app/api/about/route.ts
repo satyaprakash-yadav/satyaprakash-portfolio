@@ -2,8 +2,9 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 export async function POST(req: Request) {
     try {
@@ -11,31 +12,47 @@ export async function POST(req: Request) {
 
         const { experience, project, worldwide, summary } = body;
 
-        const session = await auth();
+        // const session = await auth();
+        const user = await currentUser();
 
         if (!experience) {
-            return NextResponse.json({ success: false, error: "Experience is required." }, { status: 400 });
+            return NextResponse.json(
+                { success: false, error: "Experience is required." },
+                { status: 400 }
+            );
         };
 
         if (!project) {
-            return NextResponse.json({ success: false, error: "Project is required." }, { status: 400 });
+            return NextResponse.json(
+                { success: false, error: "Project is required." },
+                { status: 400 }
+            );
         };
 
         if (!worldwide) {
-            return NextResponse.json({ success: false, error: "Worldwide is required." }, { status: 400 });
+            return NextResponse.json(
+                { success: false, error: "Worldwide is required." },
+                { status: 400 }
+            );
         };
 
         if (!summary) {
-            return NextResponse.json({ success: false, error: "Summary is required." }, { status: 400 });
+            return NextResponse.json(
+                { success: false, error: "Summary is required." },
+                { status: 400 }
+            );
         };
 
-        if (!session || !session.user) {
-            return NextResponse.json({ success: false, error: "Unauthorized." }, { status: 401 });
+        if (!user || !user.id) {
+            return NextResponse.json(
+                { success: false, error: "Unauthorized." },
+                { status: 401 }
+            );
         };
 
         const currentAbout = await prismadb.about.findFirst({
             where: {
-                userId: session.user.id!
+                userId: user.id,
             }
         });
 
@@ -62,7 +79,7 @@ export async function POST(req: Request) {
                     project,
                     worldwide,
                     summary,
-                    userId: session.user.id!,
+                    userId: user.id,
                 }
             });
 

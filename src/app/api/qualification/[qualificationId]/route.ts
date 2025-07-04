@@ -2,20 +2,22 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 export async function PATCH(
   req: Request,
   { params }: { params: { qualificationId: string } }
 ) {
   try {
-    const session = await auth();
+    // const session = await auth();
+    const user = await currentUser();
     const body = await req.json();
     const { type, degree, school, position, company, startYear, endYear } =
       body;
 
-    if (!session || !session.user) {
+    if (!user || !user.id) {
       return NextResponse.json(
         { success: false, error: "Unauthorized." },
         { status: 401 }
@@ -123,9 +125,10 @@ export async function DELETE(
   { params }: { params: { qualificationId: string } }
 ) {
   try {
-    const session = await auth();
+    // const session = await auth();
+    const user = await currentUser();
 
-    if (!session || !session.user) {
+    if (!user || !user.id) {
       return NextResponse.json(
         { success: false, error: "Unauthorized" },
         { status: 401 }

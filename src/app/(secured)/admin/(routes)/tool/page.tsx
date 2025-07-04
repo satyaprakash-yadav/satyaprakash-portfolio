@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 import {
     Card,
@@ -27,15 +28,16 @@ const filterOptions = [
 ];
 
 const ToolPage = async () => {
-    const session = await auth();
+    // const session = await auth();
+    const user = await currentUser();
 
-    if (!session || !session.user || !session.user.id) {
+    if (!user || !user.id) {
         redirect("/sign-in");
     };
 
     const tools = await prismadb.tool.findMany({
         where: {
-            userId: session?.user?.id
+            userId: user.id,
         },
         orderBy: {
             createdAt: "desc",

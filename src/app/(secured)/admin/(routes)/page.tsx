@@ -2,8 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { Book, Briefcase, FolderGit2, Laptop } from "lucide-react";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,9 +20,10 @@ import { RecentProject } from "@/modules/dashboard/ui/components/recent-project"
 import { QualificationTab } from "@/modules/dashboard/ui/components/qualification-tab";
 
 const DashboardPage = async () => {
-  const session = await auth();
+  // const session = await auth();
+  const user = await currentUser();
 
-  if (!session || !session.user || !session.user.id) {
+  if (!user || !user.id) {
     redirect("/sign-in");
   };
 
@@ -36,7 +38,7 @@ const DashboardPage = async () => {
     await prismadb.$transaction([
       prismadb.portfolio.count({
         where: {
-          userId: session.user.id!,
+          userId: user.id,
         }
       }),
       prismadb.qualification.findFirst({
@@ -44,7 +46,7 @@ const DashboardPage = async () => {
           startYear: true
         },
         where: {
-          userId: session.user.id!,
+          userId: user.id!,
           type: "EXPERIENCE"
         },
         orderBy: {
@@ -53,14 +55,14 @@ const DashboardPage = async () => {
       }),
       prismadb.qualification.findFirst({
         where: {
-          userId: session.user.id!,
+          userId: user.id,
           type: "EXPERIENCE",
           endYear: "present"  // TODO: present - P capital 
         }
       }),
       prismadb.qualification.findMany({
         where: {
-          userId: session.user.id!,
+          userId: user.id,
           type: "EDUCATION"
         },
         orderBy: {
@@ -69,7 +71,7 @@ const DashboardPage = async () => {
       }),
       prismadb.qualification.findMany({
         where: {
-          userId: session.user.id!,
+          userId: user.id,
           type: "EXPERIENCE"
         },
         orderBy: {
@@ -79,7 +81,7 @@ const DashboardPage = async () => {
       prismadb.portfolio.findMany({
         take: 5,
         where: {
-          userId: session.user.id!,
+          userId: user.id,
         },
         orderBy: {
           createdAt: "desc"
@@ -96,7 +98,7 @@ const DashboardPage = async () => {
     <>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight">
-          Welcome {session.user.name}
+          Welcome {user.name}
         </h2>
         <div className="flex items-center">
           <Button size="sm" asChild>

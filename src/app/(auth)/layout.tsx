@@ -1,5 +1,5 @@
-import { auth } from "@/lib/auth";
-import { redirect } from "next/navigation";
+// import { auth } from "@/lib/auth";
+// import { redirect } from "next/navigation";
 import { ModeToggle } from "@/components/mode-toggle";
 import { ViewWebsite } from "@/modules/navbar/ui/components/view-website";
 
@@ -8,11 +8,11 @@ interface Props {
 }
 
 const AuthLayout = async ({ children }: Props) => {
-  const session = await auth();
+  // const session = await auth();
 
-  if (session && session.user) {
-    redirect("/admin");
-  }
+  // if (session && session.user) {
+  //   redirect("/admin");
+  // }
 
   return (
     <>

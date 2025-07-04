@@ -1,6 +1,8 @@
-import { auth } from "@/lib/auth";
-import { prismadb } from "@/lib/prismadb";
 import { redirect } from "next/navigation";
+
+// import { auth } from "@/lib/auth";
+import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 import { AboutForm } from "@/modules/about/ui/components/about-form";
 
@@ -13,15 +15,16 @@ import {
 } from "@/components/ui/card";
 
 const AboutPage = async () => {
-  const session = await auth();
+  // const session = await auth();
+  const user = await currentUser();
 
-  if (!session || !session.user || !session.user.id) {
+  if (!user || !user.id) {
     redirect("/sign-in");
   }
 
   const about = await prismadb.about.findFirst({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
     },
   });
 

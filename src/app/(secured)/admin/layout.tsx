@@ -1,6 +1,6 @@
-import { redirect } from "next/navigation";
+// import { redirect } from "next/navigation";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import ModalProvider from "@/providers/modal-provider";
 
 interface Props {
@@ -8,11 +8,11 @@ interface Props {
 }
 
 const AdminLayout = async ({ children }: Props) => {
-    const session = await auth();
+    // const session = await auth();
 
-    if (!session || !session.user || !session.user.id) {
-        redirect("/sign-in");
-    };
+    // if (!session || !session.user || !session.user.id) {
+    //     redirect("/sign-in");
+    // };
     
     return ( 
         <>  

@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
+import { currentUser } from "@/lib/authentication";
 
 import {
   Card,
@@ -13,29 +14,30 @@ import { prismadb } from "@/lib/prismadb";
 import { ExpertiseForm } from "@/modules/expertise/ui/components/expertise-form";
 
 const ExpertisePage = async () => {
-  const session = await auth();
+  // const session = await auth();
+  const user = await currentUser();
 
-  if (!session || !session.user || !session.user.id) {
+  if (!user || !user.id) {
     redirect("/sign-in");
   }
 
   const seoOptimazationItems = await prismadb.expertise.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
       type: "SEOOPTIMIZATION",
     },
   });
 
   const webDevelopmentItems = await prismadb.expertise.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
       type: "WEBDEVELOPMENT",
     },
   });
 
   const contentCreationItems = await prismadb.expertise.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
       type: "CONTENTCREATION",
     },
   });

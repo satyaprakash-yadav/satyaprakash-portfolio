@@ -8,30 +8,32 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
 
 // import { FrontendForm } from "@/modules/experience/ui/components/frontend-form";
 // import { BackendForm } from "@/modules/experience/ui/components/backend-form";
 import { ExperienceForm } from "@/modules/experience/ui/components/experience-form";
 
 const ExperiencePage = async () => {
-  const session = await auth();
+  // const session = await auth();
+  const user = await currentUser();
 
-  if (!session || !session.user || !session.user.id) {
+  if (!user || !user.id) {
     redirect("/sign-in");
   }
 
   const frontendItems = await prismadb.experience.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
       type: "FRONTEND",
     },
   });
 
   const backendItems = await prismadb.experience.findMany({
     where: {
-      userId: session?.user?.id,
+      userId: user.id,
       type: "BACKEND",
     },
   });

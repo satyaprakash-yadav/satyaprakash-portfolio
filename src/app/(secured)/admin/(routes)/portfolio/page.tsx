@@ -1,4 +1,5 @@
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
+import { currentUser } from "@/lib/authentication";
 import { redirect } from "next/navigation";
 
 import { prismadb } from "@/lib/prismadb";
@@ -24,15 +25,16 @@ const filterOptions: {
 }[] = [];
 
 const PortfolioPage = async () => {
-    const session = await auth();
+    // const session = await auth();
+    const user = await currentUser();
 
-    if (!session || !session.user || !session.user.id) {
+    if (!user || !user.id) {
         redirect("/sign-in");
     };
 
     const portfolios = await prismadb.portfolio.findMany({
         where: {
-            userId: session?.user?.id,
+            userId: user.id,
         },
         orderBy: {
             createdAt: "desc",

@@ -1,7 +1,9 @@
 import { redirect } from "next/navigation";
 
-import { auth } from "@/lib/auth";
+// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import { currentUser } from "@/lib/authentication";
+
 import { BackButton } from "@/components/back-button";
 
 import {
@@ -14,16 +16,17 @@ import {
 import { ToolForm } from "@/modules/tool/ui/components/tool-form";
 
 const TooIdPage = async ({ params }: { params: { toolId: string } }) => {
-    const session = await auth();
+    // const session = await auth();
+    const user = await currentUser();
 
-    if (!session || !session.user || !session.user.id) {
+    if (!user || !user.id) {
         redirect("/sign-in");
     };
 
     const tool = await prismadb.tool.findUnique({
         where: {
             id: params.toolId,
-            userId: session.user.id
+            userId: user.id,
         }
     });
 
