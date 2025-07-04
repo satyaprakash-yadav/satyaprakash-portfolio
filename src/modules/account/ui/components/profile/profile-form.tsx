@@ -2,11 +2,13 @@
 
 import * as z from "zod";
 import axios from "axios";
-import { useState } from "react";
+import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Prisma } from "@prisma/client";
+import { useSession } from "next-auth/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Input } from "@/components/ui/input";
@@ -19,56 +21,48 @@ import {
     FormMessage,
     FormControl
 } from "@/components/ui/form";
-import { AccountFormSchema } from "../../schemas";
-import { useSession } from "next-auth/react";
-import { toast } from "sonner";
+import { ProfileFormSchema } from "../../../schemas";
 
 type User = Prisma.UserGetPayload<{
     select: {
+        id: true,
         name: true,
         email: true,
     };
 }>;
 
-interface AccountFormProps {
+interface ProfileFormProps {
     user: User | null;
 };
 
-export const AccountForm = ({ user }: AccountFormProps) => {
+export const ProfileForm = ({ user }: ProfileFormProps) => {
     const router = useRouter();
     const [loading, setLoading] = useState(false);
 
     const { update } = useSession();
 
-    const form = useForm<z.infer<typeof AccountFormSchema>>({
-        resolver: zodResolver(AccountFormSchema),
+    const form = useForm<z.infer<typeof ProfileFormSchema>>({
+        resolver: zodResolver(ProfileFormSchema),
         defaultValues: {
             name: user !== null && typeof user.name === "string" ? user.name : "",
             email: user !== null && typeof user.email === "string" ? user.email : "",
-            current: "",
-            password: "",
-            confirm: "",
         }
     });
 
-    const onSubmit = async (values: z.infer<typeof AccountFormSchema>) => {
+    const onSubmit = async (values: z.infer<typeof ProfileFormSchema>) => {
         try {
             setLoading(true);
 
-            const response = await axios.post("/api/account", values);
+            const response = await axios.post("/api/account/profile", values);
 
             if (response.data.success) {
                 update({
                     name: response.data.user.name,
-                    email: response.data.user.email,
+                    email: response.data.user.email
                 });
-
-                form.resetField("current");
-                form.resetField("password");
-                form.resetField("confirm");
                 router.refresh();
 
-                toast.success("Admin updated successfully.")
+                toast.success("Profile updated successfully.")
             }
         } catch (error) {
             console.log(error);
@@ -81,6 +75,12 @@ export const AccountForm = ({ user }: AccountFormProps) => {
     return (
         <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-4">
+                <FormItem className="space-y-1">
+                    <FormLabel>ID</FormLabel>
+                    <FormControl>
+                        <Input placeholder="Enter your ID" value={user?.id} readOnly />
+                    </FormControl>
+                </FormItem>
                 <FormField
                     control={form.control}
                     name="name"
@@ -89,8 +89,8 @@ export const AccountForm = ({ user }: AccountFormProps) => {
                             <FormLabel>Name</FormLabel>
                             <FormControl>
                                 <Input
-                                    {...field}
                                     placeholder="Enter your name"
+                                    {...field}
                                     autoComplete="name"
                                 />
                             </FormControl>
@@ -105,61 +105,10 @@ export const AccountForm = ({ user }: AccountFormProps) => {
                         <FormItem className="space-y-1">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
-                                <Input 
-                                    {...field} 
-                                    placeholder="example@gmail.com" 
+                                <Input
+                                    placeholder="Enter your email address"
+                                    {...field}
                                     autoComplete="email"
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="current"
-                    render={({ field }) => (
-                        <FormItem className="space-y-1">
-                            <FormLabel>Current Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="password"
-                                    {...field}
-                                    placeholder="••••••••"
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="password"
-                    render={({ field }) => (
-                        <FormItem className="space-y-1">
-                            <FormLabel>New Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="password"
-                                    {...field}
-                                    placeholder="••••••••"
-                                />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="confirm"
-                    render={({ field }) => (
-                        <FormItem className="space-y-1">
-                            <FormLabel>Confirm Password</FormLabel>
-                            <FormControl>
-                                <Input
-                                    type="password"
-                                    {...field}
-                                    placeholder="••••••••"
                                 />
                             </FormControl>
                             <FormMessage />
