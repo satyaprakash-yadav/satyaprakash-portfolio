@@ -1,5 +1,5 @@
 import { prismadb } from "@/lib/prismadb";
-import addBlurredDataUrls from "@/lib/get-blur-data";
+import addBlurredDataUrls from "@/lib/image-blur";
 import type {
   About,
   Experience,

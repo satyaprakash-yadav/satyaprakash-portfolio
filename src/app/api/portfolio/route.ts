@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 // import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
 
-import addBlurredDataUrls from "@/lib/get-blur-data";
+import addBlurredDataUrls from "@/lib/image-blur";
 import { currentUser } from "@/lib/authentication";
 
 export async function POST(req: Request) {
