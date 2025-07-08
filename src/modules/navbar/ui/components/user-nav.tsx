@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { signOut, useSession } from "next-auth/react";
+import { signOut } from "next-auth/react";
+import { useCurrentUser } from "@/hooks/use-current-user";
 import { LayoutGrid, LogOut, User } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -23,7 +24,7 @@ import {
 } from "@/components/ui/tooltip";
 
 export const UserNav = () => {
-  const { data: session } = useSession();
+  const user = useCurrentUser();
 
   return (
     <DropdownMenu>
@@ -34,8 +35,8 @@ export const UserNav = () => {
               <Button variant="outline" className="relative size-8 rounded-full">
                 <Avatar className="size-8">
                   <AvatarImage
-                    src={session?.user?.image as string}
-                    alt={session?.user?.name as string}
+                    src={user?.image as string}
+                    alt={user?.name as string}
                   />
                   <AvatarFallback className="bg-transparent">
                     <User className="size-5" />
@@ -52,10 +53,10 @@ export const UserNav = () => {
         <DropdownMenuLabel className="font-normal">
           <div className="flex flex-col space-y-1">
             <p className="text-sm font-medium leading-none">
-              {session?.user?.name}
+              {user?.name}
             </p>
             <p className="text-xs leading-none text-muted-foreground">
-              {session?.user?.email}
+              {user?.email}
             </p>
           </div>
         </DropdownMenuLabel>
