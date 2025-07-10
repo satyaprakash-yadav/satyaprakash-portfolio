@@ -21,11 +21,7 @@ export const DownloadCv = () => {
         try {
             setLoading(true);
 
-            const response = await axios.post(
-                "/api/resume/download-file",
-                { token },
-                { responseType: "blob" },
-            );
+            const response = await axios.post("/api/resume/download-file", { token });
 
             const url = URL.createObjectURL(new Blob([response.data]));
 
