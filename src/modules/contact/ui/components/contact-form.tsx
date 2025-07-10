@@ -71,6 +71,7 @@ export const ContactForm = () => {
                   {...field}
                   placeholder="Enter your name"
                   autoComplete="name"
+                  disabled={loading}
                 />
               </FormControl>
               <FormMessage />
@@ -85,9 +86,11 @@ export const ContactForm = () => {
               <FormLabel className="text-base">Email</FormLabel>
               <FormControl>
                 <Input
+                  type="email"
                   {...field}
                   placeholder="Enter your email"
                   autoComplete="email"
+                  disabled={loading}
                 />
               </FormControl>
               <FormMessage />
@@ -101,7 +104,12 @@ export const ContactForm = () => {
             <FormItem>
               <FormLabel className="text-base">Subject</FormLabel>
               <FormControl>
-                <Input {...field} placeholder="Enter your subject" />
+                <Input
+                  {...field}
+                  placeholder="Enter your subject"
+                  autoComplete="subject"
+                  disabled={loading}
+                />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -118,6 +126,8 @@ export const ContactForm = () => {
                   {...field}
                   placeholder="Type your message here."
                   className="resize-none overflow-hidden min-h-29 h-29"
+                  autoComplete="message"
+                  disabled={loading}
                 />
               </FormControl>
               <FormMessage />
