@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextResponse } from "next/server";
-import { getDownloadUrl } from "@edgestore/react/utils";
 
 import { prismadb } from "@/lib/prismadb";
 
@@ -8,8 +7,6 @@ export async function POST(req: Request) {
     try {
         const body = await req.json();
         const { token } = body;
-        console.log(token);
-        
 
         if (!token) {
             return NextResponse.json(
@@ -49,16 +46,18 @@ export async function POST(req: Request) {
             );
         };
 
-        const downloadUrl = getDownloadUrl(resume.pdf);
+        const response = await fetch(resume.pdf);
+        const pdfData = await response.arrayBuffer(); // Extract PDF data
 
-        const response = await fetch(downloadUrl);
+        // Create new Response object with PDF data and headers
+        const headers = new Headers();
+        headers.set("content-type", "application/pdf");
+        headers.set(
+            "content-disposition",
+            'attachment; filename="satyaprakash-resume.pdf"'
+        );
 
-        return new Response(response.body, {
-            headers: {
-                ...response.headers,
-                "content-disposition": `attachment; filename="satyaprakash-resume.pdf"`
-            }
-        });
+        return new Response(pdfData, { headers });
     } catch (error: any) {
         let message;
 
