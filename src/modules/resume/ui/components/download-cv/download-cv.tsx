@@ -21,7 +21,30 @@ export const DownloadCv = () => {
         try {
             setLoading(true);
 
-            await axios.post("/api/resume/download-file", { token });
+            const response = await axios.post(
+                "/api/resume/download-file",
+                { token },
+                { responseType: "blob" },
+            );
+
+            const url = URL.createObjectURL(new Blob([response.data]));
+
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "satyaprakash-resume.pdf";
+
+            // Hide the element
+            a.style.display = "none";
+
+            // Trigger the download
+            document.body.appendChild(a);
+            a.click();
+
+            // Clean up the element
+            document.body.removeChild(a);
+
+            // Release the object URL
+            URL.revokeObjectURL(url);
         } catch (error) {
             if (error instanceof AxiosError && error.response?.data.error) {
                 setError(error.response.data.error)
