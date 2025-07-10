@@ -10,7 +10,7 @@ import {
     CardContent,
     CardDescription,
 } from "@/components/ui/card";
-import { ViewResume } from "@/modules/resume/ui/components/view-resume";
+import { ViewResume } from "@/modules/resume/ui/views/view-resume";
 import { UploadPdfButton } from "@/modules/resume/ui/components/upload-pdf-button";
 
 const ResumePage = async () => {
