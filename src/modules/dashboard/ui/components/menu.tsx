@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import {
   Book,
   ClipboardCheck,
+  FileText,
   FolderGit2,
   GraduationCap,
   LayoutGrid,
@@ -85,6 +86,12 @@ export const Menu = ({ isOpen }: MenuProps) => {
       label: "Tool & Apps",
       active: pathname.includes("/admin/tool"),
       icon: <TerminalSquare size={18} />,
+    },
+    {
+      href: "/admin/resume",
+      label: "Resume",
+      active: pathname.includes("/admin/resume"),
+      icon: <FileText size={18} />,
     },
   ];
 

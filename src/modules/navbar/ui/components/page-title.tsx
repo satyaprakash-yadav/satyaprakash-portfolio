@@ -29,6 +29,8 @@ export const PageTitle = () => {
     pageTitle = "Account";
   } else if (pathname.includes("/admin/tool")) {
     pageTitle = "Tool & Apps";
+  } else if (pathname.includes("/admin/resume")) {
+    pageTitle = "Resume";
   }
 
   return <h1 className="font-bold">{pageTitle}</h1>;

@@ -27,6 +27,7 @@ model User {
   portfolios     Portfolio[]
   miscellaneous  Miscellaneous?
   tools          Tool[]
+  Resume         Resume?
 }
 
 model Account {
@@ -226,17 +227,30 @@ enum ToolType {
 }
 
 model Tool {
-  id        String  @id @default(cuid())
+  id        String   @id @default(cuid())
   image     String?
   thumbnail String?
   name      String
   color     ToolType @default(LIGHT)
 
-  userId    String
-  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+}
+
+model Resume {
+  id  String  @id @default(cuid())
+  pdf String?
+
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 
   @@index([userId])
 }
