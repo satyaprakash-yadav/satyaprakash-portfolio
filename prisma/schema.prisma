@@ -254,3 +254,19 @@ model Resume {
 
   @@index([userId])
 }
+
+model ResumeDownloader {
+  id      String  @id @default(cuid())
+  name    String
+  email   String  @unique
+  company String?
+}
+
+model DownloadToken {
+  id      String   @id @default(cuid())
+  email   String
+  token   String   @unique
+  expires DateTime
+
+  @@unique([email, token])
+}
