@@ -108,6 +108,7 @@ export const Header = ({
               <Image
                 src="/web-developer.png"
                 alt="me"
+                placeholder="blur"
                 width={250}
                 height={250}
                 priority

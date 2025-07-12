@@ -53,6 +53,7 @@ export const About = ({
             <Image
               src="/web-developer.png"
               alt="about"
+              placeholder="blur"
               width={250}
               height={250}
               priority
