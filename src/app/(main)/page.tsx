@@ -5,6 +5,7 @@ import { Tool } from "@/components/landing/tool";
 import { About } from "@/components/landing/about";
 import { Navbar } from "@/components/landing/navbar";
 import { Header } from "@/components/landing/header";
+import { Footer } from "@/components/landing/footer";
 import { Contact } from "@/components/landing/contact";
 import { Portfolio } from "@/components/landing/portfolio";
 import { Expertise } from "@/components/landing/expertise";
@@ -48,6 +49,7 @@ export default async function Home() {
         <Tool tool={tool} />
         <Contact miscellaneous={miscellaneous} />
       </main>
+      <Footer miscellaneous={miscellaneous} />
     </>
   );
 }
