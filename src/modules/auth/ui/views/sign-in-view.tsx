@@ -2,10 +2,15 @@
 
 import * as z from "zod";
 import Link from "next/link";
-import { AlertTriangle, Loader2 } from "lucide-react";
+import { signIn } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { AuthError } from "@auth/core/errors";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useSearchParams } from "next/navigation";
+import { AlertTriangle, Loader2 } from "lucide-react";
+
+import { DEFAULT_SIGNIN_REDIRECT } from "../../../../../routes";
 
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -24,18 +29,25 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
+import { 
+  Alert, 
+  AlertDescription, 
+  AlertTitle 
+} from "@/components/ui/alert";
 
 import { formSchema } from "@/modules/auth/schemas";
-import { signIn } from "next-auth/react";
-import { AuthError } from "@auth/core/errors";
-import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
-import { useSearchParams } from "next/navigation";
+
 
 export const SignInView = () => {
   const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [loading, setLoading] = useState(false);
 
-  const error = searchParams.get("error");
+  let error = searchParams.get("error");
+
+  if (error === "CredentialsSignin") {
+    error = "Invalid email or password.";
+  };
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -51,7 +63,7 @@ export const SignInView = () => {
 
       await signIn("credentials", {
         ...values,
-        callbackUrl: "/admin",
+        callbackUrl: callbackUrl || DEFAULT_SIGNIN_REDIRECT,
       });
     } catch (error) {
       if (error instanceof AuthError) {

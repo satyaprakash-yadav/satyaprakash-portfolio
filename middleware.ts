@@ -20,7 +20,7 @@ export default auth((req: any) => {
     const isPublicRoute = publicRoutes.includes(nextUrl.pathname);
     const isAuthRoute = authRoutes.includes(nextUrl.pathname);
 
-    if (isApiAuthRoute) {
+    if (isApiAuthRoute || isPublicRoute) {
         return null;
     };
 
