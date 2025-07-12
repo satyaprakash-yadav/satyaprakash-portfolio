@@ -29,14 +29,13 @@ import {
   CardContent,
   CardDescription,
 } from "@/components/ui/card";
-import { 
-  Alert, 
-  AlertDescription, 
-  AlertTitle 
+import {
+  Alert,
+  AlertDescription,
+  AlertTitle
 } from "@/components/ui/alert";
 
 import { formSchema } from "@/modules/auth/schemas";
-
 
 export const SignInView = () => {
   const searchParams = useSearchParams();
@@ -144,7 +143,9 @@ export const SignInView = () => {
             <p className="text-sm font-light text-gray-500 dark:text-gray-400 mt-1">
               Don&apos;t have an account yet?
               <Button variant="link" className="mt-1 px-1" asChild>
-                <Link href="/sign-up">Sign up</Link>
+                <Link href="/sign-up" title="Sign up">
+                  Sign up
+                </Link>
               </Button>
             </p>
           </form>

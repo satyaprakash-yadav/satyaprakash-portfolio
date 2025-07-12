@@ -13,21 +13,24 @@ export const metadata: Metadata = {
                 ? `https://${process.env.NEXTAUTH_URL}`
                 : `http://localhost:${process.env.PORT || 3000}`
     ),
-    title: "Satyaprakash — My Personal Website",
+    title: "Terms and Conditions — My Personal Website",
+    description:
+        "This is the terms and conditions page. It outlines the rules and guidelines for using our services.",
+    alternates: {
+        canonical: "/terms-and-conditions"
+    },
     openGraph: {
-        url: "/",
-        title: "Satyaprakash — My Digital Canvas",
+        url: "/terms-and-conditions",
+        title: "Terms and Conditions — My Digital Canvas",
         description:
-            "Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me."
+            "This is the terms and conditions page. It outlines the rules and guidelines for using our services."
     },
     twitter: {
         card: "summary_large_image",
         title: "Satyaprakash — My Digital Canvas",
         description:
-            "Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me."
+            "This is the terms and conditions page. It outlines the rules and guidelines for using our services."
     },
-    description:
-        "Hi! I am Satyaprakash and this is my personal website. Take a look at some of my projects at the portfolio section and do contact me.",
 };
 
 const TermsAndConditionsPage = () => {
@@ -38,7 +41,7 @@ const TermsAndConditionsPage = () => {
             </div>
             <main className="container max-w-6xl px-4 md:px-8 mx-auto -mt-5 xl:mt-5 relative overflow-x-hidden">
                 <Button variant="outline" size="sm" asChild>
-                    <Link href="/" className="flex items-center space-x-2">
+                    <Link href="/" className="flex items-center space-x-2" title="Home">
                         <ChevronLeft className="w-4 h-4" />
                         Home
                     </Link>

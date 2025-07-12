@@ -13,21 +13,24 @@ export const metadata: Metadata = {
                 ? `https://${process.env.NEXTAUTH_URL}`
                 : `http://localhost:${process.env.PORT || 3000}`
     ),
-    title: "Satyaprakash — My Personal Website",
+    title: "Privacy Policy — My Personal Website",
+    description:
+        "This is the privacy policy page. It explains how your personal data is protected and used.",
+    alternates: {
+        canonical: "/privacy-policy",
+    },
     openGraph: {
-        url: "/",
-        title: "Satyaprakash — My Digital Canvas",
+        url: "/privacy-policy",
+        title: "Privacy Policy — My Digital Canvas",
         description:
-            "Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me."
+            "This is the privacy policy page. It explains how your personal data is protected and used."
     },
     twitter: {
         card: "summary_large_image",
         title: "Satyaprakash — My Digital Canvas",
         description:
-            "Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me."
+            "This is the privacy policy page. It explains how your personal data is protected and used."
     },
-    description:
-        "Hi! I am Satyaprakash and this is my personal website. Take a look at some of my projects at the portfolio section and do contact me.",
 };
 
 
@@ -39,7 +42,7 @@ const PrivacyPolicyPage = () => {
             </div>
             <main className="container max-w-6xl px-4 md:px-8 mx-auto -mt-5 xl:mt-5 relative overflow-x-hidden">
                 <Button variant="outline" size="sm" asChild>
-                    <Link href="/" className="flex items-center space-x-2">
+                    <Link href="/" className="flex items-center space-x-2" title="Home">
                         <ChevronLeft className="size-4" />
                         Home
                     </Link>

@@ -23,18 +23,21 @@ export const metadata: Metadata = {
   ),
   title: "Satyaprakash — My Personal Website",
   description:
-    "'Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me",
+    "Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Do check it out.",
+  alternates: {
+    canonical: "/"
+  },
   openGraph: {
-    url: '/',
-    title: 'Satyaprakash — My Digital Canvas',
+    url: "/",
+    title: "Satyaprakash — My Digital Canvas",
     description:
-      'Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me.'
+      "Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Do check it out."
   },
   twitter: {
-    card: 'summary_large_image',
-    title: 'Satyaprakash — My Digital Canvas',
+    card: "summary_large_image",
+    title: "Satyaprakash — My Digital Canvas",
     description:
-      'Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Explore now and do contact me.'
+      "Hi, I am Satyaprakash. Unveil my skills, projects, and journey on my personal website. A digital portfolio reflecting my passion and expertise. Do check it out."
   },
 };
 

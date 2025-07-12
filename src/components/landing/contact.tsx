@@ -64,6 +64,7 @@ export const Contact = ({
                 <Link
                   href={`${miscellaneous ? 'mailto:' + miscellaneous.email : '#'
                     }`}
+                  title="Email me"
                 >
                   Email me
                 </Link>
@@ -86,7 +87,12 @@ export const Contact = ({
                 className="text-primary-foreground group-hover:text-primary"
                 asChild
               >
-                <Link href={`${miscellaneous ? miscellaneous.messengerUrl : "#"}`} target="_blank" rel="noopener noreferer">
+                <Link
+                  href={`${miscellaneous ? miscellaneous.messengerUrl : "#"}`}
+                  target="_blank"
+                  rel="noopener noreferer"
+                  title="Say hello"
+                >
                   Say hello
                 </Link>
               </Button>
@@ -108,7 +114,12 @@ export const Contact = ({
                 className="text-primary-foreground group-hover:text-primary"
                 asChild
               >
-                <Link href={`${miscellaneous ? miscellaneous.discordUrl : "#"}`} target="_blank" rel="noopener noreferer">
+                <Link
+                  href={`${miscellaneous ? miscellaneous.discordUrl : "#"}`}
+                  target="_blank"
+                  rel="noopener noreferer"
+                  title="Let's chat"
+                >
                   Let&apos;s chat
                 </Link>
               </Button>

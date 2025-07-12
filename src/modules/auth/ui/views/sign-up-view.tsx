@@ -156,7 +156,9 @@ export const SignUpView = () => {
             <p className='text-sm font-light text-gray-500 dark:text-gray-400 mt-1'>
               Already have an account?
               <Button variant='link' className='ml-1 px-1' asChild>
-                <Link href='/sign-in'>Sign in</Link>
+                <Link href='/sign-in' title="Sign in">
+                  Sign in
+                </Link>
               </Button>
             </p>
           </form>

@@ -198,6 +198,7 @@ export const Portfolio = ({
                   <Link
                     href={portfolio.githubUrl}
                     target="_blank"
+                    title="Github"
                     rel="noopener noreferrer"
                   >
                     Github
@@ -211,6 +212,7 @@ export const Portfolio = ({
                   <Link
                     href={portfolio.demoUrl}
                     target="_blank"
+                    title="Live Demo"
                     rel="noopener noreferrer"
                   >
                     Live Demo

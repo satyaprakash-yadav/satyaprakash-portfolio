@@ -41,7 +41,9 @@ export const Footer = ({
             className="text-primary-foreground text-4xl font-medium uppercase"
             asChild
           >
-            <Link href="/#home">Satyaprakash</Link>
+            <Link href="/#home" title="Satyaprakash">
+              Satyaprakash
+            </Link>
           </Button>
         </motion.div>
         <motion.ul
@@ -50,42 +52,42 @@ export const Footer = ({
         >
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#home">Home</Link>
+              <Link href="/#home" title="Home">Home</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#about">About</Link>
+              <Link href="/#about" title="About">About</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#experience">Experience</Link>
+              <Link href="/#experience" title="Experience">Experience</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#expertise">Expertise</Link>
+              <Link href="/#expertise" title="Expertise">Expertise</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#qualification">Qualification</Link>
+              <Link href="/#qualification" title="Qualification">Qualification</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#portfolio">Portfolio</Link>
+              <Link href="/#portfolio" title="Portfolio">Portfolio</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#tool">Tool</Link>
+              <Link href="/#tool" title="Tool">Tool</Link>
             </Button>
           </li>
           <li>
             <Button variant="ghost" className="text-primary-foreground" asChild>
-              <Link href="/#contact">Contact</Link>
+              <Link href="/#contact" title="Contact">Contact</Link>
             </Button>
           </li>
         </motion.ul>
@@ -97,6 +99,7 @@ export const Footer = ({
             <Link
               href={`${miscellaneous ? miscellaneous.facebookUrl : "#"}`}
               target="_blank"
+              title="Facebook"
               rel="noopener noreferrer"
               aria-label='Facebook'
             >
@@ -107,6 +110,7 @@ export const Footer = ({
             <Link
               href={`${miscellaneous ? miscellaneous.instagramUrl : "#"}`}
               target="_blank"
+              title="Instagram"
               rel="noopener noreferrer"
               aria-label='Instagram'
             >
@@ -117,6 +121,7 @@ export const Footer = ({
             <Link
               href={`${miscellaneous ? miscellaneous.twitterUrl : "#"}`}
               target="_blank"
+              title="Twitter"
               rel="noopener noreferrer"
               aria-label='Twitter'
             >
@@ -127,6 +132,7 @@ export const Footer = ({
             <Link
               href={`${miscellaneous ? miscellaneous.linkedinUrl : '#'}`}
               aria-label='LinkedIn'
+              title="LinkedIn"
               target='_blank'
               rel='noopener noreferrer'
             >
@@ -141,6 +147,7 @@ export const Footer = ({
           <Button variant="outline" className="h-6 w-[146px]" asChild>
             <Link
               href="/privacy-policy"
+              title="Privacy Policy"
               className="text-primary-foreground text-xs"
             >
               Privacy Policy
@@ -149,6 +156,7 @@ export const Footer = ({
           <Button variant="outline" className="h-6 w-[146px]" asChild>
             <Link
               href="/terms-and-conditions"
+              title="Terms & Conditions"
               className="text-primary-foreground text-xs"
             >
               Terms & Conditions
@@ -162,7 +170,7 @@ export const Footer = ({
           <small className="text-muted">
             Created by
             <Button variant="link" className="text-muted text-xs px-1" asChild>
-              <Link href="#" target="_blank" rel="noopener noreferrer">
+              <Link href="#" target="_blank" rel="noopener noreferrer" title="LinkedIn">
                 Satyaprakash Yadav
               </Link>
             </Button>

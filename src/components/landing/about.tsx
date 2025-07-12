@@ -53,7 +53,7 @@ export const About = ({
             <Image
               src="/web-developer.png"
               alt="about"
-              placeholder="blur"
+              // placeholder="blur"
               width={250}
               height={250}
             />
@@ -109,7 +109,9 @@ export const About = ({
           </motion.p>
           <motion.div variants={slideInFromRight(0.5)}>
             <Button variant="default" asChild>
-              <Link href="#contact">Let&apos;s Talk</Link>
+              <Link href="#contact" title="Let's Talk">
+                Let&apos;s Talk
+              </Link>
             </Button>
           </motion.div>
         </div>
