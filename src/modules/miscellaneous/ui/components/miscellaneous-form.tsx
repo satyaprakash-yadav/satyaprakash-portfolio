@@ -56,7 +56,6 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
             twitterUrl: miscellaneous?.twitterUrl ?? "",
             linkedinUrl: miscellaneous?.linkedinUrl ?? "",
             githubUrl: miscellaneous?.githubUrl ?? "",
-            cvUrl: miscellaneous?.cvUrl ?? "",
             titles: initialValues,
         },
         mode: "onChange",
@@ -97,7 +96,7 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
                     control={form.control}
                     name="email"
                     render={({ field }) => (
-                        <FormItem className="space-y-1 lg:col-span-2">
+                        <FormItem className="space-y-1">
                             <FormLabel>Email</FormLabel>
                             <FormControl>
                                 <Input
@@ -222,19 +221,6 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
                             <FormLabel>GitHub URL</FormLabel>
                             <FormControl>
                                 <Input {...field} placeholder="Enter GitHub URL" />
-                            </FormControl>
-                            <FormMessage />
-                        </FormItem>
-                    )}
-                />
-                <FormField
-                    control={form.control}
-                    name="cvUrl"
-                    render={({ field }) => (
-                        <FormItem className="space-y-1">
-                            <FormLabel>C    V URL</FormLabel>
-                            <FormControl>
-                                <Input {...field} placeholder="Enter CV URL" />
                             </FormControl>
                             <FormMessage />
                         </FormItem>

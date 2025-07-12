@@ -11,7 +11,6 @@ export const MiscellaneousFormSchema = z.object({
     twitterUrl: z.string().url({ message: "Please enter valid Twitter URL." }),
     linkedinUrl: z.string().url({ message: "Please enter valid LinkedIn URL." }),
     githubUrl: z.string().url({ message: "Please enter valid GitHub URL." }),
-    cvUrl: z.string().url({ message: "Please enter valid CV URL." }),
     titles: z
         .array(
             z.object({
