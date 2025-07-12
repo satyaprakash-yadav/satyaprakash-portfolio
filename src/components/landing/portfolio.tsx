@@ -125,12 +125,12 @@ export const Portfolio = ({
       id="portfolio"
       className="mt-32"
     >
-      <motion.h1
+      <motion.span
         variants={slideInFromTop(0.3)}
-        className="text-center text-sm text-muted-foreground font-medium"
+        className="block text-center text-sm text-muted-foreground font-medium"
       >
         My Recent Work
-      </motion.h1>
+      </motion.span>
       <motion.h2
         variants={slideInFromTop(0.4)}
         className="text-center text-2xl font-semibold pt-1"
