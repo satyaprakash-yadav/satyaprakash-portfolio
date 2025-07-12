@@ -3,8 +3,6 @@ import type { Metadata } from "next";
 import { ChevronLeft } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import getData from "@/actions/get-data";
-import { Footer } from "@/components/landing/footer";
 import { ModeToggle } from "@/components/mode-toggle";
 
 export const metadata: Metadata = {
@@ -33,9 +31,7 @@ export const metadata: Metadata = {
 };
 
 
-const PrivacyPolicyPage = async () => {
-    const { miscellaneous } = await getData();
-
+const PrivacyPolicyPage = () => {
     return (
         <>
             <div className="inline-block sticky float-right z-30 top-8 xl:top-5 right-5">
@@ -623,7 +619,6 @@ const PrivacyPolicyPage = async () => {
                     </li>
                 </ul>
             </main>
-            <Footer miscellaneous={miscellaneous} />
         </>
     );
 }

@@ -6,11 +6,16 @@ import { Button } from "../ui/button";
 import { motion, useInView } from "framer-motion";
 import { FaFacebook, FaInstagram, FaTwitter, FaLinkedin } from "react-icons/fa";
 
-import type getData from "@/actions/get-data";
+import { Miscellaneous } from "@prisma/client";
+// import type getData from "@/actions/get-data";
 
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 
-type FooterProps = Pick<Awaited<ReturnType<typeof getData>>, "miscellaneous">;
+// type FooterProps = Pick<Awaited<ReturnType<typeof getData>>, "miscellaneous">;
+interface FooterProps {
+  miscellaneous: Miscellaneous | null;
+};
+
 
 export const Footer = ({
   miscellaneous,
