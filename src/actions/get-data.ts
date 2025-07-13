@@ -99,33 +99,32 @@ const getData = async (): Promise<DataProps> => {
     toolPromise,
   ]);
 
-  const frontend = experiences.filter(
-    (experience) => experience.type === "FRONTEND"
-  );
+  const frontend = [];
+  const backend = [];
+  const seooptimization = [];
+  const webdevelopment = [];
+  const contentcreation = [];
+  const education = [];
+  const experience = [];
 
-  const backend = experiences.filter(
-    (experience) => experience.type === "BACKEND"
-  );
+  for (const exp of experiences) {
+    if (exp.type === "FRONTEND") frontend.push(exp);
+    else if (exp.type === "BACKEND") backend.push(exp);
+  }
 
-  const seooptimization = expertises.filter(
-    (expertise) => expertise.type === "SEOOPTIMIZATION"
-  );
+  for (const expertise of expertises) {
+    if (expertise.type === "SEOOPTIMIZATION") seooptimization.push(expertise);
+    else if (expertise.type === "WEBDEVELOPMENT")
+      webdevelopment.push(expertise);
+    else if (expertise.type === "CONTENTCREATION")
+      contentcreation.push(expertise);
+  }
 
-  const webdevelopment = expertises.filter(
-    (expertise) => expertise.type === "WEBDEVELOPMENT"
-  );
-
-  const contentcreation = expertises.filter(
-    (expertise) => expertise.type === "CONTENTCREATION"
-  );
-
-  const education = qualifications.filter(
-    (qualification) => qualification.type === "EDUCATION"
-  )
-
-  const experience = qualifications.filter(
-    (qualification) => qualification.type === "EXPERIENCE"
-  );
+  for (const qualification of qualifications) {
+    if (qualification.type === "EDUCATION") education.push(qualification);
+    else if (qualification.type === "EXPERIENCE")
+      experience.push(qualification);
+  }
 
   const portfolioWithBlur = await addBlurredDataUrls(portfolio);
 
