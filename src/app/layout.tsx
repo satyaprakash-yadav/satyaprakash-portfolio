@@ -4,11 +4,8 @@ import "./globals.css";
 
 import { Toaster } from "@/components/ui/sonner";
 import { ThemeProvider } from "@/providers/theme-provider";
-
-// import { getServerSession } from "next-auth";
 import { SessionProvider } from "next-auth/react";
-import { EdgeStoreProvider } from "@/lib/edgestore";
-// import SessionProvider from "@/providers/session-provider";
+
 import { auth } from "../../auth";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -53,16 +50,14 @@ export default async function RootLayout({
     <SessionProvider session={session}>
       <html lang="en" suppressHydrationWarning>
         <body className={`${inter.className} antialiased`}>
-          <EdgeStoreProvider>
-            <ThemeProvider
-              attribute="class"
-              defaultTheme="system"
-              enableSystem
-            >
-              <Toaster />
-              {children}
-            </ThemeProvider>
-          </EdgeStoreProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            <Toaster />
+            {children}
+          </ThemeProvider>
         </body>
       </html>
     </SessionProvider>
