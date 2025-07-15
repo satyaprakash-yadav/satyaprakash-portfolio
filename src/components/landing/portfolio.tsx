@@ -158,7 +158,7 @@ export const Portfolio = ({
                     fill
                     placeholder="blur"
                     blurDataURL={portfolio.blurDataUrl}
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    sizes="(max-width: 1024px) 50vw, 30vw"
                     className="object-cover object-top group-hover:object-bottom transition-all duration-6000 ease-in-out rounded-t-2xl border-t border-x"
                   />
                 ) : (
@@ -167,7 +167,7 @@ export const Portfolio = ({
                       src={portfolio.image}
                       alt='portfolio'
                       fill
-                      sizes='(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw'
+                      sizes='(max-width: 1024px) 50vw, 30vw'
                       className='object-cover object-top group-hover:object-bottom transition-all duration-6000 ease-in-out rounded-t-2xl border-t border-x'
                     />
                   )

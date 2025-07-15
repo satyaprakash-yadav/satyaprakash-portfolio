@@ -55,9 +55,10 @@ export const About = ({
               <Image
                 src="/web-developer.png"
                 alt="about"
-                // placeholder="blur"
+                placeholder="blur"
                 width={250}
                 height={250}
+                sizes="(max-width: 768px) 50vw, 100vw"
               />
             </div>
           </m.div>
