@@ -1,10 +1,15 @@
 "use client";
 
 import { useState } from "react";
+import dynamic from "next/dynamic";
 
 import { Modal } from "@/components/modal";
 import { Button } from "@/components/ui/button";
-import { DownloadCvForm } from "./download-cv-form";
+// import { DownloadCvForm } from "./download-cv-form";
+
+const DownloadCvForm = dynamic(
+    () => import("@/modules/resume/ui/components/download-cv-form").then(mod => mod.DownloadCvForm)
+);
 
 export const DownloadCvButton = () => {
     const [open, setOpen] = useState(false);
