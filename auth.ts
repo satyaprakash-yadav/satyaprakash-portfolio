@@ -3,6 +3,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 
 import { prismadb } from "@/lib/prismadb";
 import authConfig from "./auth.config";
+import { getUserById } from "@/data/user";
 
 export const {
     handlers: { GET, POST },
@@ -16,20 +17,7 @@ export const {
         error: "/sign-in"
     },
     callbacks: {
-        // async signIn({ user }) {
-        //     const existingUser = await prismadb.user.findUnique({
-        //         where: {
-        //             id: user.id,
-        //         }
-        //     });
-
-        //     if (!existingUser?.emailVerified) {
-        //         return false;
-        //     };
-
-        //     return true;
-        // },
-        async session({ token, session, trigger, newSession }) {
+        async session({ token, session }) {
             if (token.sub && session.user) {
                 session.user.id = token.sub;
             };
@@ -39,32 +27,14 @@ export const {
                 session.user.email = token.email ?? "";
             };
 
-            if (
-                session.user &&
-                trigger === 'update' &&
-                newSession?.name &&
-                newSession?.email
-            ) {
-                session.user.name = newSession.name;
-                session.user.email = newSession.email;
-            }
-
             return session;
         },
-        async jwt({ user, token, trigger, session }) {
-            if (user) {
-                token.sub = user.id;
-            };
-
-            if (!user) {
+        async jwt({ token }) {
+            if (!token.sub) {
                 return token;
             };
 
-            const existingUser = await prismadb.user.findUnique({
-                where: {
-                    id: token.sub
-                }
-            });
+            const existingUser = await getUserById(token.sub);
 
             if (!existingUser) {
                 return token;
@@ -72,11 +42,6 @@ export const {
 
             token.name = existingUser.name;
             token.email = existingUser.email;
-
-            if (trigger === "update" && session?.name && session?.email) {
-                token.name = session.name;
-                token.email = session.email;
-            };
 
             return token;
         }

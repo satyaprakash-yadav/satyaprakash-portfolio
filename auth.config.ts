@@ -1,53 +1,38 @@
 import { compare } from "bcryptjs";
 import type { NextAuthConfig } from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials"
+import Credentials from "next-auth/providers/credentials";
 
-import { prismadb } from "@/lib/prismadb";
+import { formSchema } from "@/modules/auth/schemas";
+import { getUserByEmail } from "@/data/user";
 
 export default {
     providers: [
-        CredentialsProvider({
-            name: "Credentials",
+        Credentials({
             credentials: {
-                email: { label: "email", type: "email", placeholder: "John Doe" },
-                password: { label: "password", type: "password" },
+                email: {
+                    label: "Email",
+                    type: "email"
+                },
+                password: {
+                    label: "Password",
+                    type: "password"
+                }
             },
             async authorize(credentials) {
-                // if (!credentials?.email || !credentials?.password) {
-                //     throw new Error('Email and password are required.');
-                // }
+                const validatedFields = formSchema.safeParse(credentials);
 
-                // const { email, password } = credentials;
-
-                // if (!(typeof email === 'string' && typeof password === 'string')) {
-                //     throw new Error('Email and password are required.');
-                if (
-                    !credentials.email ||
-                    !credentials.password ||
-                    typeof credentials.email !== "string" ||
-                    typeof credentials.password !== "string"
-                ) {
+                if (!validatedFields.success) {
                     return null;
-                }
+                };
 
-                const user = await prismadb.user.findUnique({
-                    where: {
-                        email: credentials.email
-                    }
-                });
+                const { email, password } = validatedFields.data;
 
-                // if (!user || !user.hashedPassword) {
-                //     throw new Error('Incorrect email or password.');
-                // }
+                const user = await getUserByEmail(email);
 
-                // const passwordsMatch = await compare(password, user.hashedPassword);
-
-                // if (!passwordsMatch) {
-                //     throw new Error('Incorrect email or password.');
                 if (
                     !user ||
                     !user.hashedPassword ||
-                    !(await compare(credentials.password, user.hashedPassword))
+                    !(await compare(password, user.hashedPassword))
                 ) {
                     return null;
                 }
