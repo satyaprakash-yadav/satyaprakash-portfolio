@@ -1,4 +1,4 @@
-import type { Prisma } from "@prisma/client";
+// import type { Prisma } from "@prisma/client";
 import { getPlaiceholder } from "plaiceholder";
 
 const getBase64 = async (imageUrl: string) => {
@@ -23,31 +23,39 @@ const getBase64 = async (imageUrl: string) => {
   }
 };
 
-type PortfolioWithTags = Prisma.PortfolioGetPayload<{
-  include: { tags: true };
-}>;
+// type PortfolioWithTags = Prisma.PortfolioGetPayload<{
+//   include: { tags: true };
+// }>;
 
-type PortfolioWithBlur = PortfolioWithTags & {
-  blurredDataUrl?: string;
-};
+// type PortfolioWithBlur = PortfolioWithTags & {
+//   blurredDataUrl?: string;
+// };
 
-export default async function addBlurredDataUrls(
-  portfolios: PortfolioWithBlur[]
-): Promise<PortfolioWithBlur[]> {
-  // Make all requests at once instead of awaiting each one - avoiding a waterfall
-  const base64Promises = portfolios.map((portfolio) =>
-    getBase64(portfolio.image!)
-  );
+// export default async function addBlurredDataUrls(
+//   portfolios: PortfolioWithBlur[]
+// ): Promise<PortfolioWithBlur[]> {
+//   // Make all requests at once instead of awaiting each one - avoiding a waterfall
+//   const base64Promises = portfolios.map((portfolio) =>
+//     getBase64(portfolio.image!)
+//   );
 
-  // Resolve all requests in order
-  const base64Results = await Promise.all(base64Promises);
+//   // Resolve all requests in order
+//   const base64Results = await Promise.all(base64Promises);
 
-  const portfolioWithBlur: PortfolioWithBlur[] = portfolios.map(
-    (portfolio, index) => {
-      portfolio.blurredDataUrl = base64Results[index];
-      return portfolio;
-    }
-  );
+//   const portfolioWithBlur: PortfolioWithBlur[] = portfolios.map(
+//     (portfolio, index) => {
+//       portfolio.blurredDataUrl = base64Results[index];
+//       return portfolio;
+//     }
+//   );
 
-  return portfolioWithBlur;
+//   return portfolioWithBlur;
+// }
+
+export default async function getBlurDataUrl(
+  imageUrl: string
+): Promise<string | undefined> {
+  const blurDataUrl = await getBase64(imageUrl);
+
+  return blurDataUrl;
 }

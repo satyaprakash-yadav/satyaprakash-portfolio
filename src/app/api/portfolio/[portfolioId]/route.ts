@@ -2,8 +2,8 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 
-// import { auth } from "@/lib/auth";
 import { prismadb } from "@/lib/prismadb";
+import getBlurDataUrl from "@/lib/image-blur";
 import { currentUser } from "@/lib/authentication";
 
 export async function PATCH(
@@ -93,6 +93,8 @@ export async function PATCH(
       );
     }
 
+    const blurDataUrl = await getBlurDataUrl(image);
+
     const portfolio = await prismadb.portfolio.update({
       where: {
         id: params.portfolioId,
@@ -100,6 +102,7 @@ export async function PATCH(
       data: {
         image,
         thumbnail,
+        blurDataUrl,
         title,
         description,
         githubUrl,

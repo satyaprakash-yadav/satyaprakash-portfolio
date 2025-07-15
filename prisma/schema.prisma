@@ -154,6 +154,7 @@ model Portfolio {
   id          String  @id @default(cuid())
   image       String?
   thumbnail   String?
+  blurDataUrl String? @db.Text
   title       String
   description String
   githubUrl   String

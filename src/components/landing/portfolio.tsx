@@ -77,11 +77,11 @@ import { fadeIn, slideInFromTop } from "@/lib/motion";
 
 type PortfolioProps = Pick<
   Awaited<ReturnType<typeof getData>>,
-  'portfolioWithBlur'
+  "portfolioWithTags"
 >;
 
 export const Portfolio = ({
-  portfolioWithBlur,
+  portfolioWithTags,
 }: PortfolioProps) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
@@ -89,7 +89,7 @@ export const Portfolio = ({
   const [_hide, setHide] = useState(false);
   const [offset, setOffset] = useState(6);
   const [loading, setLoading] = useState(false);
-  const [portfolios, setPortfolios] = useState(portfolioWithBlur);
+  const [portfolios, setPortfolios] = useState(portfolioWithTags);
 
   const onLoadMore = async () => {
     try {
@@ -151,13 +151,13 @@ export const Portfolio = ({
               className="relative w-full h-min rounded-2xl flex flex-col group"
             >
               <div className="relative w-full h-[250px] lg:h-[300px] overflow-hidden">
-                {portfolio.image && portfolio.blurredDataUrl ? (
+                {portfolio.image && portfolio.blurDataUrl ? (
                   <Image
                     src={`${portfolio.image}`}
                     alt="portfolio"
                     fill
                     placeholder="blur"
-                    blurDataURL={portfolio.blurredDataUrl}
+                    blurDataURL={portfolio.blurDataUrl}
                     sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover object-top group-hover:object-bottom transition-all duration-6000 ease-in-out rounded-t-2xl border-t border-x"
                   />
