@@ -6,4 +6,6 @@
 
 // export { handler as GET, handler as POST };
 
-export { GET, POST } from "../../../../../auth";
+import { handlers } from "../../../../../auth";
+
+export const { GET, POST } = handlers;

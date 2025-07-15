@@ -6,7 +6,7 @@ import authConfig from "./auth.config";
 import { getUserById } from "@/data/user";
 
 export const {
-    handlers: { GET, POST },
+    handlers,
     auth,
     signIn,
     signOut,
@@ -24,7 +24,7 @@ export const {
 
             if (session.user) {
                 session.user.name = token.name;
-                session.user.email = token.email ?? "";
+                session.user.email = token.email as string;
             };
 
             return session;
@@ -46,9 +46,9 @@ export const {
             return token;
         }
     },
+    ...authConfig,
+    session: { strategy: "jwt" },
+    secret: process.env.AUTH_SECRET,
     adapter: PrismaAdapter(prismadb),
     debug: process.env.NODE_ENV !== "production",
-    secret: process.env.AUTH_SECRET,
-    session: { strategy: "jwt" },
-    ...authConfig
 });
