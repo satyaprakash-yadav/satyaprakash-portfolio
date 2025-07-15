@@ -18,6 +18,8 @@ interface Props {
 const AdminRouteLayout = ({ children }: Props) => {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
+  if (!sidebar) return null;
+
   return (
       <EdgeStoreProvider>
         <Sidebar />

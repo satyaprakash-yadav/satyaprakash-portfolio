@@ -13,6 +13,8 @@ import { useSidebarToggle } from "@/hooks/use-sidebar-toggle";
 export const Sidebar = () => {
   const sidebar = useStore(useSidebarToggle, (state) => state);
 
+  if (!sidebar) return null;
+
   return (
     <aside
       className={cn(
