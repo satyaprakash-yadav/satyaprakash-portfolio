@@ -1,7 +1,7 @@
 // Server action getData
 import getData from "@/actions/get-data";
 
-import { Person, WithContext } from "schema-dts";
+import { WebPage, WithContext } from "schema-dts";
 
 import { Tool } from "@/components/landing/tool";
 import { About } from "@/components/landing/about";
@@ -32,32 +32,110 @@ export default async function Home() {
   } = await getData();
 
   // create JSON-LD
-  const jsonLd: WithContext<Person> = {
+  const jsonLd: WithContext<WebPage> = {
     "@context": "https://schema.org",
-    "@type": "Person",
+    "@type": "WebPage",
+    "@id": process.env.AUTH_URL,
     name: "Satyaprakash",
-    alternateName: "SARKS",
-    url: "https://www.satyaprakash.com",
-    image: "https://www.satyaprakash.com/satyaprakash.png",
-    jobTitle: miscellaneous
-      ? miscellaneous.titles.map((title) => title.name)
-      : ["Web Developer", "Frontend Developer"],
-    gender: "Male",
-    workLocation: "India",
+    alternateName: "Satyaprakash Yadav",
+    url: process.env.AUTH_URL,
+    image: {
+      "@type": "ImageObject",
+      "@id": process.env.AUTH_URL + "/satyaprakash.png",
+      url: process.env.AUTH_URL + "/satyaprakash.png",
+      contentUrl: process.env.AUTH_URL + "/satyaprakash.png",
+      width: {
+        "@type": "QuantitativeValue",
+        value: 512
+      },
+      height: {
+        "@type": "QuantitativeValue",
+        value: 512
+      }
+    },
     description: "Satyaprakash is an enthusiastic and passionate web developer based in India with more than half a decade of experience dedicated to deliver top-notch solutions and facilitate project success",
-    sameAs: [
-      miscellaneous
-        ? miscellaneous.facebookUrl
-        : "#",
-      miscellaneous ? miscellaneous.twitterUrl : "#",
-      miscellaneous
-        ? miscellaneous.linkedinUrl
-        : "#",
-      miscellaneous ? miscellaneous.githubUrl : "#",
-      miscellaneous
-        ? miscellaneous.instagramUrl
-        : "#"
-    ]
+    inLanguage: "en-US",
+    isPartOf: {
+      "@type": "WebSite",
+      "@id": process.env.AUTH_URL,
+      url: process.env.AUTH_URL,
+      name: "Satyaprakash",
+      description:
+        "Satyaprakash is an enthusiastic and passionate web developer based in India with more than half a decade of experience dedicated to deliver top-notch solutions and facilitate project success",
+      inLanguage: "en-US",
+      publisher: {
+        "@type": "Person",
+        name: "Satyaprakash",
+        url: process.env.AUTH_URL,
+        sameAs: [
+          miscellaneous
+            ? miscellaneous.facebookUrl
+            : "https://www.facebook.com/satyaprakash",
+          miscellaneous
+            ? miscellaneous.twitterUrl
+            : "https://twitter.com/satyaprakash",
+          miscellaneous
+            ? miscellaneous.linkedinUrl
+            : "https://www.linkedin.com/in/satyaprakash-yadav",
+          miscellaneous
+            ? miscellaneous.githubUrl
+            : "https://github.com/satyaprakash-yadav",
+          miscellaneous
+            ? miscellaneous.instagramUrl
+            : "https://www.instagram.com/satyaprakash-yadav"
+        ],
+        image: {
+          "@type": "ImageObject",
+          "@id": process.env.AUTH_URL + "/satyaprakash.png",
+          url: process.env.AUTH_URL + "/satyaprakash.png",
+          contentUrl: process.env.AUTH_URL + "/satyaprakash.png",
+          width: {
+            "@type": "QuantitativeValue",
+            value: 512
+          },
+          height: {
+            "@type": "QuantitativeValue",
+            value: 512
+          }
+        }
+      }
+    },
+    about: {
+      "@type": "Person",
+      name: "Satyaprakash",
+      url: process.env.AUTH_URL,
+      sameAs: [
+        miscellaneous
+          ? miscellaneous.facebookUrl
+          : "https://www.facebook.com/satyaprakash",
+        miscellaneous
+          ? miscellaneous.twitterUrl
+          : "https://twitter.com/satyaprakash",
+        miscellaneous
+          ? miscellaneous.linkedinUrl
+          : "https://www.linkedin.com/in/satyaprakash-yadav",
+        miscellaneous
+          ? miscellaneous.githubUrl
+          : "https://github.com/satyaprakash-yadav",
+        miscellaneous
+          ? miscellaneous.instagramUrl
+          : "https://www.instagram.com/satyaprakash"
+      ],
+      image: {
+        "@type": "ImageObject",
+        "@id": process.env.AUTH_URL + "/satyaprakash.png",
+        url: process.env.AUTH_URL + "/satyaprakash.png",
+        contentUrl: process.env.AUTH_URL + "/satyaprakash.png",
+        width: {
+          "@type": "QuantitativeValue",
+          value: 512
+        },
+        height: {
+          "@type": "QuantitativeValue",
+          value: 512
+        }
+      }
+    }
   }
 
   return (
@@ -66,7 +144,7 @@ export default async function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       <div className="sticky z-30 top-5 w-full flex justify-end px-5">
         <ModeToggle />
       </div>
