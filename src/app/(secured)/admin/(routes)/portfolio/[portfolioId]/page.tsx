@@ -42,7 +42,7 @@ const PortfolioIdPage = async ({
             <BackButton slug="/admin/portfolio" />
             <Card className="rounded-lg border-none">
                 <CardHeader className="mx-[1px] pb-9">
-                    <CardTitle className="text-xl font-semibold">Edit Portfolio</CardTitle>
+                    <CardTitle className="text-xl font-semibold">Edit Project</CardTitle>
                     <CardDescription>
                         Edit project information on your portfolio section.
                     </CardDescription>

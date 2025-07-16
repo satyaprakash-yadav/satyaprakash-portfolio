@@ -52,7 +52,7 @@ const PortfolioPage = async () => {
                     Portfolio
                 </CardTitle>
                 <CardDescription>
-                    Manage your portfolio list section informations.
+                    Manage your projects list section informations.
                 </CardDescription>
             </CardHeader>
             <CardContent>

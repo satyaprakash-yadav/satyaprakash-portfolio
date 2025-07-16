@@ -16,7 +16,7 @@ const CreatePage = () => {
             <Card className="rounded-lg border-none">
                 <CardHeader className="mx-[1px] pb-9">
                     <CardTitle className="text-xl font-semibold">
-                        Create Portfolio
+                        Add Project
                     </CardTitle>
                     <CardDescription>
                         Add more project on your portfolio section.
