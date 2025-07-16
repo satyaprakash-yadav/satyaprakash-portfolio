@@ -145,7 +145,7 @@ export const Footer = ({
             variants={slideInFromRight(0.5)}
             className="flex flex-col md:flex-row justify-center items-center mt-9 gap-4"
           >
-            <Button variant="outline" className="h-6 w-[146px]" asChild>
+            <Button variant="outline" className="h-6 w-[146px] dark:border dark:border-black dark:border-solid" asChild>
               <Link
                 href="/privacy-policy"
                 title="Privacy Policy"
@@ -154,7 +154,7 @@ export const Footer = ({
                 Privacy Policy
               </Link>
             </Button>
-            <Button variant="outline" className="h-6 w-[146px]" asChild>
+            <Button variant="outline" className="h-6 w-[146px] dark:border dark:border-black dark:border-solid" asChild>
               <Link
                 href="/terms-and-conditions"
                 title="Terms & Conditions"

@@ -1,6 +1,6 @@
 import { Skeleton } from "@/components/ui/skeleton";
 
-const MainLoading = () => {
+const Loading = () => {
     return (
         <main className="container max-w-6xl px-4 md:px-8 mx-auto mt-5 relative overflow-x-hidden">
             <Skeleton className="w-[76px] h-8 mb-5" />
@@ -13,4 +13,4 @@ const MainLoading = () => {
     );
 }
 
-export default MainLoading;
+export default Loading;
