@@ -131,7 +131,7 @@ export const Header = ({
                   title="Scroll Down"
                   className="text-primary hover:opacity-60 transition-opacity duration-300 ease-in-out flex justify-center items-center"
                 >
-                  <p className="text-sm scroll__down">
+                  <p className="text-sm scroll__down mb-20">
                     Scroll Down
                   </p>
                 </Link>

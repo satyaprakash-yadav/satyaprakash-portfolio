@@ -228,7 +228,6 @@ html {
 .scroll__down {
   position: absolute;
   right: -2rem;
-  bottom: 5rem;
   transform: rotate(90deg);
   color: var(--color-primary);
 }
@@ -252,7 +251,7 @@ html {
   border-radius: 60px;
   position: absolute;
   right: 0rem;
-  bottom: 4.5rem;
+  bottom: 5rem;
 }
 
 .mouse::before {
