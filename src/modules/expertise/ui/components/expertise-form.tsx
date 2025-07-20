@@ -103,7 +103,7 @@ export const ExpertiseForm = ({
             key={field.id}
             className="flex items-end gap-2 sm:gap-3 justify-between"
           >
-            <div className="grow">
+            <div className="grow py-0.5">
               <FormField
                 control={form.control}
                 name={`items.${index}.service`}

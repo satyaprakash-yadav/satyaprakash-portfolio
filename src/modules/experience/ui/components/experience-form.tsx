@@ -106,7 +106,7 @@ export const ExperienceForm = ({
             key={field.id}
             className="flex items-end gap-2 sm:gap-3 justify-between"
           >
-            <div className="grow grid grid-cols-2 gap-2 sm:gap-3">
+            <div className="grow grid grid-cols-2 gap-2 sm:gap-3 py-0.5">
               <FormField
                 control={form.control}
                 name={`items.${index}.skill`}

@@ -55,9 +55,9 @@ const DashboardPage = async () => {
       }),
       prismadb.qualification.findFirst({
         where: {
-          userId: user.id,
+          userId: user.id!,
           type: "EXPERIENCE",
-          endYear: "present"  // TODO: present - P capital 
+          endYear: "Present"
         }
       }),
       prismadb.qualification.findMany({

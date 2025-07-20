@@ -55,7 +55,7 @@ import type getData from "@/actions/get-data";
 //   },
 //   {
 //     start_year: "2025",
-//     end_year: "present",
+//     end_year: "Present",
 //     company: "Dr. Kana pvt ltd",
 //     position: "Web Developer - Freelancer",
 //   },

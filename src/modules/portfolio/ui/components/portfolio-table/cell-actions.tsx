@@ -1,6 +1,5 @@
 "use client";
 
-import * as z from "zod";
 import axios from "axios";
 import Link from "next/link";
 import React, { useState } from "react";

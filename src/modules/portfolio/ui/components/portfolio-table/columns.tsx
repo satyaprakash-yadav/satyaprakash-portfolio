@@ -79,7 +79,7 @@ export const columns: ColumnDef<Portfolio>[] = [
         ),
         cell: ({ row }) => (
             <div className="flex">
-                <span className="w-[250px]">
+                <span className="w-[250px] truncate">
                     {row.getValue("description")}
                 </span>
             </div>
