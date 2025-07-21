@@ -8,6 +8,11 @@ import { Briefcase, FolderGit2, Laptop } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { LazyMotionLayout } from "@/components/ui/lazy-motion";
+import {
+  CardBody,
+  CardContainer,
+  CardItem
+} from "@/components/ui/3d-card";
 
 import getData from "@/actions/get-data";
 
@@ -51,16 +56,19 @@ export const About = ({
             variants={slideInFromLeft(0.3)}
             className="lg:col-span-3 w-4/5 md:w-1/2 mx-auto lg:w-full aspect-square rounded-2xl bg-gradient-to-tr from-transparent via-primary to-transparent"
           >
-            <div className="rounded-2xl overflow-hidden rotate-[10deg] transition duration-300 ease-in-out hover:rotate-0 relative">
-              <Image
-                src="/web-developer.png"
-                alt="about"
-                // placeholder="blur"
-                width={250}
-                height={250}
-                sizes="(max-width: 768px) 50vw, 100vw"
-              />
-            </div>
+            <CardContainer>
+              <CardBody className="relative sm:w-[27rem] size-auto">
+                <CardItem translateZ="100">
+                  <Image
+                    src="/programming.svg"
+                    alt="about"
+                    height={500}
+                    width={500}
+                    sizes="(max-width: 768px) 50vw, 100vw"
+                  />
+                </CardItem>
+              </CardBody>
+            </CardContainer>
           </m.div>
           <div className="lg:col-span-4 flex flex-col gap-8">
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 md:gap-7">
