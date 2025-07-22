@@ -13,6 +13,7 @@ import { Portfolio } from "@/components/landing/portfolio";
 import { Expertise } from "@/components/landing/expertise";
 import { Experience } from "@/components/landing/experience";
 import { Qualification } from "@/components/landing/qualification";
+import { Testimonials } from "@/components/landing/testimonials";
 
 import { ModeToggle } from "@/components/mode-toggle";
 
@@ -161,6 +162,7 @@ export default async function Home() {
         <Qualification education={education} experience={experience} />
         <Portfolio portfolioWithTags={portfolioWithTags} />
         <Tool tool={tool} />
+        <Testimonials />
         <Contact miscellaneous={miscellaneous} />
       </main>
       <Footer miscellaneous={miscellaneous} />
