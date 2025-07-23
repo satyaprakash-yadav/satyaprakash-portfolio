@@ -16,6 +16,7 @@ import { Qualification } from "@/components/landing/qualification";
 import { Testimonials } from "@/components/landing/testimonials";
 
 import { ModeToggle } from "@/components/mode-toggle";
+import SplashCursor from "@/components/splash-cursor";
 
 export default async function Home() {
   const {
@@ -151,6 +152,7 @@ export default async function Home() {
       </div>
       <Navbar />
       <main className="container px-4 md:px-8 mx-auto relative -mt-14 overflow-x-hidden">
+        <SplashCursor />
         <Header miscellaneous={miscellaneous} />
         <About about={about} />
         <Experience frontend={frontend} backend={backend} />
