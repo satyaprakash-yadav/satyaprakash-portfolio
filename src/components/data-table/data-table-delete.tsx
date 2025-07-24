@@ -1,4 +1,3 @@
-import { z } from "zod";
 import axios from "axios";
 import { toast } from "sonner";
 import { Trash } from "lucide-react";
@@ -52,6 +51,7 @@ export default function DataTableDelete<TData>({
 
             toast.success("Data successfully deleted.")
         } catch (error) {
+            console.log(error);
             toast.error("Something went wrong!");
         } finally {
             setLoading(false);

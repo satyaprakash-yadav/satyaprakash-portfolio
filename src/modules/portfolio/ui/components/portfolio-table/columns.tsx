@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import Link from "next/link";
@@ -92,7 +93,7 @@ export const columns: ColumnDef<Portfolio>[] = [
         ),
         cell: ({ row }) => (
             <div className="block space-y-1">
-                {row.getValue("tags").map((tag: any) => (
+                {(row.getValue("tags") as any[]).map((tag: any) => (
                     <div key={tag.id}>
                         <Badge variant="outline">{tag.name}</Badge>
                     </div>
