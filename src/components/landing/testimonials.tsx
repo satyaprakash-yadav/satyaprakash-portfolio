@@ -10,7 +10,7 @@ export const Testimonials = () => {
             githubUrl: "https://github.com/ashish-102",
             linkedinUrl: "https://www.linkedin.com/in/ashish102",
             designation: "Software Developer at Facts Online private ltd",
-            src: "/ashish.jpeg",
+            src: "/ashish.jpg",
         },
         {
             quote:
@@ -20,7 +20,7 @@ export const Testimonials = () => {
             githubUrl: "https://github.com/Rahul-Thakur7",
             linkedinUrl: "https://www.linkedin.com/in/rahul-thakur7/",
             designation: "Security Analyst at QRC Assurance And Solutions",
-            src: "/rahul.png",
+            src: "/rahul.jpg",
         },
         {
             quote:

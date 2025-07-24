@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { m } from "framer-motion";
 import { MessageCircle } from "lucide-react";
 import { FaFacebookSquare, FaLinkedin, FaGithub } from "react-icons/fa";
@@ -15,6 +14,9 @@ import type getData from "@/actions/get-data";
 
 import { slideInFromLeft, slideInFromRight } from "@/lib/motion";
 import { DownloadCvButton } from "@/modules/resume/ui/components/download-cv-button";
+import ShinyText from "../shiny-text";
+import { BackgroundLines } from "../background-lines";
+import CircularText from "../circular-text";
 
 type HeaderProps = Pick<Awaited<ReturnType<typeof getData>>, 'miscellaneous'>;
 
@@ -34,11 +36,11 @@ export const Header = ({
         initial="hidden"
         animate="visible"
         id="home"
-        className="h-screen pt-28 min-h-[900px] max-h-[900px]"
+        className="h-screen pt-20 min-h-[600px] max-h-[600px]"
       >
         <div className="text-center h-full relative">
           <span className="text-sm text-muted-foreground font-medium">
-            Hello, I am
+            <ShinyText text="Hello, I am" disabled={false} speed={3} className='custom-class' />
           </span>
           <div className="flex flex-col justify-start items-center">
             <Link href="/" scroll={false} title="Home">
@@ -108,19 +110,18 @@ export const Header = ({
                 className='flex after:content-[""] after:w-[1px] after:h-[2rem] after:bg-primary'
               />
             </div>
-            <div className="grow flex justify-center">
-              <div className="me w-60 h-96 xs:w-72 xs:h-96 md:w-[22rem] md:h-[30rem]">
-                <Image
-                  src="/web-developer.png"
-                  alt="me"
-                  // placeholder="blur"
-                  width={250}
-                  height={250}
-                  sizes="(max-width: 768px) 50vw, 100vw"
-                  priority
-                />
+            <BackgroundLines className="h-[20rem]">
+              <div className="grow flex justify-center">
+                <div className="w-60 h-96 xs:w-72 xs:h-96 md:w-[22rem] md:h-[30rem] absolute">
+                  <CircularText
+                    text="SAR*SOLUTION*STARTUP*"
+                    onHover="speedUp"
+                    spinDuration={20}
+                    className="custom-class"
+                  />
+                </div>
               </div>
-            </div>
+            </BackgroundLines>
             <div className="flex flex-col items-center justify-center gap-4">
               <m.div variants={slideInFromRight(0.4)} className="relative">
                 <div className="mouse" />
