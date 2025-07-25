@@ -14,12 +14,14 @@ import {
     CardDescription,
 } from "@/components/ui/card";
 
-const PortfolioIdPage = async ({
-    params
-}: {
-    params: { portfolioId: string };
-}) => {
-    // const session = await auth();
+interface Props {
+    params: Promise<{
+        portfolioId: string;
+    }>
+};
+
+const PortfolioIdPage = async ({ params }: Props) => {
+    const { portfolioId } = await params;
     const user = await currentUser();
 
     if (!user || !user.id) {
@@ -28,7 +30,7 @@ const PortfolioIdPage = async ({
 
     const portfolio = await prismadb.portfolio.findUnique({
         where: {
-            id: params.portfolioId,
+            id: portfolioId,
             userId: user.id
         },
         include: {

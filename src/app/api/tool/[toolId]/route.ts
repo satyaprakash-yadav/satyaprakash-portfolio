@@ -6,12 +6,18 @@ import { revalidatePath } from "next/cache";
 import { prismadb } from "@/lib/prismadb";
 import { currentUser } from "@/lib/authentication";
 
+interface Props {
+    params: Promise<{
+        toolId: string;
+    }>
+};
+
 export async function PATCH(
     req: Request,
-    { params }: { params: { toolId: string } }
+    { params }: Props,
 ) {
     try {
-        // const session = await auth();
+        const { toolId } = await params;
         const user = await currentUser();
         const body = await req.json();
         const { image, thumbnail, name, color } = body;
@@ -51,7 +57,7 @@ export async function PATCH(
             )
         };
 
-        if (!params.toolId) {
+        if (!toolId) {
             return NextResponse.json(
                 { success: false, error: "Tool Id is required." },
                 { status: 400 },
@@ -60,7 +66,7 @@ export async function PATCH(
 
         const toolFound = await prismadb.tool.findUnique({
             where: {
-                id: params.toolId,
+                id: toolId,
             }
         });
 
@@ -73,7 +79,7 @@ export async function PATCH(
 
         const tool = await prismadb.tool.update({
             where: {
-                id: params.toolId,
+                id: toolId,
             },
             data: {
                 image,
@@ -97,10 +103,10 @@ export async function PATCH(
 
 export async function DELETE(
     _req: Request,
-    { params }: { params: { toolId: string } }
+    { params }: Props,
 ) {
     try {
-        // const session = await auth();
+        const { toolId } = await params;
         const user = await currentUser();
 
         if (!user || !user.id) {
@@ -110,7 +116,7 @@ export async function DELETE(
             );
         };
 
-        if (!params.toolId) {
+        if (!toolId) {
             return NextResponse.json(
                 { success: false, error: "Tool Id is required." },
                 { status: 400 },
@@ -119,7 +125,7 @@ export async function DELETE(
 
         const toolFound = await prismadb.tool.findUnique({
             where: {
-                id: params.toolId,
+                id: toolId,
             }
         });
 
@@ -132,7 +138,7 @@ export async function DELETE(
 
         const tool = await prismadb.tool.delete({
             where: {
-                id: params.toolId,
+                id: toolId,
             }
         });
 

@@ -6,12 +6,18 @@ import { prismadb } from "@/lib/prismadb";
 import getBlurDataUrl from "@/lib/image-blur";
 import { currentUser } from "@/lib/authentication";
 
+interface Props {
+  params: Promise<{
+    portfolioId: string;
+  }>
+};
+
 export async function PATCH(
   req: Request,
-  { params }: { params: { portfolioId: string } }
+  { params }: Props,
 ) {
   try {
-    // const session = await auth();
+    const { portfolioId } = await params;
     const user = await currentUser();
     const body = await req.json();
     const { image, thumbnail, title, description, githubUrl, demoUrl, tags } =
@@ -73,7 +79,7 @@ export async function PATCH(
       );
     }
 
-    if (!params.portfolioId) {
+    if (!portfolioId) {
       return NextResponse.json(
         { success: false, error: "Portfolio ID is required." },
         { status: 400 }
@@ -82,7 +88,7 @@ export async function PATCH(
 
     const portfolioFound = await prismadb.portfolio.findUnique({
       where: {
-        id: params.portfolioId,
+        id: portfolioId,
       },
     });
 
@@ -97,7 +103,7 @@ export async function PATCH(
 
     const portfolio = await prismadb.portfolio.update({
       where: {
-        id: params.portfolioId,
+        id: portfolioId,
       },
       data: {
         image,
@@ -112,14 +118,14 @@ export async function PATCH(
 
     await prismadb.tag.deleteMany({
       where: {
-        portfolioId: params.portfolioId,
+        portfolioId: portfolioId,
       },
     });
 
     const tagsCreated = await prismadb.tag.createMany({
       data: tags.map((tag: { name: string; portfolioId: string }) => ({
         name: tag.name,
-        portfolioId: params.portfolioId,
+        portfolioId: portfolioId,
       })),
     });
 
@@ -137,10 +143,10 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { portfolioId: string } }
+  { params }: Props,
 ) {
   try {
-    // const session = await auth();
+    const { portfolioId } = await params;
     const user = await currentUser();
 
     if (!user || !user.id) {
@@ -150,7 +156,7 @@ export async function DELETE(
       );
     }
 
-    if (!params.portfolioId) {
+    if (!portfolioId) {
       return NextResponse.json(
         { success: false, error: "Portfolio ID is required." },
         { status: 400 }
@@ -159,7 +165,7 @@ export async function DELETE(
 
     const portfolioFound = await prismadb.portfolio.findUnique({
       where: {
-        id: params.portfolioId,
+        id: portfolioId,
       },
     });
 
@@ -172,7 +178,7 @@ export async function DELETE(
 
     const portfolio = await prismadb.portfolio.delete({
       where: {
-        id: params.portfolioId
+        id: portfolioId
       },
     });
 

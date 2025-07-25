@@ -6,12 +6,18 @@ import { revalidatePath } from "next/cache";
 import { prismadb } from "@/lib/prismadb";
 import { currentUser } from "@/lib/authentication";
 
+interface Props {
+  params: Promise<{
+    qualificationId: string;
+  }>
+};
+
 export async function PATCH(
   req: Request,
-  { params }: { params: { qualificationId: string } }
+  { params }: Props,
 ) {
   try {
-    // const session = await auth();
+    const { qualificationId } = await params;
     const user = await currentUser();
     const body = await req.json();
     const { type, degree, school, position, company, startYear, endYear } =
@@ -73,7 +79,7 @@ export async function PATCH(
       );
     }
 
-    if (!params.qualificationId) {
+    if (!qualificationId) {
       return NextResponse.json(
         { success: false, error: "Qualification ID is required." },
         { status: 400 }
@@ -82,7 +88,7 @@ export async function PATCH(
 
     const qualificationFound = await prismadb.qualification.findUnique({
       where: {
-        id: params.qualificationId,
+        id: qualificationId,
       },
     });
 
@@ -95,7 +101,7 @@ export async function PATCH(
 
     const qualification = await prismadb.qualification.update({
       where: {
-        id: params.qualificationId,
+        id: qualificationId,
       },
       data: {
         type,
@@ -122,10 +128,10 @@ export async function PATCH(
 
 export async function DELETE(
   _req: Request,
-  { params }: { params: { qualificationId: string } }
+  { params }: Props,
 ) {
   try {
-    // const session = await auth();
+    const { qualificationId } = await params;
     const user = await currentUser();
 
     if (!user || !user.id) {
@@ -135,7 +141,7 @@ export async function DELETE(
       );
     }
 
-    if (!params.qualificationId) {
+    if (!qualificationId) {
       return NextResponse.json(
         { success: false, error: "Qualification ID is required." },
         { status: 400 }
@@ -144,7 +150,7 @@ export async function DELETE(
 
     const qualificationFound = await prismadb.qualification.findUnique({
       where: {
-        id: params.qualificationId,
+        id: qualificationId,
       },
     });
 
@@ -157,7 +163,7 @@ export async function DELETE(
 
     const qualification = await prismadb.qualification.delete({
       where: {
-        id: params.qualificationId,
+        id: qualificationId,
       },
     });
 

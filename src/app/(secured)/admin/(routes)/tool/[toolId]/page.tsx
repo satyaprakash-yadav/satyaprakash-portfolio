@@ -15,8 +15,15 @@ import {
 } from "@/components/ui/card";
 import { ToolForm } from "@/modules/tool/ui/components/tool-form";
 
-const TooIdPage = async ({ params }: { params: { toolId: string } }) => {
-    // const session = await auth();
+interface Props {
+    params: Promise<{
+        toolId: string;
+    }>
+};
+
+
+const TooIdPage = async ({ params }: Props) => {
+    const { toolId } = await params;
     const user = await currentUser();
 
     if (!user || !user.id) {
@@ -25,7 +32,7 @@ const TooIdPage = async ({ params }: { params: { toolId: string } }) => {
 
     const tool = await prismadb.tool.findUnique({
         where: {
-            id: params.toolId,
+            id: toolId,
             userId: user.id,
         }
     });
