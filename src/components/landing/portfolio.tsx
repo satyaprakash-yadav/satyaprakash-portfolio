@@ -177,7 +177,7 @@ export const Portfolio = ({
                 <h3 className="text-base lg:text-[1.2rem] font-medium text-primary-foreground group-hover:text-primary">
                   {portfolio.title}
                 </h3>
-                <div className="flex gap-3">
+                <div className="flex flex-wrap gap-3">
                   {portfolio.tags.map((tag, index) => (
                     <Badge
                       key={index}

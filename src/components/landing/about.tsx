@@ -56,7 +56,7 @@ export const About = ({
             variants={slideInFromLeft(0.3)}
             className="lg:col-span-3 w-4/5 md:w-1/2 mx-auto lg:w-full aspect-square rounded-2xl bg-gradient-to-tr from-transparent via-primary to-transparent"
           >
-            <CardContainer>
+            <CardContainer className="relative px-8">
               <CardBody className="relative sm:w-[27rem] size-auto">
                 <CardItem translateZ="100">
                   <Image
