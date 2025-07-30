@@ -104,7 +104,7 @@ export const ExperienceForm = ({
         {fields.map((field, index) => (
           <div
             key={field.id}
-            className="flex items-end gap-2 sm:gap-3 justify-between"
+            className="flex items-end gap-12 sm:gap-13 justify-between"
           >
             <div className="grow grid grid-cols-2 gap-2 sm:gap-3 py-0.5">
               <FormField

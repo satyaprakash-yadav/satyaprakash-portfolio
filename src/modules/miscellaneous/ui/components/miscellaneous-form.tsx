@@ -229,7 +229,7 @@ export const MiscellaneousForm = ({ miscellaneous }: MiscellaneousFormProps) => 
                 <div className="lg:col-span-2 mt-6">
                     {fields.map((field, index) => (
                         <div key={field.id} className="flex items-end gap-2 sm:gap-3 justify-between">
-                            <div className="grow">
+                            <div className="grow mt-1">
                                 <FormField
                                     control={form.control}
                                     name={`titles.${index}.name`}
