@@ -11,10 +11,13 @@ import {
 } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu } from "@/modules/dashboard/ui/components/menu";
+import { useState } from "react";
 
 export const SheetMenu = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
-        <Sheet>
+        <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger className="lg:hidden" asChild>
                 <Button className="h-8" variant="outline" size="icon">
                     <MenuIcon size={20} />
@@ -34,7 +37,7 @@ export const SheetMenu = () => {
                         </Link>
                     </Button>
                 </SheetHeader>
-                <Menu isOpen />
+                <Menu isOpen={isOpen} setIsOpen={setIsOpen} />
             </SheetContent>
         </Sheet>
     )

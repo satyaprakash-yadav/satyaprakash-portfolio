@@ -20,14 +20,15 @@ import { getMenuList } from "@/lib/menu-list";
 
 interface MenuProps {
   isOpen: boolean | undefined;
+  setIsOpen?: (isOpen: boolean) => void;
 }
 
-export const Menu = ({ isOpen }: MenuProps) => {
+export const Menu = ({ isOpen, setIsOpen }: MenuProps) => {
   const pathname = usePathname();
   const pages = getMenuList(pathname);
 
   return (
-    <ScrollArea className="[&>div>div[style]]:!block">
+    <ScrollArea className="[&>div>div[style]]:!block overflow-y-auto">
       <nav className="mt-8 h-full w-full">
         <ul className="flex flex-col min-h-[calc(100vh-48px-36px-16px-32px)] lg:min-h-[calc(100vh-32px-40px-32px)] items-start space-y-1 px-2">
           {pages.map(({ groupLabel, menus }, index) => (
@@ -60,6 +61,7 @@ export const Menu = ({ isOpen }: MenuProps) => {
                         <Tooltip delayDuration={100}>
                           <TooltipTrigger asChild>
                             <Button
+                              onClick={() => setIsOpen && setIsOpen(false)}
                               variant={active ? "secondary" : "ghost"}
                               className="w-full justify-start h-10 mb-1"
                               asChild
@@ -110,7 +112,10 @@ export const Menu = ({ isOpen }: MenuProps) => {
               <Tooltip delayDuration={100}>
                 <TooltipTrigger asChild>
                   <Button
-                    onClick={() => signOut()}
+                    onClick={() => {
+                      signOut()
+                      if (setIsOpen) setIsOpen(false)
+                    }}
                     variant="outline"
                     className="w-full justify-center h-10 mt-4"
                   >
